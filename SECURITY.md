@@ -1,7 +1,23 @@
 # MACRO App Security Guide
 
-## 🚨 CRITICAL SECURITY NOTICE
-Your Firebase configuration files contain exposed API keys that are currently in your public GitHub repository!
+## 🎯 Security vs. Functionality Balance
+
+**CRITICAL PRINCIPLE:** Protect sensitive API keys while preserving files needed for app operation.
+
+### ✅ Files that MUST be tracked (needed for app to work):
+- `ios/Info.plist` - iOS app configuration and permissions
+- `android/app/src/main/AndroidManifest.xml` - Android app configuration  
+- `ios/Presentation/*.swift` - iOS source code
+- `android/app/src/main/java/**/*.kt` - Android source code
+- `build.gradle.kts` files - Android build configuration
+- `shared/data/*.json` - App content and data
+- `Podfile` - iOS dependencies (but not Podfile.lock with versions)
+
+### ❌ Files that MUST be protected (contain secrets):
+- `ios/GoogleService-Info.plist` - Contains Firebase API keys
+- `android/app/google-services.json` - Contains Firebase API keys
+- `*.jks`, `*.p8`, `*.p12` - Signing certificates
+- `.env` files - Environment variables with secrets
 
 ### Immediate Actions Required:
 
