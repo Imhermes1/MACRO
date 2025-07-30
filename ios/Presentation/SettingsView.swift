@@ -1,4 +1,6 @@
+// If UniversalBackground is not found, ensure the file is included in the target membership in Xcode.
 import SwiftUI
+// UniversalBackground is a local SwiftUI View
 
 struct SettingsView: View {
     @State private var calorieGoal = ""
@@ -40,7 +42,7 @@ struct SettingsView: View {
                 .foregroundColor(.white)
         }
         .padding()
-        .background(Color.black)
+        .background(UniversalBackground())
         .onAppear {
             if let profile = profile {
                 calorieGoal = String(profile.weight)
