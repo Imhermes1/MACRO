@@ -1,0 +1,154 @@
+{
+  "commonFoods": [
+    {
+      "id": "vegemite-toast",
+      "name": "Vegemite on Toast",
+      "category": "australian",
+      "servingSize": "2 slices",
+      "calories": 180,
+      "nutrients": {
+        "protein": 8.2,
+        "carbs": 28.4,
+        "fat": 3.1,
+        "fiber": 2.8,
+        "sodium": 425
+      },
+      "icon": "🍞"
+    },
+    {
+      "id": "meat-pie",
+      "name": "Australian Meat Pie",
+      "category": "australian",
+      "servingSize": "1 pie (175g)",
+      "calories": 465,
+      "nutrients": {
+        "protein": 16.8,
+        "carbs": 35.2,
+        "fat": 28.9,
+        "fiber": 2.1,
+        "sodium": 892
+      },
+      "icon": "🥧"
+    },
+    {
+      "id": "lamington",
+      "name": "Lamington",
+      "category": "desserts",
+      "servingSize": "1 piece",
+      "calories": 285,
+      "nutrients": {
+        "protein": 4.2,
+        "carbs": 42.6,
+        "fat": 11.8,
+        "fiber": 1.2,
+        "sodium": 186
+      },
+      "icon": "🍰"
+    },
+    {
+      "id": "pavlova",
+      "name": "Pavlova (slice)",
+      "category": "desserts",
+      "servingSize": "1 slice (120g)",
+      "calories": 295,
+      "nutrients": {
+        "protein": 3.8,
+        "carbs": 58.4,
+        "fat": 6.2,
+        "fiber": 0.8,
+        "sodium": 45
+      },
+      "icon": "🍰"
+    },
+    {
+      "id": "anzac-biscuit",
+      "name": "ANZAC Biscuit",
+      "category": "desserts",
+      "servingSize": "1 biscuit",
+      "calories": 95,
+      "nutrients": {
+        "protein": 1.4,
+        "carbs": 13.2,
+        "fat": 4.3,
+        "fiber": 0.8,
+        "sodium": 55
+      },
+      "icon": "🍪"
+    },
+    {
+      "id": "fish-chips",
+      "name": "Fish and Chips",
+      "category": "seafood",
+      "servingSize": "1 serving",
+      "calories": 585,
+      "nutrients": {
+        "protein": 32.4,
+        "carbs": 45.8,
+        "fat": 28.6,
+        "fiber": 4.2,
+        "sodium": 1245
+      },
+      "icon": "🐟"
+    },
+    {
+      "id": "barramundi",
+      "name": "Grilled Barramundi",
+      "category": "seafood",
+      "servingSize": "150g fillet",
+      "calories": 185,
+      "nutrients": {
+        "protein": 38.2,
+        "carbs": 0,
+        "fat": 3.8,
+        "fiber": 0,
+        "sodium": 85
+      },
+      "icon": "🐟"
+    },
+    {
+      "id": "kangaroo-steak",
+      "name": "Kangaroo Steak",
+      "category": "australian",
+      "servingSize": "150g",
+      "calories": 165,
+      "nutrients": {
+        "protein": 32.1,
+        "carbs": 0,
+        "fat": 2.8,
+        "fiber": 0,
+        "sodium": 95
+      },
+      "icon": "🦘"
+    },
+    {
+      "id": "flat-white",
+      "name": "Flat White Coffee",
+      "category": "cafe",
+      "servingSize": "1 cup (240ml)",
+      "calories": 85,
+      "nutrients": {
+        "protein": 4.8,
+        "carbs": 6.2,
+        "fat": 3.2,
+        "fiber": 0,
+        "sodium": 65
+      },
+      "icon": "☕"
+    },
+    {
+      "id": "tim-tam",
+      "name": "Tim Tam Biscuit",
+      "category": "desserts",
+      "servingSize": "1 biscuit",
+      "calories": 95,
+      "nutrients": {
+        "protein": 1.2,
+        "carbs": 12.8,
+        "fat": 4.6,
+        "fiber": 0.5,
+        "sodium": 35
+      },
+      "icon": "🍪"
+    }
+  ]
+}

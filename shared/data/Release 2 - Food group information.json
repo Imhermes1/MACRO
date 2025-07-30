@@ -1,0 +1,904 @@
+{
+  "Food group information": [
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "Food group ID",
+      "Unnamed: 1": "Food group name",
+      "Unnamed: 2": "Number of foods in Release 2",
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "Inclusions",
+      "Unnamed: 5": "Additional information",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": 11,
+      "Unnamed: 1": "Non-alcoholic beverages",
+      "Unnamed: 2": 50,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis or by a simple recipe to account for the addition of water and/or milk to coffee, tea, cordials and beverage bases. ",
+      "Unnamed: 4": "111 - Tea ",
+      "Unnamed: 5": "Data for black tea have been updated based on analyses in 2018.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "112 - Coffee and coffee substitutes ",
+      "Unnamed: 5": "Data for coffee, and coffee powders  have been updated based on analyses in 2019 and 2020.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "113 - Fruit and vegetable juices, and drinks ",
+      "Unnamed: 5": "Data for apple fruit drinks have been updated based on analyses in 2019. Data for orange fruit drinks was updated based on label data in 2020.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "114 - Cordials",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "115 - Soft drinks, and flavoured mineral waters",
+      "Unnamed: 5": "Data for kombucha has been reported for the first time in Release 2 based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "116 - Electrolyte, energy and fortified drinks",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "117 - Waters, municipal and bottled, unflavoured",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "118 - Other beverage flavourings and prepared beverages",
+      "Unnamed: 5": "Data for Nesquik powder the chocolate flavoured beverage base have been updated based on analysis in 2020.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "12",
+      "Unnamed: 1": "Cereals and cereal products ",
+      "Unnamed: 2": 160,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis or by simple recipes to account for toasting of breads or cooking of grains.  Resistant starch is reported for a number of cereal and grain products based on analyses by Goodman Fielder, Grain Growers Ltd and Ingredion ANZ Pty Ltd in 2012.",
+      "Unnamed: 4": "121 - Flours and other cereal grains and starches ",
+      "Unnamed: 5": "Data for cornmeal and wholemeal wheat flour have been updated based on analysis in 2018 and 2019, respectively.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "122 - Regular breads, and bread rolls (plain/unfilled/untopped varieties) ",
+      "Unnamed: 5": "Data for bread (white, wholemeal, mixed grain, white sourdough) and bread rolls  have been updated based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "123 - English-style muffins, flat breads, and savoury and sweet breads ",
+      "Unnamed: 5": "Data for hot cross buns are reported for the first time in Release 2. Data for Naan, tortilla's pizza bases, wraps and garlic bread has been updated based on analysis in 2018 and 2019.",
+      "Unnamed: 6": "New"
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "124 - Pasta and pasta products (without sauce)",
+      "Unnamed: 5": "Data for white pasta, and egg pasta and egg noodles were updated based on analysis in 2019 and 2020. Legume based pasta has been reported for the first time in Release 2 based on analysis in 2020.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "125 - Breakfast cereals, ready to eat",
+      "Unnamed: 5": "Data for wheat bran pellet, and whole wheat biscuit breakfast cereals were updated based on analysis in 2019. Granola muesli has been reported for the first time in Release 2 based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "126 - Breakfast cereals, hot porridge style",
+      "Unnamed: 5": "Data for porridge were updated based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "13",
+      "Unnamed: 1": "Cereal based products and dishes",
+      "Unnamed: 2": 101,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis with some recipes for common homemade dishes. Specific attention was given to sodium, fat and fatty acid content with a substantial amount of analysis taking place in 2008/09 and again in 2013.\n\nResistant starch is reported for a number of cereal and grain products based on analyses by Goodman Fielder, Grain Growers Ltd and Ingredion ANZ Pty Ltd in 2012.\n\nFor some cereal products, particularly low-moisture baked products such as biscuits and breakfast cereals, the sum of proximates (macronutrients) is below generally acceptable levels for food composition tables (less than 97 g/100 g). This is likely to reflect problems with the analysis of starch and/or dietary fibre in these foods.",
+      "Unnamed: 4": "131 - Sweet biscuits",
+      "Unnamed: 5": "Data for plain, shortbread, chocolate chip, cream filled, breakfast style, caramel filled and chocolate coated, and chocolate filled and coated biscuits were updated based on analysis in 2019 and 2020.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "132 - Savoury biscuits",
+      "Unnamed: 5": "Data for seed based crackers, rice based crackers with vegetable powders, and plain and original rice crackers are reported for the first time in Release 2. Data for flavoured rice crackers; rye, plain and wholemeal wheat crispbreads; salada style; water crackers and rice cakes were updated based on analyses in 2019 and 2020.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "133 - Cakes, muffins, scones, cake-type desserts ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "134 - Pastries ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "135 - Mixed dishes where cereal is the major ingredient ",
+      "Unnamed: 5": "Data for dry mix pasta's in cream based sauce were updated based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "136 - Batter-based products ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "14",
+      "Unnamed: 1": "Fats and oils ",
+      "Unnamed: 2": 35,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis with some borrowed data for plant oils. Specific attention was given to sodium, fat and fatty acid content with a substantial amount of analyses taking place in 2008/09 and again in 2013.",
+      "Unnamed: 4": "141 - Butters",
+      "Unnamed: 5": "Data for fatty acids of plain and salted butter have been updated based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "142 - Dairy blends",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "143 - Margarine and table spreads",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "144 - Plant oils",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "145 - Other fats ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "15",
+      "Unnamed: 1": "Fish and seafood products and dishes ",
+      "Unnamed: 2": 115,
+      "Unnamed: 3": "Profiles are a mixture of analytical data and simple recipes to account for common cooking practices. There are also a small number of profiles borrowed from New Zealand, the United States Department of Agriculture and the ASEAN Food Composition Tables.\n\nA large amount of the analytcial data were provided by the Seafood CRC Company Ltd and the Fisheries Research and Development Corporation in 2008. This includes a greater number of seafoods which are differentiated by species.",
+      "Unnamed: 4": "151 - Fin fish (excluding commercially sterile) ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "152 - Crustacea and molluscs (excluding commercially sterile) ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "153 - Other sea and freshwater foods ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "154 - Packed (commercially sterile) fish and seafood ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "155 - Fish and seafood products (homemade and takeaway)",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "16",
+      "Unnamed: 1": "Fruit products and dishes ",
+      "Unnamed: 2": 125,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis. There are a small number of profiles derived using a recipe approach to combine canned fruits with a canning medium e.g. syrup or fruit juice.\n\nDue to the age of most of the data, we considered removing these records from the dataset. Based on user feedback, the records have been retained until such time as they can be updated.",
+      "Unnamed: 4": "161 - Pome fruit ",
+      "Unnamed: 5": "Data for green apples has been reported for the first time in Release 2. ",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "162 - Berry fruit ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "163 - Citrus fruit ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "164 - Stone fruit ",
+      "Unnamed: 5": "Data for fresh apricots, nectarines and peaches have been updated based on analyses in 2018 and 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "165 - Tropical and subtropical fruit ",
+      "Unnamed: 5": "Data for pineapple raw; and canned in juice, and syrup have been updated based on analyses in 2018 and 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "166 - Other fruit ",
+      "Unnamed: 5": "Data for green grapes have been updated based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "167 - Mixtures of two or more groups of fruit ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "168 - Dried fruit, preserved fruit ",
+      "Unnamed: 5": "Data for dried goji berries has been reported for the first time in Release 2. Data for dried apples have been updated based on analyses in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "17",
+      "Unnamed: 1": "Egg products and dishes ",
+      "Unnamed: 2": 11,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis with some simple recipes to account for cooking.",
+      "Unnamed: 4": "171 - Eggs ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "172 - Dishes where egg is the major ingredient ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "18",
+      "Unnamed: 1": "Meat, poultry and game products and dishes ",
+      "Unnamed: 2": 455,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis and recipes to combine the lean and fat portions. Enhancing the amount and quality of vitamin D data has been a focus for meat, poultry and game.",
+      "Unnamed: 4": "181 - Beef, sheep and pork, unprocessed",
+      "Unnamed: 5": "Data for pork belly has been reported for the first time in Release 2.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "182 - Mammalian game meats ",
+      "Unnamed: 5": "Data for camel and kangaroo has been updated in Release 2 based on analysis 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "183 - Poultry and feathered game ",
+      "Unnamed: 5": "Data for duck breast has been reported for the first time in Release 2 based on analysis in 2019. Data for chicken breast, chicken mince, chicken thigh, chicken schnitzel and Emu steak have been updated based on analyses in 2019",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "184 - Organ meats and offal, products and dishes ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "185 - Sausages, frankfurts and saveloys ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "186 - Processed meat ",
+      "Unnamed: 5": "Data for salami have been updated based on analysis in 2018.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "187 - Mixed dishes where beef, sheep, pork or mammalian game is the major component",
+      "Unnamed: 5": "Data for beef bolognese sauce home made, and made with commercial pasta sauce have been updated based on analyses in 2018.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "189 - Mixed dishes where poultry or feathered game is the major component ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "19",
+      "Unnamed: 1": "Milk products and dishes ",
+      "Unnamed: 2": 53,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis. Some data were provided by the Australian Dairy Corporation in 1999. Enhancing the amount and quality of vitamin D data has been a focus for dairy products.",
+      "Unnamed: 4": "191 - Dairy milk (cow, sheep and goat)",
+      "Unnamed: 5": "Data for cow's milk regular and reduced fat, and chocolate milk have been updated based on analyses in 2018 and 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "192 - Yoghurt ",
+      "Unnamed: 5": "Data for low fat yoghurt (approx. 2%), yoghurt (approx. 0.2% fat) have been reported in Release 2 for the first time based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "193 - Cream ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "194 - Cheese ",
+      "Unnamed: 5": "Data for cheddar cheese and parmesan have been updated based on analyses in 2019. Data for bocconcini is reported for the first time in Release 2 based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "195 - Frozen milk products ",
+      "Unnamed: 5": "Data for premium ice cream have been updated based on analysis in 2020.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "196 - Custards",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "197 - Other dishes where milk or a milk product is the major component ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "20",
+      "Unnamed: 1": "Dairy & meat substitutes",
+      "Unnamed: 2": 29,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis with a small amount of label data for specialty products with specific fortification levels.",
+      "Unnamed: 4": "201 - Dairy milk substitutes, unflavoured",
+      "Unnamed: 5": "Data for almond, and coconut beverages and  have been reported for the first time in Release 2 based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "203 - Cheese substitute",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "205 - Soy-based yoghurts",
+      "Unnamed: 5": "Data for almond and coconut yoghurts have been reported for the first time in Release 2 based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "206 - Meat substitutes",
+      "Unnamed: 5": "Data for plant based meat alternatives have been reported for the first time in Release 2 based on analysis in 2019. Data for tofu have been updated based on analyses in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "21",
+      "Unnamed: 1": "Soup ",
+      "Unnamed: 2": 6,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis.",
+      "Unnamed: 4": "212 - Dry soup mix ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "213 - Soup, prepared from dry soup mix",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "22",
+      "Unnamed: 1": "Seed and nut products and dishes ",
+      "Unnamed: 2": 38,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis with a small number borrowed from the United States Department of Agriculture.",
+      "Unnamed: 4": "221 - Seeds and seed products ",
+      "Unnamed: 5": "Data for chia, linseed, pumpkin, sunflower seeds have been updated based on analyses in 2018.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "222 - Nuts and nut products ",
+      "Unnamed: 5": "Data for coconut water have been reported for the first time in Release 2 based on analysis in 2019. Data for roasted cashews has been updated based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "23",
+      "Unnamed: 1": "Savoury sauces and condiments ",
+      "Unnamed: 2": 37,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis with a small number borrowed from the United States Department of Agriculture. While proximate (macronutrient), vitamin and mineral data remain largely unchanged since NUTTAB 2010, there were a large amount of fatty acid data generated in 2009 and 2013. Sodium levels have also been verified against current products.",
+      "Unnamed: 4": "231 - Gravies and savoury sauces ",
+      "Unnamed: 5": "Data for barbecue sauce, soy sauce, tomato based pasta sauce, and cream based pasta sauce have been updated based on analyses in 2018 and 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "232 - Pickles, chutneys and relishes ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "233 - Salad dressings ",
+      "Unnamed: 5": "Data for mayonnaise have been updated based on analysis in 2018.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "235 - Legume based dips",
+      "Unnamed: 5": "Data for hommus dip have been reported for the first time in Release 2 based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "24",
+      "Unnamed: 1": "Vegetable products and dishes ",
+      "Unnamed: 2": 232,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis or by a simple recipe to account for cooking. \nResistant starch is reported for a number of vegetables based on analyses by Goodman Fielder, Grain Growers Ltd and Ingredion ANZ Pty Ltd in 2012.\n\nDue to the age of some of the data, we considered removing these records from the dataset. Based on user feedback, the records have been retained until such time as updated data can be generated.",
+      "Unnamed: 4": "240 - Wild harvested vegetables, and vegetable dishes",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "241 - Potatoes ",
+      "Unnamed: 5": "Data for potatoes has been updated based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "242 - Cabbage, cauliflower and similar brassica vegetables ",
+      "Unnamed: 5": "Data for kale have been reported for the first time in Release 2 based on analysis in 2018.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "243 - Carrot and similar root vegetables ",
+      "Unnamed: 5": "Data for canned beetroots has been updated based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "244 - Leaf and stalk vegetables ",
+      "Unnamed: 5": "Data for mixed leafy greens have been reported for the first time in Release 2 based on analysis in 2019. Data for Basil, coriander, parsley and iceberg lettuce have been updated based on analysis in 2019 and 2020.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "245 - Peas and beans ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "246 - Tomato and tomato products ",
+      "Unnamed: 5": "Data for cherry tomatoes and tomato puree have been updated based on analysis in 2018 and 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "247 - Other fruiting vegetables ",
+      "Unnamed: 5": "Data for red and green capsicum, and pumpkin have been updated based on analysis in 2019 and 2020.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "248 - Other vegetables and vegetable combinations ",
+      "Unnamed: 5": "Data for red onion have been reported for the first time in Release 2 based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "25",
+      "Unnamed: 1": "Legume and pulse products and dishes ",
+      "Unnamed: 2": 25,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis or by a simple recipe to account for cooking.",
+      "Unnamed: 4": "251 - Mature legumes and pulses ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "252 - Mature legume and pulse products and dishes ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "26",
+      "Unnamed: 1": "Snack foods ",
+      "Unnamed: 2": 12,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis. As products in this category are known to have been reformulated in recent years to reduce the sodium content, label data were used to update values for sodium were analytical data were not available.\n\nThe majority of proximate (macronutrient), vitamin and mineral content is unchaged since NUTTAB 2010, however specific attention was given to sodium, fat and fatty acid content with a substantial amount of analysis taking place in 2008/09 and again in 2013.\n",
+      "Unnamed: 4": "261 - Potato snacks ",
+      "Unnamed: 5": "Data for sweet potato crisps have been reported for the first time in Release 2 based on analysis in 2020.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "262 - Corn snacks ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "263 - Extruded or reformed snacks ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "264 - Other snacks ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "27",
+      "Unnamed: 1": "Sugar products and dishes ",
+      "Unnamed: 2": 19,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis.\n\nThe majority of proximate (macronutrient), vitamin and mineral content is unchaged since NUTTAB 2010, however updates to sodium, fat and fatty acid content of hazelnut and chocolate flavoured spread were made based on data derived in 2008/09 and again in 2013.",
+      "Unnamed: 4": "271 - Sugar, honey and syrups ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "272 - Jam and lemon spreads, chocolate spreads, sauces ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "273 - Dishes and products other than confectionery where sugar is the major component ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "28",
+      "Unnamed: 1": "Confectionery and cereal/nut/fruit/seed bars ",
+      "Unnamed: 2": 33,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis with some recipes to account for chocolate-coated confectionery. Sodium, fat and fatty acid content of a number of products were updated based on analyses in 2009 and 2013.",
+      "Unnamed: 4": "281 - Chocolate and chocolate-based confectionery ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "283 - Muesli or cereal style bars",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "284 - Other confectionery ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "29",
+      "Unnamed: 1": "Alcoholic beverages ",
+      "Unnamed: 2": 27,
+      "Unnamed: 3": "Profiles are generally derived by nutrient analysis with a substantial analysis of beer and wine undertaken in 2015.",
+      "Unnamed: 4": "291 - Beers ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "292 - Wines ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "293 - Spirits ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "294 - Cider and perry",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": 30,
+      "Unnamed: 1": "Special dietary foods",
+      "Unnamed: 2": 2,
+      "Unnamed: 3": "Profiles are derived by nutrient analysis with simple recipes to account for cooking.",
+      "Unnamed: 4": "301 - Formula dietary foods",
+      "Unnamed: 5": "Data for whey protein powder have been reported for the first time in Release 2 based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "31",
+      "Unnamed: 1": "Miscellaneous ",
+      "Unnamed: 2": 32,
+      "Unnamed: 3": "Profiles are generally borrowed from the United States Department of Agriculture with some analytical data.",
+      "Unnamed: 4": "311 - Yeast, and yeast vegetable or meat extracts ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "313 - Herbs, spices, seasonings and stock cubes ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "314 - Essences",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": NaN,
+      "Unnamed: 1": NaN,
+      "Unnamed: 2": NaN,
+      "Unnamed: 3": NaN,
+      "Unnamed: 4": "315 - Chemical raising agents and cooking ingredients ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "32",
+      "Unnamed: 1": "Infant formulae and foods ",
+      "Unnamed: 2": 1,
+      "Unnamed: 3": "The nutrient data for human breast milk has been revised to include Australian and international research between 2003 and 2012.",
+      "Unnamed: 4": "321 - Infant formulae and human breast milk ",
+      "Unnamed: 5": NaN,
+      "Unnamed: 6": NaN
+    },
+    {
+      "General note on food information\nDue to our decision to include a core set of nutrients for all foods in Release 2, there is a small amount of data across all categories which have been imputed, borrowed or estimated to fill data gaps for core nutrients. Further information on the source of nutrient data for all foods is available in the Sampling Details field of the Food File.\n\nInclusions highlighted in blue indicate categories where data for one or more foods are reported for the first time in Release 2.": "34",
+      "Unnamed: 1": "Reptiles, amphibia and insects",
+      "Unnamed: 2": 2,
+      "Unnamed: 3": "Profiles are derived by nutrient analysis with simple recipes to account for cooking.",
+      "Unnamed: 4": "341 - Reptiles",
+      "Unnamed: 5": "Data for crocodile have been reported for the first time in Release 2 based on analysis in 2019.",
+      "Unnamed: 6": NaN
+    }
+  ]
+}
