@@ -1,0 +1,74 @@
+{
+  "categories": [
+    {
+      "id": "fast-food",
+      "name": "Fast Food",
+      "icon": "🍔",
+      "color": "#FF6B35",
+      "description": "Quick service restaurants and takeaway"
+    },
+    {
+      "id": "pizza",
+      "name": "Pizza",
+      "icon": "🍕",
+      "color": "#E74C3C",
+      "description": "Pizza restaurants and delivery"
+    },
+    {
+      "id": "asian",
+      "name": "Asian Cuisine",
+      "icon": "🍜",
+      "color": "#F39C12",
+      "description": "Chinese, Japanese, Thai, Vietnamese and other Asian foods"
+    },
+    {
+      "id": "cafe",
+      "name": "Cafés & Coffee",
+      "icon": "☕",
+      "color": "#8B4513",
+      "description": "Coffee shops, cafés, and light meals"
+    },
+    {
+      "id": "bakery",
+      "name": "Bakery",
+      "icon": "🥖",
+      "color": "#D4A574",
+      "description": "Bakeries, pastries, and baked goods"
+    },
+    {
+      "id": "seafood",
+      "name": "Seafood",
+      "icon": "🦐",
+      "color": "#3498DB",
+      "description": "Fish and chips, seafood restaurants"
+    },
+    {
+      "id": "pub-food",
+      "name": "Pub Food",
+      "icon": "🍺",
+      "color": "#2ECC71",
+      "description": "Traditional Australian pub meals"
+    },
+    {
+      "id": "healthy",
+      "name": "Healthy Options",
+      "icon": "🥗",
+      "color": "#27AE60",
+      "description": "Salads, smoothies, and health-conscious meals"
+    },
+    {
+      "id": "desserts",
+      "name": "Desserts & Sweets",
+      "icon": "🍰",
+      "color": "#E91E63",
+      "description": "Ice cream, cakes, and sweet treats"
+    },
+    {
+      "id": "australian",
+      "name": "Australian Cuisine",
+      "icon": "🦘",
+      "color": "#FF9800",
+      "description": "Traditional Australian foods and meat pies"
+    }
+  ]
+}

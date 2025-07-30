@@ -1,0 +1,84 @@
+{
+  "restaurants": [
+    {
+      "id": "mcdonalds-au",
+      "name": "McDonald's Australia",
+      "logo": "🍟",
+      "category": "Fast Food",
+      "itemCount": 150,
+      "locations": 970,
+      "description": "Classic burgers, fries, and more",
+      "color": "#FF0000"
+    },
+    {
+      "id": "kfc-au",
+      "name": "KFC Australia",
+      "logo": "🍗",
+      "category": "Fast Food",
+      "itemCount": 85,
+      "locations": 650,
+      "description": "Finger lickin' good chicken",
+      "color": "#FF6600"
+    },
+    {
+      "id": "hungry-jacks",
+      "name": "Hungry Jack's",
+      "logo": "🍔",
+      "category": "Fast Food",
+      "itemCount": 120,
+      "locations": 400,
+      "description": "The burgers are better at Hungry Jack's",
+      "color": "#FFA500"
+    },
+    {
+      "id": "subway-au",
+      "name": "Subway Australia",
+      "logo": "🥪",
+      "category": "Fast Food",
+      "itemCount": 200,
+      "locations": 1200,
+      "description": "Fresh subs and salads",
+      "color": "#00AA00"
+    },
+    {
+      "id": "dominos-au",
+      "name": "Domino's Pizza Australia",
+      "logo": "🍕",
+      "category": "Pizza",
+      "itemCount": 95,
+      "locations": 680,
+      "description": "Pizza delivery and takeaway",
+      "color": "#0066CC"
+    },
+    {
+      "id": "pizza-hut-au",
+      "name": "Pizza Hut Australia",
+      "logo": "🍕",
+      "category": "Pizza",
+      "itemCount": 75,
+      "locations": 300,
+      "description": "Delicious pizza, pasta and more",
+      "color": "#CC0000"
+    },
+    {
+      "id": "red-rooster",
+      "name": "Red Rooster",
+      "logo": "🐔",
+      "category": "Fast Food",
+      "itemCount": 65,
+      "locations": 350,
+      "description": "Australia's fresh food people",
+      "color": "#DD0000"
+    },
+    {
+      "id": "nandos-au",
+      "name": "Nando's Australia",
+      "logo": "🌶️",
+      "category": "Fast Casual",
+      "itemCount": 45,
+      "locations": 250,
+      "description": "Peri-peri chicken specialists",
+      "color": "#CC6600"
+    }
+  ]
+}
