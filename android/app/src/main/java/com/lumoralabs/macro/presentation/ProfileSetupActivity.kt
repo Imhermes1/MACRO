@@ -19,6 +19,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -28,8 +29,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.lumoralabs.macro.data.UserProfileRepository
+import com.lumoralabs.macro.domain.UserProfile
 import com.lumoralabs.macro.ui.components.UniversalBackground
 import com.lumoralabs.macro.ui.theme.MacroTheme
+import kotlinx.coroutines.launch
 
 class ProfileSetupActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +46,387 @@ class ProfileSetupActivity : ComponentActivity() {
             }
         }
     }
+}
+
+@Composable
+fun ProfileSetupScreen() {
+    var firstName by remember { mutableStateOf("") }
+    var lastName by remember { mutableStateOf("") }
+    var age by remember { mutableStateOf("") }
+    var dob by remember { mutableStateOf("") }
+    var height by remember { mutableStateOf("") }
+    var weight by remember { mutableStateOf("") }
+    var showDobIncentive by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
+    var showAlert by remember { mutableStateOf(false) }
+    var alertMessage by remember { mutableStateOf("") }
+    var hasPrefilledData by remember { mutableStateOf(false) }
+    
+    val context = LocalContext.current
+    val focusManager = LocalFocusManager.current
+    val coroutineScope = rememberCoroutineScope()
+    val profileRepo = remember { UserProfileRepository(context) }
+
+    // Auto-populate from Firebase Auth
+    LaunchedEffect(Unit) {
+        val currentUser = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
+        currentUser?.let { user ->
+            user.displayName?.let { displayName ->
+                val nameParts = displayName.split(" ")
+                if (nameParts.isNotEmpty() && firstName.isEmpty()) {
+                    firstName = nameParts[0]
+                    hasPrefilledData = true
+                }
+                if (nameParts.size > 1 && lastName.isEmpty()) {
+                    lastName = nameParts.drop(1).joinToString(" ")
+                    hasPrefilledData = true
+                }
+            }
+        }
+    }
+
+    fun isFormValid(): Boolean {
+        return firstName.trim().isNotEmpty() &&
+               age.trim().isNotEmpty() &&
+               height.trim().isNotEmpty() &&
+               weight.trim().isNotEmpty()
+    }
+
+    fun saveProfile() {
+        focusManager.clearFocus()
+        
+        val trimmedFirstName = firstName.trim()
+        val trimmedAge = age.trim()
+        val trimmedHeight = height.trim()
+        val trimmedWeight = weight.trim()
+        val trimmedDob = dob.trim()
+        
+        // Validate required fields
+        if (!isFormValid()) {
+            alertMessage = "Please fill in all required fields (marked with *)."
+            showAlert = true
+            return
+        }
+        
+        // Validate numeric inputs
+        val ageInt = trimmedAge.toIntOrNull()
+        if (ageInt == null || ageInt <= 0 || ageInt >= 150) {
+            alertMessage = "Please enter a valid age between 1 and 149."
+            showAlert = true
+            return
+        }
+        
+        val heightFloat = trimmedHeight.replace(",", ".").toFloatOrNull()
+        if (heightFloat == null || heightFloat <= 0 || heightFloat >= 300) {
+            alertMessage = "Please enter a valid height in centimeters (1-299)."
+            showAlert = true
+            return
+        }
+        
+        val weightFloat = trimmedWeight.replace(",", ".").toFloatOrNull()
+        if (weightFloat == null || weightFloat <= 0 || weightFloat >= 1000) {
+            alertMessage = "Please enter a valid weight in kilograms (1-999)."
+            showAlert = true
+            return
+        }
+        
+        // Validate DOB format if provided
+        if (trimmedDob.isNotEmpty()) {
+            val dobRegex = Regex("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$")
+            if (!dobRegex.matches(trimmedDob)) {
+                alertMessage = "Please enter date of birth in DD/MM/YYYY format (e.g., 15/03/1990)."
+                showAlert = true
+                return
+            }
+        }
+        
+        isLoading = true
+        
+        coroutineScope.launch {
+            try {
+                val profile = UserProfile(
+                    firstName = trimmedFirstName,
+                    lastName = if (lastName.trim().isEmpty()) null else lastName.trim(),
+                    age = ageInt,
+                    dob = if (trimmedDob.isEmpty()) null else trimmedDob,
+                    height = heightFloat,
+                    weight = weightFloat
+                )
+                
+                profileRepo.saveProfile(profile)
+                
+                isLoading = false
+                alertMessage = "Profile saved successfully! 🎉"
+                showAlert = true
+                
+            } catch (e: Exception) {
+                isLoading = false
+                alertMessage = "Failed to save profile. Please try again."
+                showAlert = true
+            }
+        }
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .clickable(
+                indication = null,
+                interactionSource = remember { MutableInteractionSource() }
+            ) {
+                focusManager.clearFocus()
+            }
+    ) {
+        // Header with logout button
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Complete Profile",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            
+            TextButton(
+                onClick = {
+                    com.google.firebase.auth.FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(context, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    context.startActivity(intent)
+                }
+            ) {
+                Text(
+                    text = "Logout",
+                    color = Color.White.copy(alpha = 0.8f)
+                )
+            }
+        }
+        
+        if (hasPrefilledData) {
+            Text(
+                text = "We've pre-filled some information from your account",
+                fontSize = 14.sp,
+                color = Color.White.copy(alpha = 0.8f),
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+            )
+        }
+        
+        // Form fields
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            // First Name
+            StyledTextField(
+                value = firstName,
+                onValueChange = { firstName = it },
+                placeholder = "First Name*",
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                )
+            )
+            
+            // Last Name
+            StyledTextField(
+                value = lastName,
+                onValueChange = { lastName = it },
+                placeholder = "Last Name (optional)",
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                )
+            )
+            
+            // Age
+            StyledTextField(
+                value = age,
+                onValueChange = { age = it },
+                placeholder = "Age*",
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Next
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                )
+            )
+            
+            // Date of Birth with incentive
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                StyledTextField(
+                    value = dob,
+                    onValueChange = { dob = it },
+                    placeholder = "Date of Birth (DD/MM/YYYY)",
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number,
+                        imeAction = ImeAction.Next
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                    ),
+                    modifier = Modifier.weight(1f)
+                )
+                
+                IconButton(
+                    onClick = { showDobIncentive = true }
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Warning,
+                        contentDescription = "Birthday Info",
+                        tint = Color.Red
+                    )
+                }
+            }
+            
+            // Height
+            StyledTextField(
+                value = height,
+                onValueChange = { height = it },
+                placeholder = "Height (cm)*",
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Decimal,
+                    imeAction = ImeAction.Next
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                )
+            )
+            
+            // Weight
+            StyledTextField(
+                value = weight,
+                onValueChange = { weight = it },
+                placeholder = "Weight (kg)*",
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Decimal,
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = { focusManager.clearFocus() }
+                )
+            )
+            
+            Spacer(modifier = Modifier.height(20.dp))
+            
+            // Save button
+            Button(
+                onClick = { saveProfile() },
+                enabled = !isLoading && isFormValid(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                shape = RoundedCornerShape(25.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White.copy(alpha = if (isLoading) 0.1f else 0.2f),
+                    contentColor = Color.White
+                )
+            ) {
+                if (isLoading) {
+                    CircularProgressIndicator(
+                        color = Color.White,
+                        modifier = Modifier.size(20.dp)
+                    )
+                } else {
+                    Text(
+                        text = "Save Profile",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+            }
+            
+            Spacer(modifier = Modifier.height(100.dp)) // Extra space for keyboard
+        }
+    }
+    
+    // DOB Incentive Dialog
+    if (showDobIncentive) {
+        AlertDialog(
+            onDismissRequest = { showDobIncentive = false },
+            title = { Text("Birthday Surprise! 🎉") },
+            text = { 
+                Text("If you provide your Date of Birth, we'll do something special for you on your birthday!")
+            },
+            confirmButton = {
+                TextButton(onClick = { showDobIncentive = false }) {
+                    Text("Got it!")
+                }
+            }
+        )
+    }
+    
+    // Alert Dialog for messages
+    if (showAlert) {
+        AlertDialog(
+            onDismissRequest = { showAlert = false },
+            title = { Text("Profile") },
+            text = { Text(alertMessage) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showAlert = false
+                        if (alertMessage.contains("successfully")) {
+                            // Navigate to next screen
+                            val intent = Intent(context, com.lumoralabs.macro.MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            context.startActivity(intent)
+                        }
+                    }
+                ) {
+                    Text("OK")
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun StyledTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String,
+    modifier: Modifier = Modifier,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        placeholder = { Text(placeholder, color = Color.White.copy(alpha = 0.7f)) },
+        modifier = modifier.fillMaxWidth(),
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedTextColor = Color.White,
+            unfocusedTextColor = Color.White,
+            focusedBorderColor = Color.White.copy(alpha = 0.5f),
+            unfocusedBorderColor = Color.White.copy(alpha = 0.3f),
+            cursorColor = Color.White
+        ),
+        shape = RoundedCornerShape(15.dp)
+    )
 }
 
 @Composable
