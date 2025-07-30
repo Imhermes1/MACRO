@@ -5,15 +5,20 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -44,7 +49,9 @@ fun ProfileSetupScreen() {
     var height by remember { mutableStateOf("") }
     var weight by remember { mutableStateOf("") }
     var showDobIncentive by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
     val context = LocalContext.current
+    val focusManager = LocalFocusManager.current
 
     // Auto-populate from Firebase Auth
     LaunchedEffect(Unit) {
@@ -65,6 +72,13 @@ fun ProfileSetupScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .clickable(
+                indication = null,
+                interactionSource = remember { MutableInteractionSource() }
+            ) {
+                focusManager.clearFocus()
+            }
             .padding(32.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -151,6 +165,8 @@ fun ProfileSetupScreen() {
         
         Button(
             onClick = {
+                focusManager.clearFocus() // Clear focus to dismiss keyboard
+                
                 if (firstName.isBlank() || age.isBlank() || height.isBlank() || weight.isBlank()) {
                     Toast.makeText(context, "Please fill in all required fields.", Toast.LENGTH_SHORT).show()
                     return@Button
@@ -162,26 +178,36 @@ fun ProfileSetupScreen() {
                     Toast.makeText(context, "Please enter valid numbers for age, height, and weight.", Toast.LENGTH_SHORT).show()
                     return@Button
                 }
-                val profile = com.lumoralabs.macro.domain.UserProfile(
-                    firstName = firstName,
-                    lastName = if (lastName.isBlank()) null else lastName,
-                    age = ageInt,
-                    dob = if (dob.isBlank()) null else dob,
-                    height = heightFloat,
-                    weight = weightFloat
-                )
-                com.lumoralabs.macro.data.UserProfileRepository.saveProfile(context, profile)
-                com.lumoralabs.macro.data.FirebaseService.saveGroup(
-                    com.lumoralabs.macro.domain.Group(
-                        id = "profile_${firstName}",
-                        name = firstName,
-                        members = listOf(firstName)
+                
+                isLoading = true
+                
+                try {
+                    val profile = com.lumoralabs.macro.domain.UserProfile(
+                        firstName = firstName,
+                        lastName = if (lastName.isBlank()) null else lastName,
+                        age = ageInt,
+                        dob = if (dob.isBlank()) null else dob,
+                        height = heightFloat,
+                        weight = weightFloat
                     )
-                )
-                Toast.makeText(context, "Profile saved and synced!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(context, BMICalculatorActivity::class.java)
-                context.startActivity(intent)
+                    com.lumoralabs.macro.data.UserProfileRepository.saveProfile(context, profile)
+                    com.lumoralabs.macro.data.FirebaseService.saveGroup(
+                        com.lumoralabs.macro.domain.Group(
+                            id = "profile_${firstName}",
+                            name = firstName,
+                            members = listOf(firstName)
+                        )
+                    )
+                    Toast.makeText(context, "Profile saved and synced!", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(context, BMICalculatorActivity::class.java)
+                    context.startActivity(intent)
+                } catch (e: Exception) {
+                    Toast.makeText(context, "Error saving profile: ${e.message}", Toast.LENGTH_LONG).show()
+                } finally {
+                    isLoading = false
+                }
             },
+            enabled = !isLoading,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
@@ -191,11 +217,24 @@ fun ProfileSetupScreen() {
                 contentColor = Color.White
             )
         ) {
-            Text(
-                text = "Save Profile",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium
-            )
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(16.dp),
+                        color = Color.White,
+                        strokeWidth = 2.dp
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                Text(
+                    text = if (isLoading) "Saving..." else "Save Profile",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium
+                )
+            }
         }
     }
 }
