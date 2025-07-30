@@ -17,5 +17,16 @@ struct StyledTextField: View {
             .cornerRadius(15)
             .foregroundColor(Color.white)
             .accentColor(Color.white)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Done") {
+                        // Dismiss the keyboard
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+                    .foregroundColor(.blue)
+                    .fontWeight(.semibold)
+                }
+            }
     }
 }
