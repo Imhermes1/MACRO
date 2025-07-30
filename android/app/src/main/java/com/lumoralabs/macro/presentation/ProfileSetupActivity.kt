@@ -11,7 +11,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -80,85 +84,135 @@ fun ProfileSetupScreen() {
                 focusManager.clearFocus()
             }
             .padding(32.dp),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "Complete your profile",
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-        )
+        Spacer(modifier = Modifier.height(40.dp))
         
-        Text(
-            text = "We've pre-filled some information from your account",
-            fontSize = 14.sp,
-            color = Color.White.copy(alpha = 0.8f),
-            modifier = Modifier.padding(horizontal = 16.dp),
-            textAlign = TextAlign.Center
-        )
+        // Centered header
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Text(
+                text = "Complete your profile",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                textAlign = TextAlign.Center
+            )
+            
+            Text(
+                text = "We've pre-filled some information from your account",
+                fontSize = 14.sp,
+                color = Color.White.copy(alpha = 0.8f),
+                modifier = Modifier.padding(horizontal = 16.dp),
+                textAlign = TextAlign.Center
+            )
+        }
         
-        Spacer(modifier = Modifier.height(30.dp))
+        // Logout button
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            TextButton(
+                onClick = {
+                    com.google.firebase.auth.FirebaseAuth.getInstance().signOut()
+                    context.startActivity(Intent(context, LoginActivity::class.java))
+                    (context as ComponentActivity).finish()
+                }
+            ) {
+                Text("Logout", color = Color.White.copy(alpha = 0.7f))
+            }
+        }
         
         StyledTextField(
             value = firstName,
             onValueChange = { firstName = it },
-            label = "First Name*"
+            label = "First Name*",
+            focusManager = focusManager
         )
-        
-        Spacer(modifier = Modifier.height(15.dp))
         
         StyledTextField(
             value = lastName,
             onValueChange = { lastName = it },
-            label = "Last Name (optional)"
+            label = "Last Name (optional)",
+            focusManager = focusManager
         )
-        
-        Spacer(modifier = Modifier.height(15.dp))
         
         StyledTextField(
             value = age,
             onValueChange = { age = it },
             label = "Age*",
-            keyboardType = KeyboardType.Number
+            keyboardType = KeyboardType.Number,
+            focusManager = focusManager
         )
         
-        Spacer(modifier = Modifier.height(15.dp))
-        
-        StyledTextField(
-            value = dob,
-            onValueChange = { 
-                dob = it
-                showDobIncentive = it.isNotEmpty()
-            },
-            label = "Date of Birth (optional)",
-            keyboardType = KeyboardType.Number
-        )
-        
-        if (showDobIncentive) {
-            Text(
-                text = "Provide your DOB for personalized insights and rewards!",
-                color = Color.White.copy(alpha = 0.8f),
-                fontSize = 14.sp
+        // DOB field with red exclamation button
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            StyledTextField(
+                value = dob,
+                onValueChange = { dob = it },
+                label = "Date of Birth (optional)",
+                keyboardType = KeyboardType.Number,
+                focusManager = focusManager,
+                modifier = Modifier.weight(1f)
             )
+            
+            IconButton(
+                onClick = { showDobIncentive = !showDobIncentive }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Warning,
+                    contentDescription = "Birthday Info",
+                    tint = Color.Red
+                )
+            }
         }
         
-        Spacer(modifier = Modifier.height(15.dp))
+        if (showDobIncentive) {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.1f))
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Birthday Surprise! 🎉",
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        fontSize = 16.sp
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "If you provide your Date of Birth, we'll do something special for you on your birthday!",
+                        color = Color.White.copy(alpha = 0.9f),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+        }
         
         StyledTextField(
             value = height,
             onValueChange = { height = it },
             label = "Height (cm)*",
-            keyboardType = KeyboardType.Decimal
+            keyboardType = KeyboardType.Decimal,
+            focusManager = focusManager
         )
-        
-        Spacer(modifier = Modifier.height(15.dp))
         
         StyledTextField(
             value = weight,
             onValueChange = { weight = it },
             label = "Weight (kg)*",
-            keyboardType = KeyboardType.Decimal
+            keyboardType = KeyboardType.Decimal,
+            focusManager = focusManager
         )
         
         Spacer(modifier = Modifier.height(30.dp))
@@ -190,20 +244,27 @@ fun ProfileSetupScreen() {
                         height = heightFloat,
                         weight = weightFloat
                     )
+                    
+                    // Save profile
                     com.lumoralabs.macro.data.UserProfileRepository.saveProfile(context, profile)
-                    com.lumoralabs.macro.data.FirebaseService.saveGroup(
-                        com.lumoralabs.macro.domain.Group(
-                            id = "profile_${firstName}",
-                            name = firstName,
-                            members = listOf(firstName)
-                        )
-                    )
-                    Toast.makeText(context, "Profile saved and synced!", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(context, BMICalculatorActivity::class.java)
-                    context.startActivity(intent)
+                    
+                    // Show success message
+                    Toast.makeText(context, "Profile saved successfully!", Toast.LENGTH_SHORT).show()
+                    
+                    // Navigate to main activity after delay
+                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                        // Since height and weight are provided, BMI is complete
+                        // Navigate directly to main app
+                        val intent = Intent(context, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        context.startActivity(intent)
+                        (context as ComponentActivity).finish()
+                    }, 1000)
+                    
                 } catch (e: Exception) {
                     Toast.makeText(context, "Error saving profile: ${e.message}", Toast.LENGTH_LONG).show()
-                } finally {
+                    isLoading = false
+                }
                     isLoading = false
                 }
             },
@@ -244,14 +305,24 @@ fun StyledTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
-    keyboardType: KeyboardType = KeyboardType.Text
+    keyboardType: KeyboardType = KeyboardType.Text,
+    focusManager: androidx.compose.ui.focus.FocusManager,
+    modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
         label = { Text(label, color = Color.White) },
-        modifier = Modifier.fillMaxWidth(),
-        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+        modifier = modifier.fillMaxWidth(),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType,
+            imeAction = ImeAction.Done
+        ),
+        keyboardActions = KeyboardActions(
+            onDone = {
+                focusManager.clearFocus()
+            }
+        ),
         colors = OutlinedTextFieldDefaults.colors(
             focusedTextColor = Color.White,
             unfocusedTextColor = Color.White,

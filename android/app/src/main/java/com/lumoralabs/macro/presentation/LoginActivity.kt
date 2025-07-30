@@ -39,8 +39,7 @@ class LoginActivity : ComponentActivity() {
 
 @Composable
 fun LoginScreen() {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    // Email login button only, no fields
     val auth = FirebaseAuth.getInstance()
     val context = LocalContext.current
 
@@ -58,66 +57,13 @@ fun LoginScreen() {
             color = Color.White
         )
         
-        Spacer(modifier = Modifier.height(40.dp))
-        
-        // Email TextField with Icon
-        OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Email", color = Color.White) },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Email,
-                    contentDescription = "Email",
-                    tint = Color.White
-                )
-            },
-            modifier = Modifier.fillMaxWidth(),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = Color.White,
-                unfocusedTextColor = Color.White,
-                focusedBorderColor = Color.White.copy(alpha = 0.7f),
-                unfocusedBorderColor = Color.White.copy(alpha = 0.5f)
-            ),
-            shape = RoundedCornerShape(25.dp)
-        )
-        
-        Spacer(modifier = Modifier.height(15.dp))
-        
-        // Password TextField with Icon
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password", color = Color.White) },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Lock,
-                    contentDescription = "Password",
-                    tint = Color.White
-                )
-            },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth(),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = Color.White,
-                unfocusedTextColor = Color.White,
-                focusedBorderColor = Color.White.copy(alpha = 0.7f),
-                unfocusedBorderColor = Color.White.copy(alpha = 0.5f)
-            ),
-            shape = RoundedCornerShape(25.dp)
-        )
-        
-        Spacer(modifier = Modifier.height(30.dp))
-        
-        // Login Buttons
-        PillButton(
-            text = "Login with Email",
-            icon = Icons.Default.Email,
-            onClick = {
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            val profile = com.lumoralabs.macro.data.UserProfileRepository.loadProfile(context)
+    Spacer(modifier = Modifier.height(40.dp))
+    // Login Buttons
+    PillButton(
+        text = "Login with Email",
+        icon = Icons.Default.Email,
+        onClick = {
+            // TODO: Show email login dialog/modal
                             if (profile == null) {
                                 val intent = Intent(context, ProfileSetupActivity::class.java)
                                 context.startActivity(intent)

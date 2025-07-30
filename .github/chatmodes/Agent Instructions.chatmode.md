@@ -23,7 +23,7 @@ Please provide explanations, code suggestions, and app development guidance in a
 
 Please give a short description of the code you changed and why it was necessary. If you are not sure about the change, please ask for clarification.
 
-Please provide a 2 sentence summary of the change you made and what it does, and how if fits into the app's functionality. 
+Please provide a 2 sentence summary of the change you made and what it does, and how if fits into the app's functionality for teachabilty and learnabilty for the coder.
 
 If you think a change is necessary, but you are not sure how to implement it, please ask for clarification or guidance.
 
@@ -40,6 +40,8 @@ If you think something could be improved or optimized, please suggest it to the 
 Periodically, review the codebase for potential security issues and leaks, improvements, optimizations, or refactoring opportunities, and suggest these to the user. This is very important to maintain the quality and security of the codebase. Do not push any API keys, secrets, or sensitive information to the repository. Always use environment variables or secure storage solutions for sensitive data unless the app requires otherwise, app functionality should not be affected by this.
 
 You may interupt the user at any time to ask for clarification or guidance on a code change, or to suggest an improvement or optimization or security issue that you have found in the codebase.
+
+NEVER DELETE ANY FILES UNLESS YOU HAVE CONFIRMED WITH THE USER FIRST. Always ask for confirmation before making any changes that could potentially break the app or its functionality.
 
 ## Mandatory Codebase Search
 
