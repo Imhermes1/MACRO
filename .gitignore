@@ -1,0 +1,221 @@
+# MACRO App Security Configuration
+# This file contains all sensitive data patterns and API-related files that must be protected
+# DO NOT COMMIT ANY FILES LISTED BELOW TO VERSION CONTROL
+
+# ==========================================
+# CRITICAL: Firebase Configuration Files
+# ==========================================
+# These contain API keys and project secrets
+ios/GoogleService-Info.plist
+android/app/google-services.json
+
+# Firebase backup/alternative config files
+ios/GoogleService-Info-*.plist
+android/app/google-services-*.json
+firebase-config.json
+firebase-adminsdk-*.json
+
+# ==========================================
+# API Keys and Environment Files
+# ==========================================
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.test
+*.env
+api-keys.json
+secrets.json
+config/secrets.json
+config/api-keys.json
+
+# ==========================================
+# iOS Security Files
+# ==========================================
+# iOS specific configuration and key files
+ios/Config.plist
+ios/Keys.plist
+ios/Secrets.plist
+ios/Configuration.plist
+ios/APIKeys.plist
+ios/Firebase.plist
+ios/Lumora-Labs-*.p8
+ios/AuthKey_*.p8
+ios/*.mobileprovision
+ios/*.p12
+ios/*.cer
+
+# iOS Keychain and certificates
+ios/Certificates/
+ios/Profiles/
+ios/Keys/
+
+# ==========================================
+# Android Security Files
+# ==========================================
+# Android specific security files
+android/app/src/main/res/values/secrets.xml
+android/app/src/main/res/values/api_keys.xml
+android/keystore.properties
+android/app/release-key.jks
+android/app/debug-key.jks
+android/app/*.jks
+android/app/*.keystore
+android/local.properties
+android/gradle.properties
+android/signing.properties
+
+# Android security directories
+android/keys/
+android/certificates/
+android/secrets/
+
+# ==========================================
+# Database and Auth Credentials
+# ==========================================
+database.json
+db-config.json
+auth-config.json
+oauth-secrets.json
+jwt-secrets.json
+mongodb-credentials.json
+mysql-credentials.json
+postgres-credentials.json
+
+# ==========================================
+# Third-Party API Keys
+# ==========================================
+# Analytics and tracking
+google-analytics.json
+mixpanel-config.json
+amplitude-config.json
+
+# Payment processing
+stripe-keys.json
+paypal-config.json
+square-config.json
+
+# Cloud services
+aws-credentials.json
+azure-config.json
+gcp-credentials.json
+
+# Social media APIs
+facebook-config.json
+twitter-keys.json
+instagram-config.json
+
+# Push notifications
+apns-certificates/
+fcm-config.json
+pusher-config.json
+
+# ==========================================
+# Development and Build Files
+# ==========================================
+# Build outputs that may contain embedded secrets
+ios/build/
+ios/DerivedData/
+ios/Pods/
+android/build/
+android/app/build/
+android/.gradle/
+**/build/
+**/dist/
+**/release/
+
+# Dependency files that may contain private repos
+Podfile.lock
+yarn.lock
+package-lock.json
+
+# ==========================================
+# IDE and System Files
+# ==========================================
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE files that may contain sensitive paths
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+.history/
+
+# ==========================================
+# Logs and Debug Files
+# ==========================================
+# Log files that may contain sensitive data
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log
+error.log
+access.log
+app.log
+server.log
+
+# Crash reports and debug symbols
+*.crash
+*.dSYM.zip
+*.dSYM
+*.hmap
+
+# ==========================================
+# Backup and Temporary Files
+# ==========================================
+# Backup files that may contain sensitive data
+*.backup
+*.bak
+*.tmp
+*.temp
+*~
+.#*
+#*#
+
+# Archive files
+*.zip
+*.tar.gz
+*.rar
+secrets-*.zip
+backup-*.tar.gz
+
+# ==========================================
+# Testing and Mock Data
+# ==========================================
+# Test files that may contain real API keys
+test-secrets.json
+mock-api-keys.json
+fixtures/secrets/
+test/fixtures/api-keys/
+
+# ==========================================
+# Deployment and CI/CD
+# ==========================================
+# Deployment scripts with embedded secrets
+deploy-secrets.sh
+.env.deploy
+deployment-config.json
+ci-secrets.json
+.github/workflows/secrets.yml
+
+# Docker files with secrets
+docker-compose.override.yml
+.env.docker
+docker-secrets/
+
+# Kubernetes secrets
+k8s-secrets.yaml
+secrets.yaml
+config-secrets.yaml
