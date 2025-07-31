@@ -27,10 +27,6 @@
             android:name=".presentation.authentication.LoginActivity"
             android:exported="false"
             android:theme="@style/LaunchTheme" />
-        <activity
-            android:name=".presentation.authentication.EnhancedLoginActivity"
-            android:exported="false"
-            android:theme="@style/LaunchTheme" />
         
         <!-- Onboarding Activities -->
         <activity
@@ -39,10 +35,6 @@
             android:theme="@style/LaunchTheme" />
         <activity
             android:name=".presentation.onboarding.WelcomeActivity"
-            android:exported="false"
-            android:theme="@style/LaunchTheme" />
-        <activity
-            android:name=".presentation.onboarding.EnhancedWelcomeActivity"
             android:exported="false"
             android:theme="@style/LaunchTheme" />
         <activity

@@ -126,7 +126,7 @@ struct AnimatedGlowLogo: View {
     
     var body: some View {
         ZStack {
-            // Outer magical aura
+            // Outer magical aura - static size for stable experience
             Circle()
                 .fill(
                     RadialGradient(
@@ -137,12 +137,11 @@ struct AnimatedGlowLogo: View {
                         ]),
                         center: .center,
                         startRadius: 10,
-                        endRadius: glow ? 200 : 120
+                        endRadius: 150
                     )
                 )
-                .frame(width: glow ? 400 : 300, height: glow ? 400 : 300)
+                .frame(width: 320, height: 320)
                 .blur(radius: 20)
-                .scaleEffect(pulse ? 1.1 : 0.9)
             
             // Main logo with enhanced shadows
             Image("LumoraLabsLogo")
@@ -175,18 +174,13 @@ struct AnimatedGlowLogo: View {
                 )
         }
         .onAppear {
-            // Primary glow animation
-            withAnimation(Animation.easeInOut(duration: 1.8).repeatForever(autoreverses: true)) {
+            // Only gentle glow animation - no pulse or sparkle for stable UI
+            withAnimation(Animation.easeInOut(duration: 4.0).repeatForever(autoreverses: true)) {
                 glow = true
             }
-            // Secondary pulse animation
-            withAnimation(Animation.easeInOut(duration: 2.5).repeatForever(autoreverses: true)) {
-                pulse = true
-            }
-            // Sparkle animation
-            withAnimation(Animation.easeInOut(duration: 1.2).repeatForever(autoreverses: true)) {
-                sparkle = true
-            }
+            // Remove pulse and sparkle animations for stable experience
+            // pulse = true
+            // sparkle = true
         }
     }
 }

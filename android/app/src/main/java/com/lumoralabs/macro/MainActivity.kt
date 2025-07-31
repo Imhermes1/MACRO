@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.firebase.auth.FirebaseAuth
 import com.lumoralabs.macro.presentation.authentication.SessionManager
-import com.lumoralabs.macro.presentation.authentication.EnhancedLoginActivity
+import com.lumoralabs.macro.presentation.authentication.LoginActivity
 import com.lumoralabs.macro.presentation.onboarding.ProfileSetupActivity
 import com.lumoralabs.macro.presentation.onboarding.EnhancedWelcomeActivity
 import com.lumoralabs.macro.presentation.onboarding.BMICalculatorActivity
@@ -47,7 +47,7 @@ fun AppNavigationRoot() {
     if (!sessionManager.isUserAuthenticated()) {
         // User not logged in, show login
         LaunchedEffect(Unit) {
-            val intent = Intent(context, EnhancedLoginActivity::class.java)
+            val intent = Intent(context, LoginActivity::class.java)
             context.startActivity(intent)
             (context as ComponentActivity).finish()
         }

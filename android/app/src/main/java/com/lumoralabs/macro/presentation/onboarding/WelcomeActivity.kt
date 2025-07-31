@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -13,9 +15,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -23,10 +28,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 import com.lumoralabs.macro.data.UserProfileRepository
+import com.lumoralabs.macro.presentation.authentication.SessionManager
 import com.lumoralabs.macro.ui.components.UniversalBackground
 import com.lumoralabs.macro.ui.theme.MacroTheme
 import kotlinx.coroutines.delay
 
+/**
+ * WelcomeActivity with magical glow effects matching iOS implementation.
+ * Based on Material Design animation principles:
+ * https://developer.android.com/develop/ui/compose/animation
+ */
 class WelcomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,18 +55,18 @@ class WelcomeActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WelcomeScreen() {
     val context = LocalContext.current
+    val sessionManager = remember { SessionManager.getInstance(context) }
+    
     var showAnimation by remember { mutableStateOf(false) }
     var showSecondaryElements by remember { mutableStateOf(false) }
     
-    val profileRepo = remember { UserProfileRepository(context) }
-    
     // Get first name from profile
     val firstName = remember {
-        profileRepo.loadProfile()?.firstName
+        val userDetails = sessionManager.getUserDetails()
+        userDetails.firstName.takeIf { it.isNotBlank() }
     }
     
     LaunchedEffect(Unit) {
@@ -64,7 +75,7 @@ fun WelcomeScreen() {
         delay(800)
         showSecondaryElements = true
     }
-    
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -79,8 +90,12 @@ fun WelcomeScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            // Animated logo placeholder (since we don't have the logo in Android assets)
-            AnimatedWelcomeLogo(showAnimation = showAnimation)
+            // Animated logo with enhanced glow
+            AnimatedWelcomeLogo(
+                modifier = Modifier
+                    .scale(if (showAnimation) 1.0f else 0.8f)
+                    .graphicsLayer { alpha = if (showAnimation) 1.0f else 0.0f }
+            )
             
             // Welcome message
             Column(
@@ -91,59 +106,64 @@ fun WelcomeScreen() {
                     text = "Welcome to",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Medium,
+                    color = Color.White.copy(alpha = 0.9f),
                     show = showSecondaryElements,
-                    delay = 0
+                    delay = 800
                 )
                 
                 AnimatedText(
                     text = "MACRO",
                     fontSize = 48.sp,
                     fontWeight = FontWeight.Bold,
+                    color = Color.White,
                     show = showSecondaryElements,
-                    delay = 200
+                    delay = 1000,
+                    hasShadow = true
                 )
                 
-                firstName?.let { name ->
+                firstName?.let {
                     AnimatedText(
-                        text = "Hi $name! 👋",
+                        text = "Hi $it! 👋",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.SemiBold,
+                        color = Color.White.copy(alpha = 0.9f),
                         show = showSecondaryElements,
-                        delay = 400
+                        delay = 1200
                     )
                 }
                 
                 AnimatedText(
                     text = "Your nutrition journey starts here",
-                    fontSize = 18.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
+                    color = Color.White.copy(alpha = 0.8f),
                     show = showSecondaryElements,
-                    delay = 600,
-                    alpha = 0.8f
+                    delay = 1400,
+                    textAlign = TextAlign.Center
                 )
             }
             
             // Feature highlights
             Column(
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier
+                    .scale(if (showSecondaryElements) 1.0f else 0.9f)
+                    .graphicsLayer { alpha = if (showSecondaryElements) 1.0f else 0.0f }
             ) {
-                FeatureRow(
+                WelcomeFeatureRow(
                     icon = Icons.Default.TrendingUp,
                     title = "Track your macros",
-                    show = showSecondaryElements,
-                    delay = 800
+                    delay = 1600
                 )
-                FeatureRow(
-                    icon = Icons.Default.TrackChanges,
+                WelcomeFeatureRow(
+                    icon = Icons.Default.GpsFixed,
                     title = "Reach your goals",
-                    show = showSecondaryElements,
-                    delay = 1000
+                    delay = 1800
                 )
-                FeatureRow(
+                WelcomeFeatureRow(
                     icon = Icons.Default.Favorite,
                     title = "Stay healthy",
-                    show = showSecondaryElements,
-                    delay = 1200
+                    delay = 2000
                 )
             }
         }
@@ -151,55 +171,181 @@ fun WelcomeScreen() {
         Spacer(modifier = Modifier.weight(1f))
         
         // Continue button
-        AnimatedContinueButton(
-            show = showSecondaryElements,
-            delay = 1400,
-            onClick = {
-                // Navigate to BMI Calculator
-                val intent = Intent(context, BMICalculatorActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                context.startActivity(intent)
-                (context as ComponentActivity).finish()
+        AnimatedVisibility(
+            visible = showSecondaryElements,
+            enter = fadeIn(animationSpec = tween(800, delayMillis = 2200)) + 
+                   slideInVertically(animationSpec = tween(800, delayMillis = 2200)) { it / 2 }
+        ) {
+            Button(
+                onClick = {
+                    sessionManager.markWelcomeScreenSeen()
+                    // Navigate to BMI calculator
+                    val intent = Intent(context, BMICalculatorActivity::class.java)
+                    context.startActivity(intent)
+                    (context as ComponentActivity).finish()
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                shape = RoundedCornerShape(28.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White.copy(alpha = 0.25f),
+                    contentColor = Color.White
+                )
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Let's Calculate Your BMI",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Icon(
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
             }
-        )
+        }
+        
+        Spacer(modifier = Modifier.height(40.dp))
     }
 }
 
 @Composable
-fun AnimatedWelcomeLogo(showAnimation: Boolean) {
-    val scale by animateFloatAsState(
-        targetValue = if (showAnimation) 1f else 0.8f,
-        animationSpec = tween(1200, easing = EaseOut),
-        label = "logo_scale"
-    )
+fun AnimatedWelcomeLogo(
+    modifier: Modifier = Modifier
+) {
+    var glow by remember { mutableStateOf(false) }
+    var pulse by remember { mutableStateOf(false) }
+    var sparkle by remember { mutableStateOf(false) }
     
-    val alpha by animateFloatAsState(
-        targetValue = if (showAnimation) 1f else 0f,
-        animationSpec = tween(1200, easing = EaseOut),
-        label = "logo_alpha"
-    )
+    LaunchedEffect(Unit) {
+        glow = true
+        pulse = true
+        sparkle = true
+    }
     
-    // Logo placeholder with glow effect
-    Card(
-        modifier = Modifier
-            .size(200.dp)
-            .scale(scale),
-        shape = RoundedCornerShape(100.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White.copy(alpha = alpha * 0.1f)
+    // Animation values
+    val glowAnimation by animateFloatAsState(
+        targetValue = if (glow) 1f else 0.1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(2000, easing = EaseInOut),
+            repeatMode = RepeatMode.Reverse
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+        label = "glow"
+    )
+    
+    val pulseAnimation by animateFloatAsState(
+        targetValue = if (pulse) 1.1f else 0.9f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(2500, easing = EaseInOut),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "pulse"
+    )
+    
+    val sparkleAnimation by animateFloatAsState(
+        targetValue = if (sparkle) 0.7f else 0.2f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1300, easing = EaseInOut),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "sparkle"
+    )
+    
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
     ) {
+        // Outer magical aura
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .size((240 + glowAnimation * 80).dp)
+                .clip(CircleShape)
+                .background(
+                    Brush.radialGradient(
+                        colors = listOf(
+                            Color.Yellow.copy(alpha = glowAnimation * 0.3f),
+                            Color.White.copy(alpha = glowAnimation * 0.2f),
+                            Color.Transparent
+                        ),
+                        radius = 160f + glowAnimation * 60f
+                    )
+                )
+                .blur(15.dp)
+                .scale(pulseAnimation)
+        )
+        
+        // Main logo with enhanced shadows
+        Box(
+            modifier = Modifier
+                .size(200.dp)
+                .scale(pulseAnimation),
             contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = "MACRO",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White.copy(alpha = alpha),
-                textAlign = TextAlign.Center
+            // Multiple layered shadow effects
+            repeat(4) { index ->
+                Box(
+                    modifier = Modifier
+                        .size(200.dp)
+                        .clip(CircleShape)
+                        .background(
+                            when (index) {
+                                0 -> if (glow) Color.Yellow.copy(alpha = glowAnimation * 0.9f) else Color.White.copy(alpha = 0.7f)
+                                1 -> if (glow) Color.White.copy(alpha = glowAnimation * 0.8f) else Color.Yellow.copy(alpha = 0.6f)
+                                2 -> if (glow) Color.Yellow.copy(alpha = glowAnimation * 0.7f) else Color.White.copy(alpha = 0.5f)
+                                else -> if (glow) Color.White.copy(alpha = glowAnimation * 0.6f) else Color.Yellow.copy(alpha = 0.3f)
+                            }
+                        )
+                        .blur(
+                            when (index) {
+                                0 -> if (glow) 80.dp else 40.dp
+                                1 -> if (glow) 50.dp else 25.dp
+                                2 -> if (glow) 25.dp else 12.dp
+                                else -> if (glow) 12.dp else 6.dp
+                            }
+                        )
+                )
+            }
+            
+            // Logo image (placeholder - replace with actual logo)
+            Box(
+                modifier = Modifier
+                    .size(200.dp)
+                    .clip(CircleShape)
+                    .background(Color.White.copy(alpha = 0.1f)),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.RestaurantMenu,
+                    contentDescription = "MACRO Logo",
+                    modifier = Modifier.size(100.dp),
+                    tint = Color.White
+                )
+            }
+            
+            // Subtle sparkle effect overlay
+            Box(
+                modifier = Modifier
+                    .size(210.dp)
+                    .clip(CircleShape)
+                    .background(
+                        Brush.sweepGradient(
+                            colors = listOf(
+                                Color.Yellow.copy(alpha = sparkleAnimation * 0.7f),
+                                Color.White.copy(alpha = sparkleAnimation * 0.5f),
+                                Color.Yellow.copy(alpha = sparkleAnimation * 0.3f),
+                                Color.Transparent,
+                                Color.Transparent,
+                                Color.Transparent
+                            )
+                        )
+                    )
+                    .blur(1.5.dp)
             )
         }
     }
@@ -210,19 +356,21 @@ fun AnimatedText(
     text: String,
     fontSize: androidx.compose.ui.unit.TextUnit,
     fontWeight: FontWeight,
+    color: Color,
     show: Boolean,
-    delay: Int,
-    alpha: Float = 1f
+    delay: Long,
+    hasShadow: Boolean = false,
+    textAlign: TextAlign = TextAlign.Start
 ) {
-    val scale by animateFloatAsState(
-        targetValue = if (show) 1f else 0.9f,
-        animationSpec = tween(800, delayMillis = delay, easing = EaseOut),
+    val animatedScale by animateFloatAsState(
+        targetValue = if (show) 1.0f else 0.9f,
+        animationSpec = tween(600, delayMillis = delay.toInt()),
         label = "text_scale"
     )
     
-    val textAlpha by animateFloatAsState(
-        targetValue = if (show) alpha else 0f,
-        animationSpec = tween(800, delayMillis = delay, easing = EaseOut),
+    val animatedAlpha by animateFloatAsState(
+        targetValue = if (show) 1.0f else 0.0f,
+        animationSpec = tween(600, delayMillis = delay.toInt()),
         label = "text_alpha"
     )
     
@@ -230,42 +378,58 @@ fun AnimatedText(
         text = text,
         fontSize = fontSize,
         fontWeight = fontWeight,
-        color = Color.White.copy(alpha = textAlpha),
-        textAlign = TextAlign.Center,
-        modifier = Modifier.scale(scale)
+        color = color,
+        textAlign = textAlign,
+        modifier = Modifier
+            .scale(animatedScale)
+            .graphicsLayer { alpha = animatedAlpha }
+            .then(
+                if (hasShadow) {
+                    Modifier.graphicsLayer {
+                        shadowElevation = 10f
+                    }
+                } else Modifier
+            )
     )
 }
 
 @Composable
-fun FeatureRow(
-    icon: ImageVector,
+fun WelcomeFeatureRow(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
     title: String,
-    show: Boolean,
-    delay: Int
+    delay: Long
 ) {
-    val scale by animateFloatAsState(
-        targetValue = if (show) 1f else 0.8f,
-        animationSpec = tween(600, delayMillis = delay, easing = EaseOut),
+    var show by remember { mutableStateOf(false) }
+    
+    LaunchedEffect(Unit) {
+        delay(delay)
+        show = true
+    }
+    
+    val animatedScale by animateFloatAsState(
+        targetValue = if (show) 1.0f else 0.8f,
+        animationSpec = tween(600),
         label = "feature_scale"
     )
     
-    val alpha by animateFloatAsState(
-        targetValue = if (show) 1f else 0f,
-        animationSpec = tween(600, delayMillis = delay, easing = EaseOut),
+    val animatedAlpha by animateFloatAsState(
+        targetValue = if (show) 1.0f else 0.0f,
+        animationSpec = tween(600),
         label = "feature_alpha"
     )
     
     Row(
-        modifier = Modifier
-            .scale(scale)
-            .padding(horizontal = 40.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .scale(animatedScale)
+            .graphicsLayer { alpha = animatedAlpha }
     ) {
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = Color.White.copy(alpha = alpha),
+            tint = Color.White,
             modifier = Modifier.size(24.dp)
         )
         
@@ -273,58 +437,9 @@ fun FeatureRow(
             text = title,
             fontSize = 14.sp,
             fontWeight = FontWeight.Medium,
-            color = Color.White.copy(alpha = alpha * 0.9f)
+            color = Color.White.copy(alpha = 0.9f)
         )
         
         Spacer(modifier = Modifier.weight(1f))
-    }
-}
-
-@Composable
-fun AnimatedContinueButton(
-    show: Boolean,
-    delay: Int,
-    onClick: () -> Unit
-) {
-    val scale by animateFloatAsState(
-        targetValue = if (show) 1f else 0.9f,
-        animationSpec = tween(800, delayMillis = delay, easing = EaseOut),
-        label = "button_scale"
-    )
-    
-    val alpha by animateFloatAsState(
-        targetValue = if (show) 1f else 0f,
-        animationSpec = tween(800, delayMillis = delay, easing = EaseOut),
-        label = "button_alpha"
-    )
-    
-    Button(
-        onClick = onClick,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .scale(scale),
-        shape = RoundedCornerShape(30.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color.White.copy(alpha = alpha * 0.25f),
-            contentColor = Color.White.copy(alpha = alpha)
-        ),
-        elevation = ButtonDefaults.buttonElevation(defaultElevation = 8.dp)
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Let's Calculate Your BMI",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.SemiBold
-            )
-            Icon(
-                imageVector = Icons.Default.ArrowForward,
-                contentDescription = null,
-                modifier = Modifier.size(20.dp)
-            )
-        }
     }
 }

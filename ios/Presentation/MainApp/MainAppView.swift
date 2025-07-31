@@ -5,23 +5,25 @@ struct MainAppView: View {
     @State private var currentInput = ""
     @State private var todaysCalories = 0
     @State private var calorieGoal = 2000
+    @State private var isProgressExpanded = false
     
     var body: some View {
         ZStack {
-            UniversalBackground()
-            
             VStack(spacing: 0) {
-                // Top navigation bar
-                TopNavigationBar()
+                // Dropdown Progress Bar
+                DropdownProgressBar(
+                    currentCalories: todaysCalories,
+                    goalCalories: calorieGoal,
+                    isExpanded: $isProgressExpanded
+                )
+                .zIndex(1) // Ensure it sits on top
                 
                 // Main content area
                 ScrollView {
                     VStack(spacing: 20) {
-                        // Daily progress card
-                        DailyProgressCard(
-                            currentCalories: todaysCalories,
-                            goalCalories: calorieGoal
-                        )
+                        // Add top padding to account for TransparentTopBar and dropdown
+                        Spacer()
+                            .frame(height: 80) // Increased to account for floating top bar
                         
                         // Recent entries or placeholder
                         RecentEntriesSection()
@@ -32,9 +34,24 @@ struct MainAppView: View {
                     .padding(.horizontal, 16)
                     .padding(.bottom, 100) // Space for floating input bar
                 }
+                .background(Color.clear)
                 
                 Spacer()
             }
+            
+            // TransparentTopBar sits on top of all content (from Components/TransparentTopBar.swift)
+            VStack {
+                TransparentTopBar(
+                    showRightButton: true,
+                    rightAction: {
+                        // Navigate to settings/profile
+                        print("Navigate to settings")
+                    }
+                )
+                .padding(EdgeInsets(top: 44, leading: 16, bottom: 0, trailing: 16))
+                Spacer()
+            }
+            .zIndex(10) // Highest z-index to ensure it's always on top
             
             // Floating input bar at bottom
             VStack {
@@ -57,113 +74,270 @@ struct MainAppView: View {
             }
         }
         .sheet(isPresented: $showOnboardingDemo) {
-            OnboardingDemoView {
-                UserDefaults.standard.set(true, forKey: "has_seen_app_demo")
-                showOnboardingDemo = false
-            }
+            // OnboardingDemoView - temporarily commented out
+            Text("Demo View Placeholder")
+                .onTapGesture {
+                    UserDefaults.standard.set(true, forKey: "has_seen_app_demo")
+                    showOnboardingDemo = false
+                }
         }
     }
 }
 
-// MARK: - Top Navigation Bar
-struct TopNavigationBar: View {
-    var body: some View {
-        HStack {
-            // App title/logo
-            HStack(spacing: 8) {
-                Image("LumoraLabsLogo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
-                
-                Text("MACRO")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-            }
-            
-            Spacer()
-            
-            // Settings/profile button
-            Button(action: {
-                // Navigate to settings
-            }) {
-                Image(systemName: "person.circle")
-                    .font(.title2)
-                    .foregroundColor(.white)
-            }
-        }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 12)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color.white.opacity(0.1))
-                .blur(radius: 10)
-        )
-        .padding(.horizontal, 16)
-        .padding(.top, 8)
-    }
-}
-
-// MARK: - Daily Progress Card
-struct DailyProgressCard: View {
+// MARK: - Dropdown Progress Bar
+struct DropdownProgressBar: View {
     let currentCalories: Int
     let goalCalories: Int
+    @Binding var isExpanded: Bool
     
     private var progress: Double {
         guard goalCalories > 0 else { return 0 }
         return min(Double(currentCalories) / Double(goalCalories), 1.0)
     }
     
+    private var remainingCalories: Int {
+        max(goalCalories - currentCalories, 0)
+    }
+    
     var body: some View {
-        VStack(spacing: 16) {
-            HStack {
-                Text("Today's Progress")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                Spacer()
-                Text("\(currentCalories) / \(goalCalories) cal")
-                    .font(.subheadline)
-                    .foregroundColor(.white.opacity(0.8))
-            }
-            
-            // Progress circle
-            ZStack {
-                Circle()
-                    .stroke(Color.white.opacity(0.2), lineWidth: 8)
-                    .frame(width: 120, height: 120)
-                
-                Circle()
-                    .trim(from: 0, to: progress)
-                    .stroke(
-                        LinearGradient(
-                            colors: [.yellow, .orange],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        style: StrokeStyle(lineWidth: 8, lineCap: .round)
-                    )
-                    .frame(width: 120, height: 120)
-                    .rotationEffect(.degrees(-90))
-                    .animation(.easeInOut(duration: 1.0), value: progress)
-                
-                VStack(spacing: 4) {
-                    Text("\(Int(progress * 100))%")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    
-                    Text("\(goalCalories - currentCalories) left")
-                        .font(.caption)
-                        .foregroundColor(.white.opacity(0.7))
+        VStack(spacing: 0) {
+            // Collapsed header bar
+            Button(action: {
+                withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                    isExpanded.toggle()
                 }
+            }) {
+                HStack(spacing: 12) {
+                    // Progress summary
+                    HStack(spacing: 8) {
+                        // Mini progress circle
+                        ZStack {
+                            Circle()
+                                .stroke(Color.white.opacity(0.3), lineWidth: 2)
+                                .frame(width: 24, height: 24)
+                            
+                            Circle()
+                                .trim(from: 0, to: progress)
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [.yellow, .orange],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    style: StrokeStyle(lineWidth: 2, lineCap: .round)
+                                )
+                                .frame(width: 24, height: 24)
+                                .rotationEffect(.degrees(-90))
+                        }
+                        
+                        Text("Today's Progress")
+                            .font(.system(.subheadline, design: .rounded, weight: .medium))
+                            .foregroundColor(.white)
+                    }
+                    
+                    Spacer()
+                    
+                    // Current stats
+                    HStack(spacing: 8) {
+                        VStack(alignment: .trailing, spacing: 1) {
+                            Text("\(currentCalories) / \(goalCalories)")
+                                .font(.system(.subheadline, design: .rounded, weight: .semibold))
+                                .foregroundColor(.white)
+                            
+                            Text("calories")
+                                .font(.system(.caption2, design: .rounded))
+                                .foregroundColor(.white.opacity(0.7))
+                        }
+                        
+                        // Chevron indicator
+                        Image(systemName: "chevron.down")
+                            .font(.caption)
+                            .foregroundColor(.white.opacity(0.7))
+                            .rotationEffect(.degrees(isExpanded ? 180 : 0))
+                            .animation(.easeInOut(duration: 0.3), value: isExpanded)
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 14)
+            }
+            .buttonStyle(PlainButtonStyle())
+            
+            // Expanded content
+            if isExpanded {
+                VStack(spacing: 16) {
+                    // Elegant divider
+                    Rectangle()
+                        .fill(
+                            LinearGradient(
+                                colors: [Color.clear, Color.white.opacity(0.2), Color.clear],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .frame(height: 1)
+                        .padding(.horizontal, 20)
+                    
+                    HStack(spacing: 24) {
+                        // Large progress circle with Apple-style animation
+                        ZStack {
+                            Circle()
+                                .stroke(Color.white.opacity(0.15), lineWidth: 8)
+                                .frame(width: 100, height: 100)
+                            
+                            Circle()
+                                .trim(from: 0, to: progress)
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [.yellow, .orange, .red.opacity(0.8)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    style: StrokeStyle(lineWidth: 8, lineCap: .round)
+                                )
+                                .frame(width: 100, height: 100)
+                                .rotationEffect(.degrees(-90))
+                                .animation(.spring(response: 1.2, dampingFraction: 0.8), value: progress)
+                            
+                            VStack(spacing: 2) {
+                                Text("\(Int(progress * 100))%")
+                                    .font(.system(.title2, design: .rounded, weight: .bold))
+                                    .foregroundColor(.white)
+                                
+                                Text("complete")
+                                    .font(.system(.caption, design: .rounded))
+                                    .foregroundColor(.white.opacity(0.7))
+                            }
+                        }
+                        
+                        // Detailed stats with Apple-style cards
+                        VStack(spacing: 12) {
+                            // Consumed card
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    HStack(spacing: 6) {
+                                        Circle()
+                                            .fill(.green)
+                                            .frame(width: 8, height: 8)
+                                        
+                                        Text("Consumed")
+                                            .font(.system(.caption, design: .rounded, weight: .medium))
+                                            .foregroundColor(.white.opacity(0.8))
+                                    }
+                                    
+                                    Text("\(currentCalories)")
+                                        .font(.system(.title3, design: .rounded, weight: .bold))
+                                        .foregroundColor(.white)
+                                        .contentTransition(.numericText())
+                                        .animation(.spring(response: 0.6), value: currentCalories)
+                                }
+                                
+                                Spacer()
+                            }
+                            .padding(12)
+                            .background(Color.white.opacity(0.08))
+                            .cornerRadius(12)
+                            
+                            // Remaining card
+                            HStack {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    HStack(spacing: 6) {
+                                        Circle()
+                                            .fill(.yellow)
+                                            .frame(width: 8, height: 8)
+                                        
+                                        Text("Remaining")
+                                            .font(.system(.caption, design: .rounded, weight: .medium))
+                                            .foregroundColor(.white.opacity(0.8))
+                                    }
+                                    
+                                    Text("\(remainingCalories)")
+                                        .font(.system(.title3, design: .rounded, weight: .bold))
+                                        .foregroundColor(.yellow)
+                                        .contentTransition(.numericText())
+                                        .animation(.spring(response: 0.6), value: remainingCalories)
+                                }
+                                
+                                Spacer()
+                            }
+                            .padding(12)
+                            .background(Color.yellow.opacity(0.1))
+                            .cornerRadius(12)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                    .padding(.horizontal, 20)
+                    
+                    // Progress bar with smooth animation
+                    VStack(spacing: 8) {
+                        HStack {
+                            Text("Daily Goal Progress")
+                                .font(.system(.caption, design: .rounded, weight: .medium))
+                                .foregroundColor(.white.opacity(0.8))
+                            
+                            Spacer()
+                            
+                            Text("\(Int(progress * 100))%")
+                                .font(.system(.caption, design: .rounded, weight: .bold))
+                                .foregroundColor(.white)
+                        }
+                        
+                        GeometryReader { geometry in
+                            ZStack(alignment: .leading) {
+                                RoundedRectangle(cornerRadius: 6)
+                                    .fill(Color.white.opacity(0.15))
+                                    .frame(height: 6)
+                                
+                                RoundedRectangle(cornerRadius: 6)
+                                    .fill(
+                                        LinearGradient(
+                                            colors: [.yellow, .orange],
+                                            startPoint: .leading,
+                                            endPoint: .trailing
+                                        )
+                                    )
+                                    .frame(width: geometry.size.width * progress, height: 6)
+                                    .animation(.spring(response: 1.0, dampingFraction: 0.8), value: progress)
+                            }
+                        }
+                        .frame(height: 6)
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
+                }
+                .transition(.asymmetric(
+                    insertion: .opacity.combined(with: .scale(scale: 0.98, anchor: .top)).combined(with: .offset(y: -10)),
+                    removal: .opacity.combined(with: .scale(scale: 0.98, anchor: .top)).combined(with: .offset(y: -10))
+                ))
             }
         }
-        .padding(20)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color.white.opacity(0.1))
+        .background(.ultraThinMaterial)
+        .overlay(
+            // Subtle shadow overlay for depth
+            LinearGradient(
+                colors: [
+                    Color.black.opacity(0.05),
+                    Color.clear,
+                    Color.black.opacity(0.02)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
         )
+        .clipShape(
+            UnevenRoundedRectangle(
+                topLeadingRadius: 0,
+                bottomLeadingRadius: isExpanded ? 20 : 12,
+                bottomTrailingRadius: isExpanded ? 20 : 12,
+                topTrailingRadius: 0
+            )
+        )
+        .shadow(
+            color: .black.opacity(isExpanded ? 0.15 : 0.08),
+            radius: isExpanded ? 12 : 6,
+            x: 0,
+            y: isExpanded ? 6 : 3
+        )
+        .animation(.spring(response: 0.8, dampingFraction: 0.9), value: isExpanded)
     }
 }
 
