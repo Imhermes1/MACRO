@@ -17,13 +17,13 @@ class CloudKitUserProfileRepository {
                 self?.cloudKitService.saveProfile(profile) { result in
                     switch result {
                     case .success:
-                        print("Profile successfully saved to CloudKit")
+                        break // Profile successfully saved to CloudKit
                     case .failure(let error):
-                        print("Failed to save to CloudKit: \(error.localizedDescription)")
+                        break // Failed to save to CloudKit: \(error.localizedDescription)
                     }
                 }
             } else {
-                print("CloudKit not available - profile saved locally only")
+                // CloudKit not available - profile saved locally only
             }
         }
     }
@@ -59,8 +59,7 @@ class CloudKitUserProfileRepository {
                             completion(self?.loadProfileLocally())
                         }
                     case .failure(let error):
-                        print("Failed to load from CloudKit: \(error.localizedDescription)")
-                        // Fallback to local data
+                        // Failed to load from CloudKit, fallback to local data
                         completion(self?.loadProfileLocally())
                     }
                 }

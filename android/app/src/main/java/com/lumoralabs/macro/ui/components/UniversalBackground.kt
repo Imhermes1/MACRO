@@ -18,8 +18,10 @@ fun UniversalBackground(
             .background(
                 brush = Brush.linearGradient(
                     colors = listOf(
-                        Color.Blue.copy(alpha = 0.3f),
-                        Color.Green.copy(alpha = 0.3f)
+                        Color.Black,
+                        Color.Gray.copy(alpha = 0.7f),
+                        Color.Cyan.copy(alpha = 0.1f),
+                        Color.Gray.copy(alpha = 0.3f)
                     )
                 )
             )

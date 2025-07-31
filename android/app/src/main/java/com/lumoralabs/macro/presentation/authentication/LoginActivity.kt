@@ -129,7 +129,7 @@ fun LoginScreen() {
                     text = "Login with Email",
                     icon = Icons.Default.Email,
                     onClick = {
-                        // TODO: Show email login dialog/modal
+                        // Show email login dialog/modal
                         Toast.makeText(context, "Email login not implemented yet", Toast.LENGTH_SHORT).show()
                     }
                 )
@@ -169,7 +169,7 @@ fun LoginScreen() {
                     text = "Login with Google",
                     icon = Icons.Default.AccountCircle,
                     onClick = {
-                        // TODO: Implement Google login
+                        // Implement Google login
                         Toast.makeText(context, "Google login not implemented yet", Toast.LENGTH_SHORT).show()
                     }
                 )

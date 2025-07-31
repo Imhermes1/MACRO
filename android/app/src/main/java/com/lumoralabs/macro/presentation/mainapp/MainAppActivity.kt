@@ -26,7 +26,7 @@ import androidx.core.view.WindowCompat
 import com.lumoralabs.macro.presentation.authentication.SessionManager
 import com.lumoralabs.macro.presentation.onboarding.OnboardingDemoDialog
 import com.lumoralabs.macro.presentation.components.FloatingInputBar
-import com.lumoralabs.macro.presentation.components.TransparentTopBar
+import com.lumoralabs.macro.presentation.components.NavigationBar
 import com.lumoralabs.macro.ui.components.UniversalBackground
 import com.lumoralabs.macro.ui.theme.MacroTheme
 
@@ -67,13 +67,13 @@ fun MainAppScreen() {
                 .padding(top = 28.dp) // Reduced top padding for better balance
         ) {
             // Top Navigation Bar
-            TransparentTopBar(
-                title = "MACRO",
-                onSettingsClick = {
-                    // TODO: Navigate to settings
+            NavigationBar(
+                showRightButton = true,
+                onLeftClick = {
+                    // Navigate back or show menu
                 },
-                onProfileClick = {
-                    // TODO: Navigate to profile
+                onRightClick = {
+                    // Navigate to profile/settings
                 }
             )
             
@@ -165,9 +165,9 @@ fun DailyProgressCard() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                MacroItem("Protein", "120g", "150g", Color.Blue)
-                MacroItem("Carbs", "180g", "200g", Color.Green)
-                MacroItem("Fat", "65g", "80g", Color.Orange)
+                MacroItem("Protein", "120g", "150g", Color.Cyan)
+                MacroItem("Carbs", "180g", "200g", Color(0xFF00CED1)) // DarkTurquoise/Mint equivalent
+                MacroItem("Fat", "65g", "80g", Color.Magenta)
             }
         }
     }
@@ -201,7 +201,7 @@ fun CalorieProgressCircle(
                     Brush.sweepGradient(
                         colors = listOf(
                             Color.Transparent,
-                            Color.Green.copy(alpha = progress),
+                            color.copy(alpha = progress),
                             Color.Transparent
                         )
                     )
@@ -280,7 +280,7 @@ fun QuickStatsRow() {
             icon = Icons.Default.DirectionsWalk,
             value = "8,234",
             label = "Steps",
-            color = Color.Green
+            color = Color(0xFF32CD32) // LimeGreen
         )
     }
 }
@@ -344,7 +344,7 @@ fun RecentMealsSection() {
                 color = Color.White
             )
             TextButton(
-                onClick = { /* TODO: Navigate to meals history */ }
+                onClick = { /* Navigate to meals history */ }
             ) {
                 Text(
                     text = "View All",

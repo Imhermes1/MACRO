@@ -24,6 +24,7 @@ struct FloatingInputBar: View {
             HStack {
                 Button(action: { /* Plus action */ }) {
                     Image(systemName: "plus")
+                        .foregroundColor(.cyan)
                 }
                 TextField("Enter calories...", text: .constant(""))
                     .padding(.horizontal)
@@ -39,10 +40,11 @@ struct FloatingInputBar: View {
                     }
                 }) {
                     Image(systemName: "mic")
-                        .foregroundColor(isRecording ? .accentColor : .primary)
+                        .foregroundColor(isRecording ? .pink : .mint)
                 }
                 Button(action: { /* Camera action */ }) {
                     Image(systemName: "camera")
+                        .foregroundColor(.yellow)
                 }
             }
             .padding()

@@ -50,9 +50,9 @@ class UserProfileRepository {
         
         db.collection("userProfiles").document(userId).setData(data) { error in
             if let error = error {
-                print("Error saving profile to cloud: \(error.localizedDescription)")
+                // Error saving profile to cloud
             } else {
-                print("Profile successfully saved to cloud")
+                // Profile successfully saved to cloud
             }
         }
     }
@@ -90,7 +90,7 @@ class UserProfileRepository {
     private func loadProfileFromCloud(userId: String, completion: @escaping (UserProfile?) -> Void) {
         db.collection("userProfiles").document(userId).getDocument { document, error in
             if let error = error {
-                print("Error loading profile from cloud: \(error.localizedDescription)")
+                // Error loading profile from cloud
                 completion(nil)
                 return
             }
@@ -198,6 +198,6 @@ class UserProfileRepository {
             cloudKitRepo.saveProfile(currentProfile)
         }
         
-        print("Profile data migrated from \(from.displayName) to \(to.displayName)")
+        // Profile data migrated from \(from.displayName) to \(to.displayName)
     }
 }

@@ -288,7 +288,6 @@ struct ProfileSetupView: View {
             isLoading = false
             alertMessage = "Failed to save profile. Please try again."
             showAlert = true
-            print("Profile save error: \(error)")
         }
     }
     

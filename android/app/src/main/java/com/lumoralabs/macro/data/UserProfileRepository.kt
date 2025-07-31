@@ -57,10 +57,10 @@ class UserProfileRepository(private val context: Context) {
         db.collection("userProfiles").document(userId)
             .set(data)
             .addOnSuccessListener {
-                Log.d(TAG, "Profile successfully saved to cloud")
+                // Profile successfully saved to cloud
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error saving profile to cloud", e)
+                // Error saving profile to cloud
             }
     }
 
@@ -97,7 +97,7 @@ class UserProfileRepository(private val context: Context) {
                 weight = obj.getDouble("weight").toFloat()
             )
         } catch (e: Exception) {
-            Log.e(TAG, "Error parsing local profile data", e)
+            // Error parsing local profile data
             null
         }
     }
@@ -119,16 +119,16 @@ class UserProfileRepository(private val context: Context) {
                         )
                         onResult(profile)
                     } catch (e: Exception) {
-                        Log.e(TAG, "Error parsing cloud profile data", e)
+                        // Error parsing cloud profile data
                         onResult(null)
                     }
                 } else {
-                    Log.d(TAG, "No cloud profile found")
+                    // No cloud profile found
                     onResult(null)
                 }
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error loading profile from cloud", e)
+                // Error loading profile from cloud
                 onResult(null)
             }
     }
