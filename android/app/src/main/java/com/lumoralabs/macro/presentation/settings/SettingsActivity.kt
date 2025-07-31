@@ -1,4 +1,4 @@
-package com.lumoralabs.macro.presentation
+package com.lumoralabs.macro.presentation.settings
 
 import android.os.Bundle
 import android.widget.Toast

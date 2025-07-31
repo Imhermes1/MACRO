@@ -22,41 +22,38 @@ struct ProfileSetupView: View {
     }
     
     var body: some View {
-        ZStack {
-            UniversalBackground()
-            
-            VStack(spacing: 0) {
-                // Header with logout button
-                HStack {
-                    Text("Complete Profile")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    
-                    Spacer()
-                    
-                    Button("Logout") {
-                        session.signOut()
-                    }
-                    .foregroundColor(.white.opacity(0.8))
-                    .font(.body)
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 10)
+        GeometryReader { geometry in
+            ZStack {
+                UniversalBackground()
                 
-                if hasPrefilledData {
-                    Text("We've pre-filled some information from your account")
-                        .font(.subheadline)
+                VStack(spacing: 20) {
+                    // Header with logout button
+                    HStack {
+                        Text("Complete Profile")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                        
+                        Button("Logout") {
+                            session.signOut()
+                        }
                         .foregroundColor(.white.opacity(0.8))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 20)
-                        .padding(.top, 5)
-                }
+                        .font(.body)
+                    }
+                    .padding(.horizontal, 20)
                 
-                // Scrollable form
-                ScrollView {
-                    VStack(spacing: 20) {
-                        // Form fields
+                    if hasPrefilledData {
+                        Text("We've pre-filled some information from your account")
+                            .font(.subheadline)
+                            .foregroundColor(.white.opacity(0.8))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 20)
+                    }
+                    
+                    // Form fields in a scrollable container
+                    ScrollView {
                         VStack(spacing: 16) {
                             // First Name
                             CustomTextField(
@@ -110,7 +107,7 @@ struct ProfileSetupView: View {
                                             .font(.headline)
                                             .fontWeight(.bold)
                                         
-                                        Text("If you provide your Date of Birth, we'll do something special for you on your birthday!")
+                                        Text("If you provide your Date of Birth, we might surprise you on your birthday!")
                                             .font(.body)
                                             .multilineTextAlignment(.center)
                                     }
@@ -138,44 +135,42 @@ struct ProfileSetupView: View {
                                 currentField: .weight,
                                 nextField: nil
                             )
-                        }
-                        .padding(.horizontal, 20)
-                        
-                        // Save button
-                        Button(action: saveProfile) {
-                            HStack {
-                                if isLoading {
-                                    ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                        .scaleEffect(0.8)
+                            
+                            // Save button
+                            Button(action: saveProfile) {
+                                HStack {
+                                    if isLoading {
+                                        ProgressView()
+                                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                            .scaleEffect(0.8)
+                                    }
+                                    Text(isLoading ? "Saving..." : "Save Profile")
+                                        .fontWeight(.semibold)
                                 }
-                                Text(isLoading ? "Saving..." : "Save Profile")
-                                    .fontWeight(.semibold)
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .fill(Color.white.opacity(isLoading ? 0.1 : 0.2))
+                                )
+                                .scaleEffect(isLoading ? 0.95 : 1.0)
+                                .animation(.easeInOut(duration: 0.2), value: isLoading)
                             }
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .fill(Color.white.opacity(isLoading ? 0.1 : 0.2))
-                            )
-                            .scaleEffect(isLoading ? 0.95 : 1.0)
-                            .animation(.easeInOut(duration: 0.2), value: isLoading)
+                            .disabled(isLoading || !isFormValid)
+                            .padding(.top, 10)
                         }
-                        .disabled(isLoading || !isFormValid)
                         .padding(.horizontal, 20)
-                        .padding(.top, 10)
-                        
-                        // Extra padding for keyboard
-                        Spacer()
-                            .frame(height: 100)
                     }
-                    .padding(.top, 20)
+                    .scrollDismissesKeyboard(.interactively)
                 }
-                .scrollDismissesKeyboard(.interactively)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.top, geometry.safeAreaInsets.top)
+                .padding(.bottom, geometry.safeAreaInsets.bottom)
             }
         }
+        .ignoresSafeArea(.all) // Ensure full screen coverage like other views
         .onTapGesture {
             focusedField = nil
         }

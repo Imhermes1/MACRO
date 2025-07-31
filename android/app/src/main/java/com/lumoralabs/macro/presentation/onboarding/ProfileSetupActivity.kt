@@ -1,4 +1,4 @@
-package com.lumoralabs.macro.presentation
+package com.lumoralabs.macro.presentation.onboarding
 
 import android.content.Intent
 import android.os.Bundle
@@ -29,6 +29,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.WindowCompat
 import com.lumoralabs.macro.data.UserProfileRepository
 import com.lumoralabs.macro.domain.UserProfile
 import com.lumoralabs.macro.ui.components.UniversalBackground
@@ -38,6 +39,10 @@ import kotlinx.coroutines.launch
 class ProfileSetupActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Enable edge-to-edge display
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        
         setContent {
             MacroTheme {
                 UniversalBackground {
@@ -170,19 +175,22 @@ fun ProfileSetupScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(16.dp)
             .verticalScroll(rememberScrollState())
             .clickable(
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() }
             ) {
                 focusManager.clearFocus()
-            }
+            },
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Header with logout button
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .padding(horizontal = 20.dp, vertical = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -388,8 +396,8 @@ fun ProfileSetupScreen() {
                     onClick = {
                         showAlert = false
                         if (alertMessage.contains("successfully")) {
-                            // Navigate to next screen
-                            val intent = Intent(context, com.lumoralabs.macro.MainActivity::class.java)
+                            // Navigate to welcome screen
+                            val intent = Intent(context, WelcomeActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             context.startActivity(intent)
                         }
@@ -630,17 +638,16 @@ fun ProfileSetupScreen() {
                         weight = weightFloat
                     )
                     
-                    // Save profile
-                    com.lumoralabs.macro.data.UserProfileRepository.saveProfile(context, profile)
+                    // Save profile using the new cloud-enabled repository
+                    profileRepo.saveProfile(profile)
                     
                     // Show success message
                     Toast.makeText(context, "Profile saved successfully!", Toast.LENGTH_SHORT).show()
                     
-                    // Navigate to main activity after delay
+                    // Navigate to welcome screen after delay
                     android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                        // Since height and weight are provided, BMI is complete
-                        // Navigate directly to main app
-                        val intent = Intent(context, MainActivity::class.java)
+                        // Navigate to welcome screen first
+                        val intent = Intent(context, WelcomeActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         context.startActivity(intent)
                         (context as ComponentActivity).finish()

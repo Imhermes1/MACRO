@@ -17,7 +17,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.firebase.auth.FirebaseAuth
-import com.lumoralabs.macro.presentation.LoginActivity
+import com.lumoralabs.macro.presentation.authentication.SessionManager
+import com.lumoralabs.macro.presentation.authentication.EnhancedLoginActivity
+import com.lumoralabs.macro.presentation.onboarding.ProfileSetupActivity
+import com.lumoralabs.macro.presentation.onboarding.EnhancedWelcomeActivity
+import com.lumoralabs.macro.presentation.onboarding.BMICalculatorActivity
+import com.lumoralabs.macro.presentation.mainapp.MainAppActivity
 import com.lumoralabs.macro.ui.components.UniversalBackground
 import com.lumoralabs.macro.ui.theme.MacroTheme
 
@@ -36,13 +41,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AppNavigationRoot() {
-    val currentUser = FirebaseAuth.getInstance().currentUser
     val context = LocalContext.current
+    val sessionManager = remember { SessionManager.getInstance(context) }
     
-    if (currentUser == null) {
+    if (!sessionManager.isUserAuthenticated()) {
         // User not logged in, show login
         LaunchedEffect(Unit) {
-            val intent = Intent(context, LoginActivity::class.java)
+            val intent = Intent(context, EnhancedLoginActivity::class.java)
             context.startActivity(intent)
             (context as ComponentActivity).finish()
         }
@@ -52,21 +57,30 @@ fun AppNavigationRoot() {
         }
     } else {
         // User is logged in, check profile completion
-        val profile = com.lumoralabs.macro.data.UserProfileRepository.loadProfile(context)
-        if (profile == null) {
+        if (!sessionManager.isProfileComplete(context)) {
             // Profile incomplete, show profile setup
             LaunchedEffect(Unit) {
-                val intent = Intent(context, com.lumoralabs.macro.presentation.ProfileSetupActivity::class.java)
+                val intent = Intent(context, ProfileSetupActivity::class.java)
                 context.startActivity(intent)
                 (context as ComponentActivity).finish()
             }
             UniversalBackground {
                 Box(modifier = Modifier.fillMaxSize())
             }
-        } else if (profile.height <= 0 || profile.weight <= 0) {
-            // Profile complete but BMI data missing, show BMI calculator
+        } else if (!sessionManager.isWelcomeScreenSeen()) {
+            // Profile complete but welcome not seen, show welcome
             LaunchedEffect(Unit) {
-                val intent = Intent(context, com.lumoralabs.macro.presentation.BMICalculatorActivity::class.java)
+                val intent = Intent(context, EnhancedWelcomeActivity::class.java)
+                context.startActivity(intent)
+                (context as ComponentActivity).finish()
+            }
+            UniversalBackground {
+                Box(modifier = Modifier.fillMaxSize())
+            }
+        } else if (!sessionManager.isBMICalculatorCompleted()) {
+            // Welcome seen but BMI not calculated, show BMI calculator
+            LaunchedEffect(Unit) {
+                val intent = Intent(context, BMICalculatorActivity::class.java)
                 context.startActivity(intent)
                 (context as ComponentActivity).finish()
             }
@@ -74,9 +88,14 @@ fun AppNavigationRoot() {
                 Box(modifier = Modifier.fillMaxSize())
             }
         } else {
-            // Profile and BMI complete, show main app
+            // Everything complete, show main app
+            LaunchedEffect(Unit) {
+                val intent = Intent(context, MainAppActivity::class.java)
+                context.startActivity(intent)
+                (context as ComponentActivity).finish()
+            }
             UniversalBackground {
-                MainAppContent()
+                Box(modifier = Modifier.fillMaxSize())
             }
         }
     }

@@ -1,3 +1,5 @@
+package com.lumoralabs.macro.presentation.components
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
