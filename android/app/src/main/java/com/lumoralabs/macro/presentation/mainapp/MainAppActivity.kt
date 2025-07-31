@@ -64,6 +64,7 @@ fun MainAppScreen() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
+                .padding(top = 28.dp) // Reduced top padding for better balance
         ) {
             // Top Navigation Bar
             TransparentTopBar(

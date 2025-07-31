@@ -183,9 +183,11 @@ fun ProfileSetupScreen() {
             ) {
                 focusManager.clearFocus()
             },
-        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Add top spacer to push content down from top
+        Spacer(modifier = Modifier.height(20.dp))
+        
         // Header with logout button
         Row(
             modifier = Modifier
@@ -367,6 +369,9 @@ fun ProfileSetupScreen() {
             
             Spacer(modifier = Modifier.height(100.dp)) // Extra space for keyboard
         }
+        
+        // Add bottom spacer for visual balance
+        Spacer(modifier = Modifier.height(20.dp))
     }
     
     // DOB Incentive Dialog

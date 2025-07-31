@@ -15,6 +15,7 @@
 		0B1819EE2E39D89600562B43 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0B1819ED2E39D89600562B43 /* FirebaseStorage */; };
 		0B1819F02E39D97000562B43 /* MacroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1819EF2E39D97000562B43 /* MacroApp.swift */; };
 		0B1819F22E39DB2500562B43 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B1819F12E39DB2500562B43 /* GoogleService-Info.plist */; };
+		0B4885522E3B1F1D00A2AADC /* TransparentTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4885512E3B1F1D00A2AADC /* TransparentTopBar.swift */; };
 		0B5257A62E3A2E2900B30CCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5257A52E3A2E2900B30CCA /* Assets.xcassets */; };
 		0B7C99B32E3AE81100C74B04 /* CloudKitProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C99B12E3AE81100C74B04 /* CloudKitProfileService.swift */; };
 		0B7C99B42E3AE81100C74B04 /* CloudKitUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C99B22E3AE81100C74B04 /* CloudKitUserProfileRepository.swift */; };
@@ -39,7 +40,6 @@
 		0BFD314C2E3AF48200BA677C /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31352E3AF48200BA677C /* StyledTextField.swift */; };
 		0BFD314D2E3AF48200BA677C /* BMICalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD313D2E3AF48200BA677C /* BMICalculatorView.swift */; };
 		0BFD314E2E3AF48200BA677C /* FloatingInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31382E3AF48200BA677C /* FloatingInputBar.swift */; };
-		0BFD314F2E3AF48200BA677C /* TransparentTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD313A2E3AF48200BA677C /* TransparentTopBar.swift */; };
 		0BFD31512E3AF48200BA677C /* OnboardingDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD313E2E3AF48200BA677C /* OnboardingDemoView.swift */; };
 		0BFD31522E3AF48200BA677C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31452E3AF48200BA677C /* SettingsView.swift */; };
 		0BFD31532E3AF48200BA677C /* CloudStorageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31432E3AF48200BA677C /* CloudStorageSettingsView.swift */; };
@@ -54,6 +54,7 @@
 		0B02C63A2E3AEE3E00A672B6 /* CloudProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudProvider.swift; sourceTree = "<group>"; };
 		0B1819EF2E39D97000562B43 /* MacroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroApp.swift; sourceTree = "<group>"; };
 		0B1819F12E39DB2500562B43 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0B4885512E3B1F1D00A2AADC /* TransparentTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentTopBar.swift; sourceTree = "<group>"; };
 		0B5257A52E3A2E2900B30CCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B7C99B12E3AE81100C74B04 /* CloudKitProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitProfileService.swift; sourceTree = "<group>"; };
 		0B7C99B22E3AE81100C74B04 /* CloudKitUserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitUserProfileRepository.swift; sourceTree = "<group>"; };
@@ -75,7 +76,6 @@
 		0BFD31362E3AF48200BA677C /* UniversalBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalBackground.swift; sourceTree = "<group>"; };
 		0BFD31382E3AF48200BA677C /* FloatingInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingInputBar.swift; sourceTree = "<group>"; };
 		0BFD31392E3AF48200BA677C /* MainAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView.swift; sourceTree = "<group>"; };
-		0BFD313A2E3AF48200BA677C /* TransparentTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentTopBar.swift; sourceTree = "<group>"; };
 		0BFD313D2E3AF48200BA677C /* BMICalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMICalculatorView.swift; sourceTree = "<group>"; };
 		0BFD313E2E3AF48200BA677C /* OnboardingDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDemoView.swift; sourceTree = "<group>"; };
 		0BFD313F2E3AF48200BA677C /* ProfileSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupView.swift; sourceTree = "<group>"; };
@@ -195,6 +195,7 @@
 		0BFD31372E3AF48200BA677C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0B4885512E3B1F1D00A2AADC /* TransparentTopBar.swift */,
 				0BFD31352E3AF48200BA677C /* StyledTextField.swift */,
 				0BFD31362E3AF48200BA677C /* UniversalBackground.swift */,
 			);
@@ -206,7 +207,6 @@
 			children = (
 				0BFD31382E3AF48200BA677C /* FloatingInputBar.swift */,
 				0BFD31392E3AF48200BA677C /* MainAppView.swift */,
-				0BFD313A2E3AF48200BA677C /* TransparentTopBar.swift */,
 			);
 			path = MainApp;
 			sourceTree = "<group>";
@@ -327,6 +327,7 @@
 				0B9ED1E52E39D21A006A7B7B /* UserProfileRepository.swift in Sources */,
 				0BFD31582E3AF63400BA677C /* ContentView.swift in Sources */,
 				0B9ED1E62E39D21A006A7B7B /* ICloudService.swift in Sources */,
+				0B4885522E3B1F1D00A2AADC /* TransparentTopBar.swift in Sources */,
 				0B1819F02E39D97000562B43 /* MacroApp.swift in Sources */,
 				0B7C99B32E3AE81100C74B04 /* CloudKitProfileService.swift in Sources */,
 				0B7C99B42E3AE81100C74B04 /* CloudKitUserProfileRepository.swift in Sources */,
@@ -344,7 +345,6 @@
 				0BFD314C2E3AF48200BA677C /* StyledTextField.swift in Sources */,
 				0BFD314D2E3AF48200BA677C /* BMICalculatorView.swift in Sources */,
 				0BFD314E2E3AF48200BA677C /* FloatingInputBar.swift in Sources */,
-				0BFD314F2E3AF48200BA677C /* TransparentTopBar.swift in Sources */,
 				0BFD31512E3AF48200BA677C /* OnboardingDemoView.swift in Sources */,
 				0BFD31522E3AF48200BA677C /* SettingsView.swift in Sources */,
 				0BFD31532E3AF48200BA677C /* CloudStorageSettingsView.swift in Sources */,

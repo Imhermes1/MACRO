@@ -27,6 +27,8 @@ struct ProfileSetupView: View {
                 UniversalBackground()
                 
                 VStack(spacing: 20) {
+                    Spacer(minLength: 20) // Add spacer to push content down from top
+                    
                     // Header with logout button
                     HStack {
                         Text("Complete Profile")
@@ -43,6 +45,7 @@ struct ProfileSetupView: View {
                         .font(.body)
                     }
                     .padding(.horizontal, 20)
+                    .padding(.top, max(20, geometry.safeAreaInsets.top))
                 
                     if hasPrefilledData {
                         Text("We've pre-filled some information from your account")
@@ -164,6 +167,8 @@ struct ProfileSetupView: View {
                         .padding(.horizontal, 20)
                     }
                     .scrollDismissesKeyboard(.interactively)
+                    
+                    Spacer(minLength: 20) // Add bottom spacer for balance
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.top, geometry.safeAreaInsets.top)
