@@ -4,7 +4,12 @@ struct UniversalBackground: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.7), Color.green.opacity(0.5)]),
+                gradient: Gradient(colors: [
+                    Color.black, 
+                    Color.gray.opacity(0.7), 
+                    Color.cyan.opacity(0.1), 
+                    Color.gray.opacity(0.3)
+                ]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )

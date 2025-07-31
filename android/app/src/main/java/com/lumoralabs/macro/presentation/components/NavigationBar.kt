@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TransparentTopBar(
+fun NavigationBar(
     showRightButton: Boolean = false,
     onLeftClick: () -> Unit = {},
     onRightClick: () -> Unit = {}

@@ -40,7 +40,9 @@ fun FloatingInputBar() {
                     .background(
                         Brush.horizontalGradient(
                             colors = listOf(
-                                Color.Red, Color.Yellow, Color.Green, Color.Cyan, Color.Blue, Color.Magenta, Color.Red
+                                Color.Cyan.copy(alpha = 0.3f), 
+                                Color(0xFF00CED1).copy(alpha = 0.2f), 
+                                Color.Magenta.copy(alpha = 0.3f)
                             )
                         )
                     )

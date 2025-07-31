@@ -230,6 +230,6 @@ struct DemoStep {
 
 #Preview {
     OnboardingDemoView {
-        print("Demo dismissed")
+        // Demo dismissed
     }
 }

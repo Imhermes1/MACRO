@@ -97,7 +97,7 @@ class SessionStore: ObservableObject {
             defaults.removeObject(forKey: "bmi_calculator_completed")
             defaults.removeObject(forKey: "welcome_screen_seen")
         } catch {
-            print("Error signing out")
+            // Handle sign out error silently
         }
     }
     

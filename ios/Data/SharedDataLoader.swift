@@ -8,7 +8,7 @@ class SharedDataLoader {
             let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
             return json
         } catch {
-            print("Error loading JSON: \(error)")
+            // Error loading JSON - return nil
             return nil
         }
     }
