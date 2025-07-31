@@ -7,46 +7,56 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B02C6372E3AEE1200A672B6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B02C6352E3AEE0D00A672B6 /* CloudKit.framework */; };
+		0B02C63B2E3AEE3E00A672B6 /* CloudProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02C63A2E3AEE3E00A672B6 /* CloudProvider.swift */; };
 		0B1819E82E39D88000562B43 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0B1819E72E39D88000562B43 /* FirebaseFirestore */; };
 		0B1819EA2E39D89600562B43 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0B1819E92E39D89600562B43 /* FirebaseAuth */; };
 		0B1819EC2E39D89600562B43 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 0B1819EB2E39D89600562B43 /* FirebaseDatabase */; };
 		0B1819EE2E39D89600562B43 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0B1819ED2E39D89600562B43 /* FirebaseStorage */; };
 		0B1819F02E39D97000562B43 /* MacroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1819EF2E39D97000562B43 /* MacroApp.swift */; };
 		0B1819F22E39DB2500562B43 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B1819F12E39DB2500562B43 /* GoogleService-Info.plist */; };
-		0B1819F42E39E38900562B43 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1819F32E39E38900562B43 /* SessionStore.swift */; };
-		0B1819F62E39EF2000562B43 /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1819F52E39EF2000562B43 /* StyledTextField.swift */; };
 		0B5257A62E3A2E2900B30CCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5257A52E3A2E2900B30CCA /* Assets.xcassets */; };
-		0B9ED1E02E39D21A006A7B7B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1DC2E39D21A006A7B7B /* SettingsView.swift */; };
-		0B9ED1E12E39D21A006A7B7B /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1DB2E39D21A006A7B7B /* SettingsMenu.swift */; };
-		0B9ED1E22E39D21A006A7B7B /* ProfileSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1DA2E39D21A006A7B7B /* ProfileSetupView.swift */; };
+		0B7C99B32E3AE81100C74B04 /* CloudKitProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C99B12E3AE81100C74B04 /* CloudKitProfileService.swift */; };
+		0B7C99B42E3AE81100C74B04 /* CloudKitUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C99B22E3AE81100C74B04 /* CloudKitUserProfileRepository.swift */; };
 		0B9ED1E32E39D21A006A7B7B /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D32E39D21A006A7B7B /* Group.swift */; };
-		0B9ED1E42E39D21A006A7B7B /* UniversalBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1DE2E39D21A006A7B7B /* UniversalBackground.swift */; };
 		0B9ED1E52E39D21A006A7B7B /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D12E39D21A006A7B7B /* UserProfileRepository.swift */; };
 		0B9ED1E62E39D21A006A7B7B /* ICloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1CD2E39D21A006A7B7B /* ICloudService.swift */; };
-		0B9ED1E72E39D21A006A7B7B /* FloatingInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D82E39D21A006A7B7B /* FloatingInputBar.swift */; };
 		0B9ED1E82E39D21A006A7B7B /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1CB2E39D21A006A7B7B /* FirebaseService.swift */; };
-		0B9ED1E92E39D21A006A7B7B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D72E39D21A006A7B7B /* ContentView.swift */; };
-		0B9ED1EA2E39D21A006A7B7B /* TransparentTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1DD2E39D21A006A7B7B /* TransparentTopBar.swift */; };
-		0B9ED1EB2E39D21A006A7B7B /* BMICalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D62E39D21A006A7B7B /* BMICalculatorView.swift */; };
 		0B9ED1EC2E39D21A006A7B7B /* GroupRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1CC2E39D21A006A7B7B /* GroupRepository.swift */; };
 		0B9ED1ED2E39D21A006A7B7B /* SharedDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1CF2E39D21A006A7B7B /* SharedDataLoader.swift */; };
 		0B9ED1EE2E39D21A006A7B7B /* LocalGroupStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1CE2E39D21A006A7B7B /* LocalGroupStorage.swift */; };
 		0B9ED1EF2E39D21A006A7B7B /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D02E39D21A006A7B7B /* SyncManager.swift */; };
-		0B9ED1F02E39D21A006A7B7B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D92E39D21A006A7B7B /* LoginView.swift */; };
 		0B9ED1F12E39D21A006A7B7B /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D42E39D21A006A7B7B /* UserProfile.swift */; };
 		0B9ED1F42E39D434006A7B7B /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = 0B9ED1F32E39D434006A7B7B /* FirebaseAI */; };
 		0B9ED1F62E39D434006A7B7B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0B9ED1F52E39D434006A7B7B /* FirebaseAnalytics */; };
 		0B9ED1F82E39D434006A7B7B /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0B9ED1F72E39D434006A7B7B /* FirebaseAnalyticsCore */; };
 		0B9ED1FA2E39D434006A7B7B /* FirebaseAnalyticsIdentitySupport in Frameworks */ = {isa = PBXBuildFile; productRef = 0B9ED1F92E39D434006A7B7B /* FirebaseAnalyticsIdentitySupport */; };
 		0B9ED1FC2E39D434006A7B7B /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 0B9ED1FB2E39D434006A7B7B /* FirebaseAppCheck */; };
+		0BFD31472E3AF48200BA677C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31322E3AF48200BA677C /* LoginView.swift */; };
+		0BFD31482E3AF48200BA677C /* ProfileSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD313F2E3AF48200BA677C /* ProfileSetupView.swift */; };
+		0BFD31492E3AF48200BA677C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31402E3AF48200BA677C /* WelcomeView.swift */; };
+		0BFD314B2E3AF48200BA677C /* MainAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31392E3AF48200BA677C /* MainAppView.swift */; };
+		0BFD314C2E3AF48200BA677C /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31352E3AF48200BA677C /* StyledTextField.swift */; };
+		0BFD314D2E3AF48200BA677C /* BMICalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD313D2E3AF48200BA677C /* BMICalculatorView.swift */; };
+		0BFD314E2E3AF48200BA677C /* FloatingInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31382E3AF48200BA677C /* FloatingInputBar.swift */; };
+		0BFD314F2E3AF48200BA677C /* TransparentTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD313A2E3AF48200BA677C /* TransparentTopBar.swift */; };
+		0BFD31512E3AF48200BA677C /* OnboardingDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD313E2E3AF48200BA677C /* OnboardingDemoView.swift */; };
+		0BFD31522E3AF48200BA677C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31452E3AF48200BA677C /* SettingsView.swift */; };
+		0BFD31532E3AF48200BA677C /* CloudStorageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31432E3AF48200BA677C /* CloudStorageSettingsView.swift */; };
+		0BFD31542E3AF48200BA677C /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31442E3AF48200BA677C /* SettingsMenu.swift */; };
+		0BFD31552E3AF48200BA677C /* UniversalBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31362E3AF48200BA677C /* UniversalBackground.swift */; };
+		0BFD31562E3AF48200BA677C /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31332E3AF48200BA677C /* SessionStore.swift */; };
+		0BFD31582E3AF63400BA677C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31572E3AF63400BA677C /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B02C6352E3AEE0D00A672B6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		0B02C63A2E3AEE3E00A672B6 /* CloudProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudProvider.swift; sourceTree = "<group>"; };
 		0B1819EF2E39D97000562B43 /* MacroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroApp.swift; sourceTree = "<group>"; };
 		0B1819F12E39DB2500562B43 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		0B1819F32E39E38900562B43 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
-		0B1819F52E39EF2000562B43 /* StyledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
 		0B5257A52E3A2E2900B30CCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0B7C99B12E3AE81100C74B04 /* CloudKitProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitProfileService.swift; sourceTree = "<group>"; };
+		0B7C99B22E3AE81100C74B04 /* CloudKitUserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitUserProfileRepository.swift; sourceTree = "<group>"; };
 		0B9ED1CB2E39D21A006A7B7B /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		0B9ED1CC2E39D21A006A7B7B /* GroupRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRepository.swift; sourceTree = "<group>"; };
 		0B9ED1CD2E39D21A006A7B7B /* ICloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudService.swift; sourceTree = "<group>"; };
@@ -56,18 +66,24 @@
 		0B9ED1D12E39D21A006A7B7B /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
 		0B9ED1D32E39D21A006A7B7B /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		0B9ED1D42E39D21A006A7B7B /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
-		0B9ED1D62E39D21A006A7B7B /* BMICalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMICalculatorView.swift; sourceTree = "<group>"; };
-		0B9ED1D72E39D21A006A7B7B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		0B9ED1D82E39D21A006A7B7B /* FloatingInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingInputBar.swift; sourceTree = "<group>"; };
-		0B9ED1D92E39D21A006A7B7B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		0B9ED1DA2E39D21A006A7B7B /* ProfileSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupView.swift; sourceTree = "<group>"; };
-		0B9ED1DB2E39D21A006A7B7B /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
-		0B9ED1DC2E39D21A006A7B7B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		0B9ED1DD2E39D21A006A7B7B /* TransparentTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentTopBar.swift; sourceTree = "<group>"; };
-		0B9ED1DE2E39D21A006A7B7B /* UniversalBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalBackground.swift; sourceTree = "<group>"; };
 		0BB9EF0E2E39BB1D00EDB4AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BB9EF0F2E39BB1D00EDB4AA /* Macro.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Macro.xcodeproj; sourceTree = "<group>"; };
 		0BEE023E2E39ACF20085B9EA /* Macro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BFD31322E3AF48200BA677C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		0BFD31332E3AF48200BA677C /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		0BFD31352E3AF48200BA677C /* StyledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
+		0BFD31362E3AF48200BA677C /* UniversalBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalBackground.swift; sourceTree = "<group>"; };
+		0BFD31382E3AF48200BA677C /* FloatingInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingInputBar.swift; sourceTree = "<group>"; };
+		0BFD31392E3AF48200BA677C /* MainAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView.swift; sourceTree = "<group>"; };
+		0BFD313A2E3AF48200BA677C /* TransparentTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentTopBar.swift; sourceTree = "<group>"; };
+		0BFD313D2E3AF48200BA677C /* BMICalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMICalculatorView.swift; sourceTree = "<group>"; };
+		0BFD313E2E3AF48200BA677C /* OnboardingDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDemoView.swift; sourceTree = "<group>"; };
+		0BFD313F2E3AF48200BA677C /* ProfileSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupView.swift; sourceTree = "<group>"; };
+		0BFD31402E3AF48200BA677C /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		0BFD31432E3AF48200BA677C /* CloudStorageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorageSettingsView.swift; sourceTree = "<group>"; };
+		0BFD31442E3AF48200BA677C /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
+		0BFD31452E3AF48200BA677C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		0BFD31572E3AF63400BA677C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +96,7 @@
 				0B1819EE2E39D89600562B43 /* FirebaseStorage in Frameworks */,
 				0B9ED1F82E39D434006A7B7B /* FirebaseAnalyticsCore in Frameworks */,
 				0B9ED1FC2E39D434006A7B7B /* FirebaseAppCheck in Frameworks */,
+				0B02C6372E3AEE1200A672B6 /* CloudKit.framework in Frameworks */,
 				0B9ED1F42E39D434006A7B7B /* FirebaseAI in Frameworks */,
 				0B1819EA2E39D89600562B43 /* FirebaseAuth in Frameworks */,
 				0B1819EC2E39D89600562B43 /* FirebaseDatabase in Frameworks */,
@@ -93,6 +110,7 @@
 		0B1819E62E39D88000562B43 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B02C6352E3AEE0D00A672B6 /* CloudKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -100,6 +118,8 @@
 		0B9ED1D22E39D21A006A7B7B /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0B7C99B12E3AE81100C74B04 /* CloudKitProfileService.swift */,
+				0B7C99B22E3AE81100C74B04 /* CloudKitUserProfileRepository.swift */,
 				0B9ED1CB2E39D21A006A7B7B /* FirebaseService.swift */,
 				0B9ED1CC2E39D21A006A7B7B /* GroupRepository.swift */,
 				0B9ED1CD2E39D21A006A7B7B /* ICloudService.swift */,
@@ -114,6 +134,7 @@
 		0B9ED1D52E39D21A006A7B7B /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				0B02C63A2E3AEE3E00A672B6 /* CloudProvider.swift */,
 				0B9ED1D32E39D21A006A7B7B /* Group.swift */,
 				0B9ED1D42E39D21A006A7B7B /* UserProfile.swift */,
 			);
@@ -123,18 +144,13 @@
 		0B9ED1DF2E39D21A006A7B7B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				0B1819F32E39E38900562B43 /* SessionStore.swift */,
-				0B9ED1D62E39D21A006A7B7B /* BMICalculatorView.swift */,
-				0B9ED1D72E39D21A006A7B7B /* ContentView.swift */,
-				0B9ED1D82E39D21A006A7B7B /* FloatingInputBar.swift */,
-				0B9ED1D92E39D21A006A7B7B /* LoginView.swift */,
-				0B9ED1DA2E39D21A006A7B7B /* ProfileSetupView.swift */,
-				0B9ED1DB2E39D21A006A7B7B /* SettingsMenu.swift */,
-				0B9ED1DC2E39D21A006A7B7B /* SettingsView.swift */,
-				0B9ED1DD2E39D21A006A7B7B /* TransparentTopBar.swift */,
-				0B9ED1DE2E39D21A006A7B7B /* UniversalBackground.swift */,
 				0B1819EF2E39D97000562B43 /* MacroApp.swift */,
-				0B1819F52E39EF2000562B43 /* StyledTextField.swift */,
+				0BFD31572E3AF63400BA677C /* ContentView.swift */,
+				0BFD31342E3AF48200BA677C /* Authentication */,
+				0BFD31372E3AF48200BA677C /* Components */,
+				0BFD313B2E3AF48200BA677C /* MainApp */,
+				0BFD31412E3AF48200BA677C /* Onboarding */,
+				0BFD31462E3AF48200BA677C /* Settings */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -165,6 +181,55 @@
 				0BEE023E2E39ACF20085B9EA /* Macro.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		0BFD31342E3AF48200BA677C /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				0BFD31322E3AF48200BA677C /* LoginView.swift */,
+				0BFD31332E3AF48200BA677C /* SessionStore.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		0BFD31372E3AF48200BA677C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0BFD31352E3AF48200BA677C /* StyledTextField.swift */,
+				0BFD31362E3AF48200BA677C /* UniversalBackground.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0BFD313B2E3AF48200BA677C /* MainApp */ = {
+			isa = PBXGroup;
+			children = (
+				0BFD31382E3AF48200BA677C /* FloatingInputBar.swift */,
+				0BFD31392E3AF48200BA677C /* MainAppView.swift */,
+				0BFD313A2E3AF48200BA677C /* TransparentTopBar.swift */,
+			);
+			path = MainApp;
+			sourceTree = "<group>";
+		};
+		0BFD31412E3AF48200BA677C /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0BFD313D2E3AF48200BA677C /* BMICalculatorView.swift */,
+				0BFD313E2E3AF48200BA677C /* OnboardingDemoView.swift */,
+				0BFD313F2E3AF48200BA677C /* ProfileSetupView.swift */,
+				0BFD31402E3AF48200BA677C /* WelcomeView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		0BFD31462E3AF48200BA677C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0BFD31432E3AF48200BA677C /* CloudStorageSettingsView.swift */,
+				0BFD31442E3AF48200BA677C /* SettingsMenu.swift */,
+				0BFD31452E3AF48200BA677C /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,27 +323,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B9ED1E02E39D21A006A7B7B /* SettingsView.swift in Sources */,
-				0B9ED1E12E39D21A006A7B7B /* SettingsMenu.swift in Sources */,
-				0B9ED1E22E39D21A006A7B7B /* ProfileSetupView.swift in Sources */,
 				0B9ED1E32E39D21A006A7B7B /* Group.swift in Sources */,
-				0B9ED1E42E39D21A006A7B7B /* UniversalBackground.swift in Sources */,
 				0B9ED1E52E39D21A006A7B7B /* UserProfileRepository.swift in Sources */,
-				0B1819F42E39E38900562B43 /* SessionStore.swift in Sources */,
+				0BFD31582E3AF63400BA677C /* ContentView.swift in Sources */,
 				0B9ED1E62E39D21A006A7B7B /* ICloudService.swift in Sources */,
 				0B1819F02E39D97000562B43 /* MacroApp.swift in Sources */,
-				0B9ED1E72E39D21A006A7B7B /* FloatingInputBar.swift in Sources */,
-				0B1819F62E39EF2000562B43 /* StyledTextField.swift in Sources */,
+				0B7C99B32E3AE81100C74B04 /* CloudKitProfileService.swift in Sources */,
+				0B7C99B42E3AE81100C74B04 /* CloudKitUserProfileRepository.swift in Sources */,
 				0B9ED1E82E39D21A006A7B7B /* FirebaseService.swift in Sources */,
-				0B9ED1E92E39D21A006A7B7B /* ContentView.swift in Sources */,
-				0B9ED1EA2E39D21A006A7B7B /* TransparentTopBar.swift in Sources */,
-				0B9ED1EB2E39D21A006A7B7B /* BMICalculatorView.swift in Sources */,
+				0B02C63B2E3AEE3E00A672B6 /* CloudProvider.swift in Sources */,
 				0B9ED1EC2E39D21A006A7B7B /* GroupRepository.swift in Sources */,
 				0B9ED1ED2E39D21A006A7B7B /* SharedDataLoader.swift in Sources */,
 				0B9ED1EE2E39D21A006A7B7B /* LocalGroupStorage.swift in Sources */,
 				0B9ED1EF2E39D21A006A7B7B /* SyncManager.swift in Sources */,
-				0B9ED1F02E39D21A006A7B7B /* LoginView.swift in Sources */,
 				0B9ED1F12E39D21A006A7B7B /* UserProfile.swift in Sources */,
+				0BFD31472E3AF48200BA677C /* LoginView.swift in Sources */,
+				0BFD31482E3AF48200BA677C /* ProfileSetupView.swift in Sources */,
+				0BFD31492E3AF48200BA677C /* WelcomeView.swift in Sources */,
+				0BFD314B2E3AF48200BA677C /* MainAppView.swift in Sources */,
+				0BFD314C2E3AF48200BA677C /* StyledTextField.swift in Sources */,
+				0BFD314D2E3AF48200BA677C /* BMICalculatorView.swift in Sources */,
+				0BFD314E2E3AF48200BA677C /* FloatingInputBar.swift in Sources */,
+				0BFD314F2E3AF48200BA677C /* TransparentTopBar.swift in Sources */,
+				0BFD31512E3AF48200BA677C /* OnboardingDemoView.swift in Sources */,
+				0BFD31522E3AF48200BA677C /* SettingsView.swift in Sources */,
+				0BFD31532E3AF48200BA677C /* CloudStorageSettingsView.swift in Sources */,
+				0BFD31542E3AF48200BA677C /* SettingsMenu.swift in Sources */,
+				0BFD31552E3AF48200BA677C /* UniversalBackground.swift in Sources */,
+				0BFD31562E3AF48200BA677C /* SessionStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

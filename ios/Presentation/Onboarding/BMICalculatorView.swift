@@ -76,8 +76,8 @@ struct BMICalculatorView: View {
                             )
                             profileRepo.saveProfile(profile)
                             
-                            // Update session to reflect BMI completion
-                            session.checkUserProfile()
+                            // Mark BMI calculator as completed
+                            session.markBMICalculatorCompleted()
                         }
                     }) {
                         Text("Calculate & Save")

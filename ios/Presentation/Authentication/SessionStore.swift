@@ -5,6 +5,7 @@ import Combine
 class SessionStore: ObservableObject {
     @Published var isLoggedIn = false
     @Published var isProfileComplete = false
+    @Published var isWelcomeScreenSeen = false
     @Published var isBMIComplete = false
     @Published var currentUser: User?
     
@@ -20,6 +21,7 @@ class SessionStore: ObservableObject {
             } else {
                 self.isLoggedIn = false
                 self.isProfileComplete = false
+                self.isWelcomeScreenSeen = false
                 self.isBMIComplete = false
                 self.currentUser = nil
             }
@@ -56,23 +58,44 @@ class SessionStore: ObservableObject {
     
     func checkUserProfile() {
         let profileRepo = UserProfileRepository()
-        if let profile = profileRepo.loadProfile() {
-            self.isProfileComplete = true
-            // Check if BMI data exists (height and weight are set)
-            if profile.height > 0 && profile.weight > 0 {
-                self.isBMIComplete = true
-            } else {
-                self.isBMIComplete = false
+        
+        // Use the async version to load from cloud if available
+        profileRepo.loadProfile { [weak self] profile in
+            DispatchQueue.main.async {
+                if let profile = profile {
+                    self?.isProfileComplete = true
+                    // Check both UserDefaults flags for completion states
+                    let defaults = UserDefaults.standard
+                    self?.isWelcomeScreenSeen = defaults.bool(forKey: "welcome_screen_seen")
+                    self?.isBMIComplete = defaults.bool(forKey: "bmi_calculator_completed")
+                } else {
+                    self?.isProfileComplete = false
+                    self?.isWelcomeScreenSeen = false
+                    self?.isBMIComplete = false
+                }
             }
-        } else {
-            self.isProfileComplete = false
-            self.isBMIComplete = false
         }
+    }
+    
+    func markWelcomeScreenSeen() {
+        let defaults = UserDefaults.standard
+        defaults.set(true, forKey: "welcome_screen_seen")
+        isWelcomeScreenSeen = true
+    }
+    
+    func markBMICalculatorCompleted() {
+        let defaults = UserDefaults.standard
+        defaults.set(true, forKey: "bmi_calculator_completed")
+        isBMIComplete = true
     }
     
     func signOut() {
         do {
             try Auth.auth().signOut()
+            // Reset completion flags when signing out
+            let defaults = UserDefaults.standard
+            defaults.removeObject(forKey: "bmi_calculator_completed")
+            defaults.removeObject(forKey: "welcome_screen_seen")
         } catch {
             print("Error signing out")
         }

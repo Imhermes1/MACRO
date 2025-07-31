@@ -1,4 +1,4 @@
-package com.lumoralabs.macro.presentation
+package com.lumoralabs.macro.presentation.onboarding
 
 import android.content.Intent
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.lumoralabs.macro.presentation
+package com.lumoralabs.macro.presentation.authentication
 
 import android.content.Intent
 import android.os.Bundle
@@ -117,16 +117,6 @@ fun LoginScreen() {
             onClick = {
                 // TODO: Implement Google login
                 Toast.makeText(context, "Google login not implemented yet", Toast.LENGTH_SHORT).show()
-            }
-        )
-        
-        Spacer(modifier = Modifier.height(15.dp))
-        
-        PillButton(
-            text = "Login with iCloud",
-            icon = Icons.Default.Cloud,
-            onClick = {
-                Toast.makeText(context, "iCloud login not available on Android", Toast.LENGTH_SHORT).show()
             }
         )
     }

@@ -1,6 +1,5 @@
 
 import SwiftUI
-import FirebaseAuth
 
 struct ContentView: View {
     @StateObject private var session = SessionStore()
@@ -12,6 +11,8 @@ struct ContentView: View {
             if session.isLoggedIn {
                 if !session.isProfileComplete {
                     ProfileSetupView(session: session)
+                } else if !session.isWelcomeScreenSeen {
+                    WelcomeView(session: session)
                 } else if !session.isBMIComplete {
                     BMICalculatorView(session: session)
                 } else {

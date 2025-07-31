@@ -1,4 +1,4 @@
-package com.lumoralabs.macro.presentation
+package com.lumoralabs.macro.presentation.settings
 
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
