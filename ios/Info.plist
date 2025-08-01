@@ -69,11 +69,9 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>CKSharingSupported</key>
-	<true/>
 	<key>NSUbiquitousContainers</key>
 	<dict>
-		<key>iCloud.com.lumoralabs.macro</key>
+		<key>iCloud.$(CFBundleIdentifier)</key>
 		<dict>
 			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
 			<false/>

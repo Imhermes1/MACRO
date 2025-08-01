@@ -1,6 +1,5 @@
 
 import SwiftUI
-import CloudKit
 
 struct LoginView: View {
     @ObservedObject var session: SessionStore
@@ -96,38 +95,16 @@ struct LoginView: View {
     
     // MARK: - iCloud Login Function
     private func signiCloudLogin() {
-        let container = CKContainer(identifier: "iCloud.com.lumoralabs.macro")
-        
-        container.accountStatus { status, error in
-            DispatchQueue.main.async {
-                switch status {
-                case .available:
-                    // iCloud account is available, proceed with login
-                    session.isLoggedIn = true
-                    session.currentUser = "icloud_user"
-                    session.checkUserProfile()
-                    
-                case .noAccount:
-                    alertMessage = "No iCloud account found. Please sign in to iCloud in Settings."
-                    showAlert = true
-                    
-                case .restricted:
-                    alertMessage = "iCloud account is restricted."
-                    showAlert = true
-                    
-                case .temporarilyUnavailable:
-                    alertMessage = "iCloud is temporarily unavailable. Please try again."
-                    showAlert = true
-                    
-                case .couldNotDetermine:
-                    alertMessage = "Could not determine iCloud account status."
-                    showAlert = true
-                    
-                @unknown default:
-                    alertMessage = "Unknown iCloud account status."
-                    showAlert = true
-                }
-            }
+        // Check if iCloud Documents is available
+        if FileManager.default.url(forUbiquityContainerIdentifier: nil) != nil {
+            // iCloud Documents is available
+            session.isLoggedIn = true
+            session.currentUser = "icloud_user"
+            session.checkUserProfile()
+        } else {
+            // iCloud Documents is not available
+            alertMessage = "iCloud is not available. Please sign in to iCloud in Settings and ensure iCloud Drive is enabled."
+            showAlert = true
         }
     }
 }

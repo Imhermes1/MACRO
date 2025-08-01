@@ -9,7 +9,8 @@ class CloudKitAuthService: ObservableObject {
     private let container: CKContainer
     
     init() {
-        self.container = CKContainer(identifier: "iCloud.com.lumoralabs.macro")
+        // Use dynamic container identifier that matches bundle ID
+        self.container = CKContainer.default()
         checkAccountStatus()
     }
     
