@@ -4,7 +4,7 @@ import Foundation
 enum CloudProvider: String, CaseIterable, Hashable {
     case localOnly = "local"
     case cloudKit = "cloudkit"
-    case firebase = "firebase"
+    case supabase = "supabase"
     
     var displayName: String {
         switch self {
@@ -12,8 +12,8 @@ enum CloudProvider: String, CaseIterable, Hashable {
             return "Local Only"
         case .cloudKit:
             return "iCloud (Recommended)"
-        case .firebase:
-            return "Firebase"
+        case .supabase:
+            return "Supabase"
         }
     }
     
@@ -23,7 +23,7 @@ enum CloudProvider: String, CaseIterable, Hashable {
             return "Keeps data on this device only"
         case .cloudKit:
             return "Syncs across your Apple devices"
-        case .firebase:
+        case .supabase:
             return "Cross-platform cloud storage"
         }
     }
@@ -33,7 +33,7 @@ enum CloudProvider: String, CaseIterable, Hashable {
         switch self {
         case .localOnly:
             return false
-        case .cloudKit, .firebase:
+        case .cloudKit, .supabase:
             return true
         }
     }
@@ -41,7 +41,7 @@ enum CloudProvider: String, CaseIterable, Hashable {
     /// Indicates if this provider is available on the current platform
     var isAvailableOnCurrentPlatform: Bool {
         switch self {
-        case .localOnly, .firebase:
+        case .localOnly, .supabase:
             return true
         case .cloudKit:
             // CloudKit is only available on Apple platforms
