@@ -1,7 +1,6 @@
 
 import SwiftUI
-// UniversalBackground is a local SwiftUI View
-import FirebaseAuth
+import CloudKit
 
 struct LoginView: View {
     @ObservedObject var session: SessionStore
@@ -59,20 +58,10 @@ struct LoginView: View {
                             .modifier(PillButtonStyle())
                         }
                         Button(action: {
-                            // Anonymous login - actually sign in
-                            Auth.auth().signInAnonymously { result, error in
-                                if let error = error {
-                                    alertMessage = error.localizedDescription
-                                    showAlert = true
-                                } else {
-                                    // For demo purposes, simulate user profile data
-                                    if let user = result?.user {
-                                        let changeRequest = user.createProfileChangeRequest()
-                                        changeRequest.displayName = "Demo User"
-                                        changeRequest.commitChanges { _ in }
-                                    }
-                                }
-                            }
+                            // Demo login without Firebase
+                            session.isLoggedIn = true
+                            session.currentUser = "demo_user"
+                            session.checkUserProfile()
                         }) {
                             HStack {
                                 Image(systemName: "person.fill")
@@ -81,7 +70,8 @@ struct LoginView: View {
                             .modifier(PillButtonStyle())
                         }
                         Button(action: {
-                            showICloudWarning = true
+                            // iCloud/CloudKit login
+                            signiCloudLogin()
                         }) {
                             HStack {
                                 Image(systemName: "icloud.fill")
@@ -101,6 +91,43 @@ struct LoginView: View {
             }
             .navigationBarHidden(true)
             .ignoresSafeArea(.all)
+        }
+    }
+    
+    // MARK: - iCloud Login Function
+    private func signiCloudLogin() {
+        let container = CKContainer(identifier: "iCloud.com.lumoralabs.macro")
+        
+        container.accountStatus { status, error in
+            DispatchQueue.main.async {
+                switch status {
+                case .available:
+                    // iCloud account is available, proceed with login
+                    session.isLoggedIn = true
+                    session.currentUser = "icloud_user"
+                    session.checkUserProfile()
+                    
+                case .noAccount:
+                    alertMessage = "No iCloud account found. Please sign in to iCloud in Settings."
+                    showAlert = true
+                    
+                case .restricted:
+                    alertMessage = "iCloud account is restricted."
+                    showAlert = true
+                    
+                case .temporarilyUnavailable:
+                    alertMessage = "iCloud is temporarily unavailable. Please try again."
+                    showAlert = true
+                    
+                case .couldNotDetermine:
+                    alertMessage = "Could not determine iCloud account status."
+                    showAlert = true
+                    
+                @unknown default:
+                    alertMessage = "Unknown iCloud account status."
+                    showAlert = true
+                }
+            }
         }
     }
 }

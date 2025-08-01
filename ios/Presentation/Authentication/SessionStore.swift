@@ -1,80 +1,65 @@
 import Foundation
-import FirebaseAuth
 import Combine
+import CloudKit
 
 class SessionStore: ObservableObject {
     @Published var isLoggedIn = false
     @Published var isProfileComplete = false
     @Published var isWelcomeScreenSeen = false
     @Published var isBMIComplete = false
-    @Published var currentUser: User?
+    @Published var currentUser: String? // Changed to String for demo
+    @Published var iCloudAvailable = false
     
-    private var handle: AuthStateDidChangeListenerHandle?
+    private let cloudKitContainer = CKContainer(identifier: "iCloud.com.lumoralabs.macro")
     
-    func listen() {
-        handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
-            guard let self = self else { return }
-            if let user = user {
-                self.isLoggedIn = true
-                self.currentUser = user
-                self.checkUserProfile()
-            } else {
-                self.isLoggedIn = false
-                self.isProfileComplete = false
-                self.isWelcomeScreenSeen = false
-                self.isBMIComplete = false
-                self.currentUser = nil
+    init() {
+        checkiCloudStatus()
+    }
+    
+    func checkiCloudStatus() {
+        cloudKitContainer.accountStatus { [weak self] status, error in
+            DispatchQueue.main.async {
+                self?.iCloudAvailable = (status == .available)
             }
         }
+    }
+    
+    func listen() {
+        // Demo mode - automatically log in
+        self.isLoggedIn = true
+        self.currentUser = "demo_user"
+        self.checkUserProfile()
     }
     
     func getUserDisplayName() -> String? {
-        return currentUser?.displayName
+        return "Demo User"
     }
     
     func getUserEmail() -> String? {
-        return currentUser?.email
+        return "demo@example.com"
     }
     
     func extractUserDetails() -> (firstName: String?, lastName: String?, email: String?) {
-        guard let user = currentUser else { return (nil, nil, nil) }
-        
-        let displayName = user.displayName
-        let email = user.email
-        
-        var firstName: String?
-        var lastName: String?
-        
-        if let displayName = displayName, !displayName.isEmpty {
-            let nameParts = displayName.components(separatedBy: " ")
-            firstName = nameParts.first
-            if nameParts.count > 1 {
-                lastName = nameParts.dropFirst().joined(separator: " ")
-            }
-        }
-        
-        return (firstName, lastName, email)
+        return ("Demo", "User", "demo@example.com")
     }
     
     func checkUserProfile() {
-        let profileRepo = UserProfileRepository()
+        // For demo mode, check UserDefaults for profile completion
+        let defaults = UserDefaults.standard
+        self.isProfileComplete = defaults.bool(forKey: "profile_complete")
+        self.isWelcomeScreenSeen = defaults.bool(forKey: "welcome_screen_seen")
+        self.isBMIComplete = defaults.bool(forKey: "bmi_calculator_completed")
         
-        // Use the async version to load from cloud if available
-        profileRepo.loadProfile { [weak self] profile in
-            DispatchQueue.main.async {
-                if let profile = profile {
-                    self?.isProfileComplete = true
-                    // Check both UserDefaults flags for completion states
-                    let defaults = UserDefaults.standard
-                    self?.isWelcomeScreenSeen = defaults.bool(forKey: "welcome_screen_seen")
-                    self?.isBMIComplete = defaults.bool(forKey: "bmi_calculator_completed")
-                } else {
-                    self?.isProfileComplete = false
-                    self?.isWelcomeScreenSeen = false
-                    self?.isBMIComplete = false
-                }
-            }
+        // If using iCloud, also check CloudKit
+        if currentUser == "icloud_user" && iCloudAvailable {
+            syncWithCloudKit()
         }
+    }
+    
+    private func syncWithCloudKit() {
+        // For now, we'll just mark CloudKit sync as completed
+        // This can be expanded later with proper CloudKit integration
+        UserDefaults.standard.set(true, forKey: "cloudkit_synced")
     }
     
     func markWelcomeScreenSeen() {
@@ -90,20 +75,15 @@ class SessionStore: ObservableObject {
     }
     
     func signOut() {
-        do {
-            try Auth.auth().signOut()
-            // Reset completion flags when signing out
-            let defaults = UserDefaults.standard
-            defaults.removeObject(forKey: "bmi_calculator_completed")
-            defaults.removeObject(forKey: "welcome_screen_seen")
-        } catch {
-            // Handle sign out error silently
-        }
-    }
-    
-    deinit {
-        if let handle = handle {
-            Auth.auth().removeStateDidChangeListener(handle)
-        }
+        // Reset completion flags when signing out
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "bmi_calculator_completed")
+        defaults.removeObject(forKey: "welcome_screen_seen")
+        defaults.removeObject(forKey: "profile_complete")
+        isLoggedIn = false
+        currentUser = nil
+        isProfileComplete = false
+        isWelcomeScreenSeen = false
+        isBMIComplete = false
     }
 }

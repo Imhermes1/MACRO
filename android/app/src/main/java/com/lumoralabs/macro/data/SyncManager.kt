@@ -15,8 +15,8 @@ object SyncManager {
     fun syncGroups(context: Context) {
         if (isOnline(context)) {
             val localGroups = LocalGroupStorage.loadGroups(context)
-            localGroups.forEach { FirebaseService.saveGroup(it) }
-            FirebaseService.getGroups { cloudGroups ->
+            localGroups.forEach { SupabaseService.saveGroup(it) }
+            SupabaseService.getGroups { cloudGroups ->
                 LocalGroupStorage.saveGroups(context, cloudGroups)
             }
         }

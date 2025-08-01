@@ -88,16 +88,9 @@ fun ProfileSetupScreen(
     val coroutineScope = rememberCoroutineScope()
     val profileRepo = remember { UserProfileRepository(context) }
 
-    // Auto-populate from Firebase Auth
+    // No auto-populate needed for demo
     LaunchedEffect(Unit) {
-        val currentUser = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
-        currentUser?.let { user ->
-            user.displayName?.let { displayName ->
-                val nameParts = displayName.split(" ")
-                if (nameParts.isNotEmpty() && firstName.isEmpty()) {
-                    firstName = nameParts[0]
-                    hasPrefilledData = true
-                }
+        // Profile data will be entered manually in demo mode
                 if (nameParts.size > 1 && lastName.isEmpty()) {
                     lastName = nameParts.drop(1).joinToString(" ")
                     hasPrefilledData = true
@@ -221,7 +214,7 @@ fun ProfileSetupScreen(
             
             TextButton(
                 onClick = {
-                    com.google.firebase.auth.FirebaseAuth.getInstance().signOut()
+                    // Demo logout - just navigate back
                     onNavigateBack()
                 }
             ) {
@@ -467,20 +460,9 @@ fun ProfileSetupScreen() {
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
 
-    // Auto-populate from Firebase Auth
+    // No auto-populate needed for demo
     LaunchedEffect(Unit) {
-        val currentUser = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
-        currentUser?.let { user ->
-            user.displayName?.let { displayName ->
-                val nameParts = displayName.split(" ")
-                if (nameParts.isNotEmpty() && firstName.isEmpty()) {
-                    firstName = nameParts[0]
-                }
-                if (nameParts.size > 1 && lastName.isEmpty()) {
-                    lastName = nameParts.drop(1).joinToString(" ")
-                }
-            }
-        }
+        // Profile data will be entered manually in demo mode
     }
 
     Column(
@@ -528,7 +510,7 @@ fun ProfileSetupScreen() {
         ) {
             TextButton(
                 onClick = {
-                    com.google.firebase.auth.FirebaseAuth.getInstance().signOut()
+                    // Demo logout - just navigate back
                     onNavigateBack()
                 }
             ) {
