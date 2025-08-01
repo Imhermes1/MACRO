@@ -28,7 +28,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
-import com.google.firebase.auth.FirebaseAuth
 import com.lumoralabs.macro.presentation.onboarding.ProfileSetupActivity
 import com.lumoralabs.macro.presentation.mainapp.MainAppActivity
 import com.lumoralabs.macro.ui.components.UniversalBackground
@@ -37,8 +36,6 @@ import kotlinx.coroutines.delay
 
 /**
  * LoginActivity with magical glow effects for the logo.
- * Based on Firebase Authentication best practices:
- * https://firebase.google.com/docs/auth/android/start
  * 
  * UI inspired by Material Design 3 principles:
  * https://developer.android.com/develop/ui/compose/designsystems/material3
@@ -53,7 +50,16 @@ class LoginActivity : ComponentActivity() {
         setContent {
             MacroTheme {
                 UniversalBackground {
-                    LoginScreen()
+                    LoginScreen(
+                        onLoginSuccess = {
+                            startActivity(Intent(this@LoginActivity, MainAppActivity::class.java))
+                            finish()
+                        },
+                        onAnonymousLogin = {
+                            startActivity(Intent(this@LoginActivity, ProfileSetupActivity::class.java))
+                            finish()
+                        }
+                    )
                 }
             }
         }
@@ -65,7 +71,6 @@ fun LoginScreen(
     onLoginSuccess: () -> Unit = {},
     onAnonymousLogin: () -> Unit = {}
 ) {
-    val auth = FirebaseAuth.getInstance()
     val context = LocalContext.current
     val sessionManager = remember { SessionManager.getInstance(context) }
     
@@ -141,26 +146,13 @@ fun LoginScreen(
                     text = "Login Anonymously (Demo)",
                     icon = Icons.Default.Person,
                     onClick = {
-                        auth.signInAnonymously()
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    // For demo purposes, simulate user profile data
-                                    val user = auth.currentUser
-                                    val profileUpdates = com.google.firebase.auth.UserProfileChangeRequest.Builder()
-                                        .setDisplayName("Demo User")
-                                        .build()
-                                    user?.updateProfile(profileUpdates)
-                                    
-                                    val profile = com.lumoralabs.macro.data.UserProfileRepository.loadProfile(context)
-                                    if (profile == null) {
-                                        onProfileSetupRequired()
-                                    } else {
-                                        onLoginSuccess()
-                                    }
-                                } else {
-                                    Toast.makeText(context, "Anonymous login failed!", Toast.LENGTH_SHORT).show()
-                                }
-                            }
+                        // Demo login without Firebase
+                        val profile = com.lumoralabs.macro.data.UserProfileRepository.loadProfile(context)
+                        if (profile == null) {
+                            onAnonymousLogin()
+                        } else {
+                            onLoginSuccess()
+                        }
                     }
                 )
                 

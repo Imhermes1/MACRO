@@ -138,7 +138,7 @@ struct CloudStorageInfoView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("🔥 Firebase")
+                        Text("�️ Supabase")
                             .font(.headline)
                             .foregroundColor(.orange)
                         

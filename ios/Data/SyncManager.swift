@@ -12,12 +12,12 @@ class SyncManager {
         monitor.start(queue: queue)
     }
 
-    func syncGroups(localStorage: LocalGroupStorage, firebaseService: FirebaseService) {
+    func syncGroups(localStorage: LocalGroupStorage, supabaseService: SupabaseService) {
         isOnline { online in
             if online {
                 let localGroups = localStorage.loadGroups()
-                localGroups.forEach { firebaseService.saveGroup($0) }
-                firebaseService.getGroups { cloudGroups in
+                localGroups.forEach { supabaseService.saveGroup($0) }
+                supabaseService.getGroups { cloudGroups in
                     localStorage.saveGroups(cloudGroups)
                 }
             }

@@ -115,7 +115,7 @@ fun MacroNavigation(
 
 /**
  * Determines the start destination based on user authentication and onboarding state.
- * Following Firebase Auth and app state management best practices.
+ * Following Supabase Auth and app state management best practices.
  */
 private fun getStartDestination(sessionManager: SessionManager): Any {
     return when {

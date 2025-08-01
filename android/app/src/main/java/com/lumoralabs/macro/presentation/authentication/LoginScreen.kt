@@ -24,7 +24,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.firebase.auth.FirebaseAuth
 import com.lumoralabs.macro.data.UserProfileRepository
 import com.lumoralabs.macro.ui.components.PillButton
 
@@ -33,7 +32,6 @@ fun LoginScreen(
     onLoginSuccess: () -> Unit = {},
     onProfileSetupRequired: () -> Unit = {}
 ) {
-    val auth = FirebaseAuth.getInstance()
     val context = LocalContext.current
     
     Column(
@@ -97,26 +95,13 @@ fun LoginScreen(
                 text = "Login Anonymously (Demo)",
                 icon = Icons.Default.Person,
                 onClick = {
-                    auth.signInAnonymously()
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                // For demo purposes, simulate user profile data
-                                val user = auth.currentUser
-                                val profileUpdates = com.google.firebase.auth.UserProfileChangeRequest.Builder()
-                                    .setDisplayName("Demo User")
-                                    .build()
-                                user?.updateProfile(profileUpdates)
-                                
-                                val profile = com.lumoralabs.macro.data.UserProfileRepository.loadProfile(context)
-                                if (profile == null) {
-                                    onProfileSetupRequired()
-                                } else {
-                                    onLoginSuccess()
-                                }
-                            } else {
-                                Toast.makeText(context, "Anonymous login failed!", Toast.LENGTH_SHORT).show()
-                            }
-                        }
+                    // Demo login without Firebase
+                    val profile = com.lumoralabs.macro.data.UserProfileRepository.loadProfile(context)
+                    if (profile == null) {
+                        onProfileSetupRequired()
+                    } else {
+                        onLoginSuccess()
+                    }
                 }
             )
             
