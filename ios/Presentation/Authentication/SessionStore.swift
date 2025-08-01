@@ -1,6 +1,5 @@
 import Foundation
 import Combine
-import CloudKit
 
 class SessionStore: ObservableObject {
     @Published var isLoggedIn = false
@@ -10,18 +9,13 @@ class SessionStore: ObservableObject {
     @Published var currentUser: String? // Changed to String for demo
     @Published var iCloudAvailable = false
     
-    private let cloudKitContainer = CKContainer(identifier: "iCloud.com.lumoralabs.macro")
-    
     init() {
         checkiCloudStatus()
     }
     
     func checkiCloudStatus() {
-        cloudKitContainer.accountStatus { [weak self] status, error in
-            DispatchQueue.main.async {
-                self?.iCloudAvailable = (status == .available)
-            }
-        }
+        // Check if iCloud Documents is available
+        iCloudAvailable = FileManager.default.url(forUbiquityContainerIdentifier: nil) != nil
     }
     
     func listen() {
@@ -57,9 +51,9 @@ class SessionStore: ObservableObject {
     }
     
     private func syncWithCloudKit() {
-        // For now, we'll just mark CloudKit sync as completed
-        // This can be expanded later with proper CloudKit integration
-        UserDefaults.standard.set(true, forKey: "cloudkit_synced")
+        // For now, we'll use simple iCloud Documents instead of CloudKit
+        // This can be expanded later with proper iCloud Documents integration
+        UserDefaults.standard.set(true, forKey: "icloud_synced")
     }
     
     func markWelcomeScreenSeen() {

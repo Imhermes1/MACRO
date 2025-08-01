@@ -6,8 +6,8 @@ class CloudKitProfileService {
     private let database: CKDatabase
     
     init() {
-        // Use the same container identifier as the authentication service
-        self.container = CKContainer(identifier: "iCloud.com.lumoralabs.macro")
+        // Use default container that matches bundle ID
+        self.container = CKContainer.default()
         self.database = container.privateCloudDatabase
     }
     
