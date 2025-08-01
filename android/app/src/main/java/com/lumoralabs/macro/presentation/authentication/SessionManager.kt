@@ -2,15 +2,15 @@ package com.lumoralabs.macro.presentation.authentication
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.google.firebase.auth.FirebaseAuth
 import com.lumoralabs.macro.data.UserProfileRepository
+import com.lumoralabs.macro.data.SupabaseService
 
 /**
  * SessionManager handles user session state and app flow logic.
  * Equivalent to iOS SessionStore for managing authentication and onboarding flow.
  * 
- * Based on Firebase Authentication best practices:
- * https://firebase.google.com/docs/auth/android/manage-users
+ * Updated to use Supabase Authentication:
+ * https://supabase.com/docs/guides/auth
  */
 class SessionManager private constructor(context: Context) {
     
@@ -32,14 +32,13 @@ class SessionManager private constructor(context: Context) {
     }
     
     private val sharedPrefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-    private val userProfileRepository = UserProfileRepository
-    private val auth = FirebaseAuth.getInstance()
+    private val userProfileRepository = UserProfileRepository(context)
     
     /**
-     * Check if user is currently authenticated
+     * Check if user is currently authenticated using Supabase
      */
-    fun isUserAuthenticated(): Boolean {
-        return auth.currentUser != null
+    suspend fun isUserAuthenticated(): Boolean {
+        return SupabaseService.Auth.isAuthenticated()
     }
     
     /**
@@ -99,13 +98,13 @@ class SessionManager private constructor(context: Context) {
     }
     
     /**
-     * Get user details from Firebase Auth
+     * Get user details from Supabase Auth
      */
-    fun getUserDetails(): UserDetails {
-        val user = auth.currentUser
+    suspend fun getUserDetails(): UserDetails {
+        val user = SupabaseService.Auth.getCurrentUser()
         return UserDetails(
-            firstName = user?.displayName?.split(" ")?.firstOrNull() ?: "",
-            lastName = user?.displayName?.split(" ")?.drop(1)?.joinToString(" ") ?: "",
+            firstName = user?.userMetadata?.get("first_name") as? String ?: "",
+            lastName = user?.userMetadata?.get("last_name") as? String ?: "",
             email = user?.email ?: ""
         )
     }
@@ -113,9 +112,9 @@ class SessionManager private constructor(context: Context) {
     /**
      * Clear all session data (for logout)
      */
-    fun clearSession() {
+    suspend fun clearSession() {
         sharedPrefs.edit().clear().apply()
-        auth.signOut()
+        SupabaseService.Auth.signOut()
     }
     
     /**

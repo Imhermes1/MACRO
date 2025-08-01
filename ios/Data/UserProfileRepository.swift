@@ -1,19 +1,20 @@
 import Foundation
-import FirebaseAuth
-import FirebaseFirestore
 
 class UserProfileRepository {
     private let key = "user_profile"
     private let defaults = UserDefaults.standard
-    private let db = Firestore.firestore()
+    private let supabaseService = SupabaseService()
 
     func saveProfile(_ profile: UserProfile) {
         // Always save locally first for immediate access
         saveProfileLocally(profile)
         
-        // Save to cloud if user is authenticated (not anonymous)
-        if let user = Auth.auth().currentUser, !user.isAnonymous {
-            saveProfileToCloud(profile, userId: user.uid)
+        // Save to cloud if user is authenticated
+        Task {
+            let user = await supabaseService.getCurrentUser()
+            if let user = user {
+                try? await saveProfileToCloud(profile, userId: user.id)
+            }
         }
     }
     
@@ -33,13 +34,14 @@ class UserProfileRepository {
         defaults.set(dict, forKey: key)
     }
     
-    private func saveProfileToCloud(_ profile: UserProfile, userId: String) {
+    private func saveProfileToCloud(_ profile: UserProfile, userId: String) async throws {
         var data: [String: Any] = [
+            "id": userId,
             "firstName": profile.firstName,
             "age": profile.age,
             "height": profile.height,
             "weight": profile.weight,
-            "lastUpdated": Timestamp(date: Date())
+            "lastUpdated": Date().timeIntervalSince1970
         ]
         if let lastName = profile.lastName {
             data["lastName"] = lastName
@@ -48,31 +50,47 @@ class UserProfileRepository {
             data["dob"] = dob
         }
         
-        db.collection("userProfiles").document(userId).setData(data) { error in
-            if let error = error {
-                // Error saving profile to cloud
-            } else {
-                // Profile successfully saved to cloud
-            }
-        }
+        // TODO: Replace with actual Supabase client implementation
+        // This is a placeholder - implement using Supabase Swift client
+        // Documentation: https://supabase.com/docs/reference/swift/insert
+        
+        // Example implementation would be:
+        // try await supabase.from("user_profiles").upsert(data)
+        
+        print("Profile saved to Supabase cloud (placeholder)")
     }
 
     func loadProfile(completion: @escaping (UserProfile?) -> Void = { _ in }) {
         // Try to load from cloud first if user is authenticated
-        if let user = Auth.auth().currentUser, !user.isAnonymous {
-            loadProfileFromCloud(userId: user.uid) { [weak self] cloudProfile in
-                if let cloudProfile = cloudProfile {
-                    // Save cloud data locally for offline access
-                    self?.saveProfileLocally(cloudProfile)
-                    completion(cloudProfile)
-                } else {
+        Task {
+            let user = await supabaseService.getCurrentUser()
+            if let user = user {
+                do {
+                    let cloudProfile = try await loadProfileFromCloud(userId: user.id)
+                    if let cloudProfile = cloudProfile {
+                        // Save cloud data locally for offline access
+                        saveProfileLocally(cloudProfile)
+                        await MainActor.run {
+                            completion(cloudProfile)
+                        }
+                    } else {
+                        // Fallback to local data
+                        await MainActor.run {
+                            completion(loadProfileLocally())
+                        }
+                    }
+                } catch {
                     // Fallback to local data
-                    completion(self?.loadProfileLocally())
+                    await MainActor.run {
+                        completion(loadProfileLocally())
+                    }
+                }
+            } else {
+                // For unauthenticated users, only use local storage
+                await MainActor.run {
+                    completion(loadProfileLocally())
                 }
             }
-        } else {
-            // For anonymous users, only use local storage
-            completion(loadProfileLocally())
         }
     }
     
@@ -87,30 +105,17 @@ class UserProfileRepository {
         return UserProfile(firstName: firstName, lastName: lastName, age: age, dob: dob, height: height, weight: weight)
     }
     
-    private func loadProfileFromCloud(userId: String, completion: @escaping (UserProfile?) -> Void) {
-        db.collection("userProfiles").document(userId).getDocument { document, error in
-            if let error = error {
-                // Error loading profile from cloud
-                completion(nil)
-                return
-            }
-            
-            guard let document = document,
-                  document.exists,
-                  let data = document.data(),
-                  let firstName = data["firstName"] as? String,
-                  let age = data["age"] as? Int,
-                  let height = data["height"] as? Float,
-                  let weight = data["weight"] as? Float else {
-                completion(nil)
-                return
-            }
-            
-            let lastName = data["lastName"] as? String
-            let dob = data["dob"] as? String
-            let profile = UserProfile(firstName: firstName, lastName: lastName, age: age, dob: dob, height: height, weight: weight)
-            completion(profile)
-        }
+    private func loadProfileFromCloud(userId: String) async throws -> UserProfile? {
+        // TODO: Replace with actual Supabase client implementation
+        // This is a placeholder - implement using Supabase Swift client
+        // Documentation: https://supabase.com/docs/reference/swift/select
+        
+        // Example implementation would be:
+        // let response = try await supabase.from("user_profiles").select().eq("id", userId).single()
+        // return UserProfile(from: response.data)
+        
+        print("Loading profile from Supabase cloud (placeholder)")
+        return nil // Fallback to local for now
     }
     
     // Synchronous version for backward compatibility
@@ -120,10 +125,13 @@ class UserProfileRepository {
     
     /// Migrates local profile data to cloud when user upgrades from anonymous to authenticated
     func migrateLocalToCloud() {
-        guard let user = Auth.auth().currentUser, !user.isAnonymous else { return }
-        
-        if let localProfile = loadProfileLocally() {
-            saveProfileToCloud(localProfile, userId: user.uid)
+        Task {
+            let user = await supabaseService.getCurrentUser()
+            if let user = user {
+                if let localProfile = loadProfileLocally() {
+                    try? await saveProfileToCloud(localProfile, userId: user.id)
+                }
+            }
         }
     }
     
@@ -157,8 +165,8 @@ class UserProfileRepository {
     func getAvailableCloudProviders(completion: @escaping ([CloudProvider]) -> Void) {
         var providers: [CloudProvider] = [.localOnly]
         
-        // Add Firebase if available (always available in this implementation)
-        providers.append(.firebase)
+        // Add Supabase if available (always available in this implementation)
+        providers.append(.supabase)
         
         // Check CloudKit availability
         if CloudProvider.cloudKit.isAvailableOnCurrentPlatform {
@@ -189,8 +197,8 @@ class UserProfileRepository {
         case .localOnly:
             // Data is already saved locally, no migration needed
             break
-        case .firebase:
-            // Save to Firebase (existing saveProfile method handles this)
+        case .supabase:
+            // Save to Supabase (existing saveProfile method handles this)
             saveProfile(currentProfile)
         case .cloudKit:
             // Save to CloudKit

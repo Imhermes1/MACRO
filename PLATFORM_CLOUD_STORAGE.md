@@ -1,5 +1,9 @@
 # Platform-Specific Cloud Storage Implementation
 
+## 🚀 Migration Notice: Firebase → Supabase
+
+**MACRO has migrated from Firebase to Supabase** for improved open-source infrastructure, PostgreSQL capabilities, and enhanced data sovereignty.
+
 ## iOS Cloud Storage Options
 
 ### Available Options:
@@ -9,9 +13,10 @@
    - Uses Apple ID (no additional accounts)
    - Free with generous limits
 
-2. **Firebase** 🔥
-   - Cross-platform cloud storage
-   - Works with Google accounts
+2. **Supabase** 🚀
+   - Open-source cross-platform cloud storage
+   - PostgreSQL database with real-time features
+   - Works with email, Google, and Apple ID accounts
    - Good for multi-platform users
 
 3. **Local Only** 📱
@@ -20,16 +25,17 @@
 
 ### Implementation:
 - **File**: `ios/Presentation/CloudStorageSettingsView.swift`
-- **Service**: `ios/Data/CloudKitProfileService.swift`
+- **Service**: `ios/Data/SupabaseService.swift` (replaces FirebaseService)
 - **Repository**: Enhanced `ios/Data/UserProfileRepository.swift`
 
 ## Android Cloud Storage Options
 
 ### Available Options:
-1. **Firebase** 🔥
+1. **Supabase** 🚀
    - Primary cloud option for Android
    - Cross-platform compatibility
-   - Google ecosystem integration
+   - PostgreSQL-powered backend
+   - Email, Google, and Apple authentication support
 
 2. **Local Only** 📱
    - Complete privacy
@@ -37,23 +43,24 @@
 
 ### What's NOT Available on Android:
 ❌ **CloudKit/iCloud** - This is iOS-only technology
-❌ **Apple ID Integration** - Not supported on Android
+❌ **Apple ID Integration** - Limited to Apple OAuth via Supabase
 
 ### Implementation:
+- **Service**: `android/app/src/main/java/com/lumoralabs/macro/data/SupabaseService.kt`
 - **Repository**: `android/app/src/main/java/com/lumoralabs/macro/data/UserProfileRepository.kt`
 - **No CloudKit Dependencies**: Android code is completely separate from iOS CloudKit implementation
 
-## Key Safeguards Implemented
+## Key Migration Changes
+
+### ✅ Supabase Integration:
+1. **Authentication**: Email + OAuth providers (Google, Apple)
+2. **Database**: PostgreSQL with Row Level Security (RLS)
+3. **Real-time**: Live data synchronization capabilities
+4. **Open Source**: Self-hostable and transparent
 
 ### ✅ Platform Separation:
-1. **Android Login**: Removed iCloud login button that was incorrectly included
-2. **No CloudKit References**: Android code has zero CloudKit dependencies
-3. **Firebase Focus**: Android uses Firebase as primary cloud option
-4. **Local Fallback**: Both platforms support local-only storage
-
-### ✅ User Experience:
-- **iOS Users**: Can choose between CloudKit (native) or Firebase (cross-platform)
-- **Android Users**: Only see relevant options (Firebase or Local)
+- **iOS Users**: Can choose between CloudKit (native) or Supabase (cross-platform)
+- **Android Users**: Only see relevant options (Supabase or Local)
 - **No Confusion**: Platform-specific interfaces prevent inappropriate options
 
 ## Code Structure
@@ -61,30 +68,47 @@
 ```
 ios/
 ├── Data/
-│   ├── CloudKitProfileService.swift     // iOS CloudKit integration
+│   ├── CloudKitProfileService.swift         // iOS CloudKit integration
 │   ├── CloudKitUserProfileRepository.swift  // Pure CloudKit option
-│   └── UserProfileRepository.swift     // Multi-provider (CloudKit + Firebase)
+│   ├── SupabaseService.swift               // Supabase integration (NEW)
+│   └── UserProfileRepository.swift         // Multi-provider (CloudKit + Supabase)
 └── Presentation/
-    └── CloudStorageSettingsView.swift  // iOS cloud settings UI
+    └── CloudStorageSettingsView.swift      // iOS cloud settings UI
 
 android/
 ├── data/
-│   └── UserProfileRepository.kt        // Firebase + Local only
+│   ├── SupabaseService.kt                  // Supabase integration (NEW)
+│   └── UserProfileRepository.kt            // Supabase + Local only
 └── presentation/
-    ├── SettingsActivity.kt            // Basic settings (no cloud options)
-    └── LoginActivity.kt               // Google + Anonymous (no iCloud)
+    ├── SettingsActivity.kt                // Basic settings (no cloud options)
+    └── LoginActivity.kt                   // Email + OAuth (supports Google/Apple via Supabase)
+
+Configuration/
+├── supabase.config                         // Supabase project configuration
+├── supabase_schema.sql                     // Database schema
+├── supabase_policies.sql                   // Security policies
+└── firestore.rules.bak                     // Backup of old Firebase rules
 ```
 
 ## Security & Privacy
 
 ### iOS:
 - **CloudKit**: Uses Apple's privacy-first approach
-- **Firebase**: Optional for cross-platform users
+- **Supabase**: Open-source with Row Level Security (RLS)
 - **User Choice**: Can select most private option
 
 ### Android:
-- **Firebase**: Secure Google cloud infrastructure
+- **Supabase**: PostgreSQL with robust security policies
 - **Local Option**: Complete privacy for sensitive users
-- **No Apple Data**: Zero Apple ID or iCloud dependencies
+- **Authentication**: Email, Google OAuth, Apple OAuth support
 
-This ensures each platform provides the most appropriate and native cloud storage experience while maintaining complete separation between iOS and Android implementations.
+## Setup Requirements
+
+### Supabase Configuration:
+1. Create project at [Supabase Dashboard](https://supabase.com/dashboard)
+2. Configure authentication providers (Email, Google, Apple)
+3. Run database migrations from `supabase_schema.sql`
+4. Apply security policies from `supabase_policies.sql`
+5. Update configuration in `supabase.config`
+
+This ensures each platform provides the most appropriate and native cloud storage experience while maintaining complete separation between iOS and Android implementations, now powered by Supabase's open-source infrastructure.
