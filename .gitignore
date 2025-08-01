@@ -9,7 +9,13 @@
 # These contain sensitive API keys - BUT apps need them to function
 # SOLUTION: Use environment-specific configs or build-time injection
 ios/GoogleService-Info.plist
+ios/GoogleService-Info-*.plist
 android/app/google-services.json
+android/app/google-services-*.json
+
+# Firebase configuration variants
+**/GoogleService-Info*.plist
+**/google-services*.json
 
 # Alternative: Keep template files, ignore the real ones
 # ios/GoogleService-Info-prod.plist
@@ -25,6 +31,21 @@ android/app/google-services.json
 *.env
 api-keys.json
 secrets.json
+config.json
+credentials.json
+
+# Firebase service account keys
+**/serviceAccountKey.json
+**/service-account-*.json
+
+# Apple Developer certificates and keys
+*.p8
+*.p12
+*.cer
+*.mobileprovision
+
+# Google Cloud service account keys
+**/gcloud-service-key.json
 
 # Keep these - they're needed for app builds:
 # - Info.plist (iOS app configuration)
