@@ -61,7 +61,10 @@ class LoginActivity : ComponentActivity() {
 }
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    onLoginSuccess: () -> Unit = {},
+    onAnonymousLogin: () -> Unit = {}
+) {
     val auth = FirebaseAuth.getInstance()
     val context = LocalContext.current
     val sessionManager = remember { SessionManager.getInstance(context) }
@@ -150,13 +153,9 @@ fun LoginScreen() {
                                     
                                     val profile = com.lumoralabs.macro.data.UserProfileRepository.loadProfile(context)
                                     if (profile == null) {
-                                        val intent = Intent(context, ProfileSetupActivity::class.java)
-                                        context.startActivity(intent)
-                                        (context as ComponentActivity).finish()
+                                        onProfileSetupRequired()
                                     } else {
-                                        val intent = Intent(context, MainAppActivity::class.java)
-                                        context.startActivity(intent)
-                                        (context as ComponentActivity).finish()
+                                        onLoginSuccess()
                                     }
                                 } else {
                                     Toast.makeText(context, "Anonymous login failed!", Toast.LENGTH_SHORT).show()

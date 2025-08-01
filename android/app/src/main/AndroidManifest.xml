@@ -21,42 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        
-        <!-- Authentication Activities -->
-        <activity
-            android:name=".presentation.authentication.LoginActivity"
-            android:exported="false"
-            android:theme="@style/LaunchTheme" />
-        
-        <!-- Onboarding Activities -->
-        <activity
-            android:name=".presentation.onboarding.ProfileSetupActivity"
-            android:exported="false"
-            android:theme="@style/LaunchTheme" />
-        <activity
-            android:name=".presentation.onboarding.WelcomeActivity"
-            android:exported="false"
-            android:theme="@style/LaunchTheme" />
-        <activity
-            android:name=".presentation.onboarding.BMICalculatorActivity"
-            android:exported="false"
-            android:theme="@style/LaunchTheme" />
-        <activity
-            android:name=".presentation.onboarding.OnboardingDemoActivity"
-            android:exported="false"
-            android:theme="@style/LaunchTheme" />
-        
-        <!-- Main App Activities -->
-        <activity
-            android:name=".presentation.mainapp.MainAppActivity"
-            android:exported="false"
-            android:theme="@style/LaunchTheme" />
-        
-        <!-- Settings Activities -->
-        <activity
-            android:name=".presentation.settings.SettingsActivity"
-            android:exported="false"
-            android:theme="@style/LaunchTheme" />
     </application>
     <queries>
         <intent>

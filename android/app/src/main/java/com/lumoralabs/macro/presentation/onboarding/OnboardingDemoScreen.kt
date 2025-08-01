@@ -1,8 +1,5 @@
 package com.lumoralabs.macro.presentation.onboarding
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -26,27 +23,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.lumoralabs.macro.ui.components.UniversalBackground
-import com.lumoralabs.macro.ui.theme.MacroTheme
 import kotlinx.coroutines.delay
 
 /**
- * OnboardingDemoActivity provides an Apple-style tutorial popup for new users.
+ * OnboardingDemoDialog provides an Apple-style tutorial popup for new users.
  * Based on Material Design guidelines for onboarding:
  * https://developers.google.com/android/guides/overview
  */
-class OnboardingDemoActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MacroTheme {
-                OnboardingDemoDialog(
-                    onDismiss = { finish() }
-                )
-            }
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
