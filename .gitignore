@@ -4,22 +4,28 @@
 # PRINCIPLE: Hide API keys and secrets, keep app structure and build configs
 
 # ==========================================
-# CRITICAL: Firebase Configuration Files with API Keys
+# CRITICAL: Supabase Configuration Files with API Keys
 # ==========================================
-# These contain sensitive API keys - BUT apps need them to function
-# SOLUTION: Use environment-specific configs or build-time injection
+# These contain sensitive API keys and database credentials
+supabase.config
+supabase.env
+ios/SupabaseConfig.plist
+android/app/supabase.properties
+android/app/src/main/res/values/supabase.xml
+
+# Supabase configuration variants
+**/supabase-*.config
+**/SupabaseConfig*.plist
+**/supabase*.properties
+
+# Legacy Firebase Configuration (for migration reference)
+firebase.config
 ios/GoogleService-Info.plist
 ios/GoogleService-Info-*.plist
 android/app/google-services.json
 android/app/google-services-*.json
-
-# Firebase configuration variants
 **/GoogleService-Info*.plist
 **/google-services*.json
-
-# Alternative: Keep template files, ignore the real ones
-# ios/GoogleService-Info-prod.plist
-# android/app/google-services-prod.json
 
 # ==========================================
 # API Keys and Secrets (NOT app structure)
@@ -34,16 +40,21 @@ secrets.json
 config.json
 credentials.json
 
-# Info.plist files that contain API keys
+# Database credentials
+database.config
+db.config
+*.connection.string
+
+# Info.plist files that contain API keys (if they do)
 ios/Info.plist
 reference/Info.plist
 
 # Reference/Development folder - should not be in production repo
 reference/
 
-# Firebase service account keys
-**/serviceAccountKey.json
-**/service-account-*.json
+# Supabase service account keys
+**/supabase-service-key.json
+**/supabase-*.json
 
 # Apple Developer certificates and keys
 *.p8
@@ -55,7 +66,7 @@ reference/
 **/gcloud-service-key.json
 
 # Keep these - they're needed for app builds:
-# - Info.plist (iOS app configuration)
+# - Info.plist (iOS app configuration - if no secrets)
 # - AndroidManifest.xml (Android app configuration) 
 # - build.gradle files (Android build scripts)
 # - package.json (dependencies)
@@ -82,6 +93,15 @@ android/keystore.properties
 # Keep these - needed for development:
 # - android/local.properties (can contain SDK paths)
 # BUT remove it if it contains API keys
+
+# ==========================================
+# Database Backups and Sensitive Artifacts
+# ==========================================
+*.sql.backup
+*.rules.bak
+firestore.rules.bak
+*.dump
+*.backup
 
 # ==========================================
 # Personal/Local Development Files
@@ -138,7 +158,7 @@ android/.gradle/
 # DO NOT IGNORE THESE - they're needed for the app:
 # 
 # iOS:
-# - Info.plist (app configuration)
+# - Info.plist (app configuration - if no secrets)
 # - *.swift files (source code)
 # - *.storyboard (UI layouts)
 # - Assets.xcassets (app assets)
@@ -155,3 +175,5 @@ android/.gradle/
 # - *.json data files (app content)
 # - *.md documentation
 # - Configuration files without secrets
+# - supabase_schema.sql (database structure - public)
+# - supabase_policies.sql (security rules - public)

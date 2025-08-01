@@ -87,6 +87,11 @@ dependencies {
     // Serialization
     implementation(libs.kotlinx.serialization.json)
     
+    // Supabase
+    implementation(libs.supabase.android)
+    implementation(libs.supabase.auth)
+    implementation(libs.supabase.realtime)
+    
     // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

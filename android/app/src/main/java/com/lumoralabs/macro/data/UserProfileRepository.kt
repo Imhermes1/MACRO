@@ -3,16 +3,13 @@ package com.lumoralabs.macro.data
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FieldValue
 import com.lumoralabs.macro.domain.UserProfile
 import org.json.JSONObject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class UserProfileRepository(private val context: Context) {
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-    private val db = FirebaseFirestore.getInstance()
-    private val auth = FirebaseAuth.getInstance()
 
     companion object {
         private const val PREFS_NAME = "user_profile"
@@ -20,14 +17,14 @@ class UserProfileRepository(private val context: Context) {
         private const val TAG = "UserProfileRepository"
     }
 
-    fun saveProfile(profile: UserProfile) {
+    suspend fun saveProfile(profile: UserProfile) {
         // Always save locally first for immediate access
         saveProfileLocally(profile)
         
-        // Save to cloud if user is authenticated (not anonymous)
-        val currentUser = auth.currentUser
-        if (currentUser != null && !currentUser.isAnonymous) {
-            saveProfileToCloud(profile, currentUser.uid)
+        // Save to cloud if user is authenticated
+        val currentUser = SupabaseService.Auth.getCurrentUser()
+        if (currentUser != null) {
+            saveProfileToCloud(profile, currentUser.id)
         }
     }
     
@@ -43,32 +40,37 @@ class UserProfileRepository(private val context: Context) {
         prefs.edit().putString(PROFILE_KEY, obj.toString()).apply()
     }
     
-    private fun saveProfileToCloud(profile: UserProfile, userId: String) {
-        val data = hashMapOf(
+    private suspend fun saveProfileToCloud(profile: UserProfile, userId: String) = withContext(Dispatchers.IO) {
+        val data = mapOf(
+            "id" to userId,
             "firstName" to profile.firstName,
             "lastName" to profile.lastName,
             "age" to profile.age,
             "dob" to profile.dob,
             "height" to profile.height,
             "weight" to profile.weight,
-            "lastUpdated" to FieldValue.serverTimestamp()
+            "lastUpdated" to System.currentTimeMillis()
         )
         
-        db.collection("userProfiles").document(userId)
-            .set(data)
-            .addOnSuccessListener {
-                // Profile successfully saved to cloud
-            }
-            .addOnFailureListener { e ->
-                // Error saving profile to cloud
-            }
+        try {
+            // TODO: Replace with actual Supabase client implementation
+            // This is a placeholder - implement using Supabase Kotlin client
+            // Documentation: https://supabase.com/docs/reference/kotlin/insert
+            
+            // Example implementation would be:
+            // supabase.from("user_profiles").upsert(data)
+            
+            Log.d(TAG, "Profile saved to Supabase cloud (placeholder)")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error saving profile to Supabase cloud", e)
+        }
     }
 
-    fun loadProfile(onResult: (UserProfile?) -> Unit = {}) {
+    suspend fun loadProfile(onResult: (UserProfile?) -> Unit = {}) {
         // Try to load from cloud first if user is authenticated
-        val currentUser = auth.currentUser
-        if (currentUser != null && !currentUser.isAnonymous) {
-            loadProfileFromCloud(currentUser.uid) { cloudProfile ->
+        val currentUser = SupabaseService.Auth.getCurrentUser()
+        if (currentUser != null) {
+            loadProfileFromCloud(currentUser.id) { cloudProfile ->
                 if (cloudProfile != null) {
                     // Save cloud data locally for offline access
                     saveProfileLocally(cloudProfile)
@@ -79,7 +81,7 @@ class UserProfileRepository(private val context: Context) {
                 }
             }
         } else {
-            // For anonymous users, only use local storage
+            // For unauthenticated users, only use local storage
             onResult(loadProfileLocally())
         }
     }
@@ -102,35 +104,22 @@ class UserProfileRepository(private val context: Context) {
         }
     }
     
-    private fun loadProfileFromCloud(userId: String, onResult: (UserProfile?) -> Unit) {
-        db.collection("userProfiles").document(userId)
-            .get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    try {
-                        val data = document.data!!
-                        val profile = UserProfile(
-                            firstName = data["firstName"] as String,
-                            lastName = data["lastName"] as? String,
-                            age = (data["age"] as Long).toInt(),
-                            dob = data["dob"] as? String,
-                            height = (data["height"] as Double).toFloat(),
-                            weight = (data["weight"] as Double).toFloat()
-                        )
-                        onResult(profile)
-                    } catch (e: Exception) {
-                        // Error parsing cloud profile data
-                        onResult(null)
-                    }
-                } else {
-                    // No cloud profile found
-                    onResult(null)
-                }
-            }
-            .addOnFailureListener { e ->
-                // Error loading profile from cloud
-                onResult(null)
-            }
+    private suspend fun loadProfileFromCloud(userId: String, onResult: (UserProfile?) -> Unit) = withContext(Dispatchers.IO) {
+        try {
+            // TODO: Replace with actual Supabase client implementation
+            // This is a placeholder - implement using Supabase Kotlin client
+            // Documentation: https://supabase.com/docs/reference/kotlin/select
+            
+            // Example implementation would be:
+            // val response = supabase.from("user_profiles").select().eq("id", userId).single()
+            // val profile = response.decodeAs<UserProfile>()
+            
+            Log.d(TAG, "Loading profile from Supabase cloud (placeholder)")
+            onResult(null) // Fallback to local for now
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading profile from Supabase cloud", e)
+            onResult(null)
+        }
     }
     
     // Synchronous version for backward compatibility
@@ -141,12 +130,12 @@ class UserProfileRepository(private val context: Context) {
     /**
      * Migrates local profile data to cloud when user upgrades from anonymous to authenticated
      */
-    fun migrateLocalToCloud() {
-        val currentUser = auth.currentUser
-        if (currentUser != null && !currentUser.isAnonymous) {
+    suspend fun migrateLocalToCloud() {
+        val currentUser = SupabaseService.Auth.getCurrentUser()
+        if (currentUser != null) {
             val localProfile = loadProfileLocally()
             if (localProfile != null) {
-                saveProfileToCloud(localProfile, currentUser.uid)
+                saveProfileToCloud(localProfile, currentUser.id)
             }
         }
     }
