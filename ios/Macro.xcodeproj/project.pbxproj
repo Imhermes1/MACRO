@@ -8,98 +8,110 @@
 
 /* Begin PBXBuildFile section */
 		0B02C6372E3AEE1200A672B6 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B02C6352E3AEE0D00A672B6 /* CloudKit.framework */; };
-		0B02C63B2E3AEE3E00A672B6 /* CloudProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B02C63A2E3AEE3E00A672B6 /* CloudProvider.swift */; };
-		0B1819F02E39D97000562B43 /* MacroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1819EF2E39D97000562B43 /* MacroApp.swift */; };
 		0B5257A62E3A2E2900B30CCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5257A52E3A2E2900B30CCA /* Assets.xcassets */; };
-		0B7B3BFE2E3D7E470056A79C /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3BFD2E3D7E470056A79C /* SupabaseService.swift */; };
-		0B7B3C092E3D7E6D0056A79C /* CloudNutrientHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C002E3D7E6D0056A79C /* CloudNutrientHandler.swift */; };
-		0B7B3C0A2E3D7E6D0056A79C /* NutrientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C062E3D7E6D0056A79C /* NutrientService.swift */; };
-		0B7B3C0B2E3D7E6D0056A79C /* GitHubNutrientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C032E3D7E6D0056A79C /* GitHubNutrientService.swift */; };
-		0B7B3C0C2E3D7E6D0056A79C /* FoodAnalysisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C022E3D7E6D0056A79C /* FoodAnalysisService.swift */; };
-		0B7B3C0D2E3D7E6D0056A79C /* MacroServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C052E3D7E6D0056A79C /* MacroServices.swift */; };
-		0B7B3C0E2E3D7E6D0056A79C /* AlternativeStorageOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3BFF2E3D7E6D0056A79C /* AlternativeStorageOptions.swift */; };
-		0B7B3C0F2E3D7E6D0056A79C /* SimpleFoodAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C072E3D7E6D0056A79C /* SimpleFoodAI.swift */; };
-		0B7B3C102E3D7E6D0056A79C /* CloudNutrientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C012E3D7E6D0056A79C /* CloudNutrientService.swift */; };
-		0B7B3C112E3D7E6D0056A79C /* GitHubNutrientServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C042E3D7E6D0056A79C /* GitHubNutrientServiceTest.swift */; };
-		0B7B3C292E3D7EA10056A79C /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C132E3D7EA10056A79C /* SessionStore.swift */; };
-		0B7B3C2A2E3D7EA10056A79C /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C172E3D7EA10056A79C /* NavigationBar.swift */; };
-		0B7B3C2B2E3D7EA10056A79C /* NutrientDatabaseDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C182E3D7EA10056A79C /* NutrientDatabaseDownloadView.swift */; };
-		0B7B3C2C2E3D7EA10056A79C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C272E3D7EA10056A79C /* SettingsView.swift */; };
-		0B7B3C2D2E3D7EA10056A79C /* ProfileSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C222E3D7EA10056A79C /* ProfileSetupView.swift */; };
-		0B7B3C2E2E3D7EA10056A79C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C232E3D7EA10056A79C /* WelcomeView.swift */; };
-		0B7B3C2F2E3D7EA10056A79C /* LoadingAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C162E3D7EA10056A79C /* LoadingAnimations.swift */; };
-		0B7B3C302E3D7EA10056A79C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C122E3D7EA10056A79C /* LoginView.swift */; };
-		0B7B3C312E3D7EA10056A79C /* MainAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C1D2E3D7EA10056A79C /* MainAppView.swift */; };
-		0B7B3C322E3D7EA10056A79C /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C192E3D7EA10056A79C /* StyledTextField.swift */; };
-		0B7B3C332E3D7EA10056A79C /* FloatingInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C1C2E3D7EA10056A79C /* FloatingInputBar.swift */; };
-		0B7B3C342E3D7EA10056A79C /* OnboardingDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C212E3D7EA10056A79C /* OnboardingDemoView.swift */; };
-		0B7B3C352E3D7EA10056A79C /* AnimatedWelcomeLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C152E3D7EA10056A79C /* AnimatedWelcomeLogo.swift */; };
-		0B7B3C362E3D7EA10056A79C /* UniversalBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C1A2E3D7EA10056A79C /* UniversalBackground.swift */; };
-		0B7B3C372E3D7EA10056A79C /* CloudStorageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C252E3D7EA10056A79C /* CloudStorageSettingsView.swift */; };
-		0B7B3C382E3D7EA10056A79C /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C262E3D7EA10056A79C /* SettingsMenu.swift */; };
-		0B7B3C392E3D7EA10056A79C /* MainAppView_Simple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C1E2E3D7EA10056A79C /* MainAppView_Simple.swift */; };
-		0B7B3C3A2E3D7EA10056A79C /* BMICalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C202E3D7EA10056A79C /* BMICalculatorView.swift */; };
-		0B7C99B32E3AE81100C74B04 /* CloudKitProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C99B12E3AE81100C74B04 /* CloudKitProfileService.swift */; };
-		0B7C99B42E3AE81100C74B04 /* CloudKitUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C99B22E3AE81100C74B04 /* CloudKitUserProfileRepository.swift */; };
-		0B9ED1E32E39D21A006A7B7B /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D32E39D21A006A7B7B /* Group.swift */; };
-		0B9ED1E52E39D21A006A7B7B /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D12E39D21A006A7B7B /* UserProfileRepository.swift */; };
-		0B9ED1E62E39D21A006A7B7B /* ICloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1CD2E39D21A006A7B7B /* ICloudService.swift */; };
-		0B9ED1EC2E39D21A006A7B7B /* GroupRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1CC2E39D21A006A7B7B /* GroupRepository.swift */; };
-		0B9ED1ED2E39D21A006A7B7B /* SharedDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1CF2E39D21A006A7B7B /* SharedDataLoader.swift */; };
-		0B9ED1EE2E39D21A006A7B7B /* LocalGroupStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1CE2E39D21A006A7B7B /* LocalGroupStorage.swift */; };
-		0B9ED1EF2E39D21A006A7B7B /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D02E39D21A006A7B7B /* SyncManager.swift */; };
-		0B9ED1F12E39D21A006A7B7B /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9ED1D42E39D21A006A7B7B /* UserProfile.swift */; };
-		0BFD31582E3AF63400BA677C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD31572E3AF63400BA677C /* ContentView.swift */; };
+		0B7B3C7E2E3D8C2B0056A79C /* CloudKitAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C4D2E3D8C2B0056A79C /* CloudKitAuthenticationService.swift */; };
+		0B7B3C7F2E3D8C2B0056A79C /* NutrientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C4A2E3D8C2B0056A79C /* NutrientService.swift */; };
+		0B7B3C802E3D8C2B0056A79C /* CloudNutrientHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C452E3D8C2B0056A79C /* CloudNutrientHandler.swift */; };
+		0B7B3C812E3D8C2B0056A79C /* FloatingInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C6B2E3D8C2B0056A79C /* FloatingInputBar.swift */; };
+		0B7B3C822E3D8C2B0056A79C /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C5E2E3D8C2B0056A79C /* UserProfile.swift */; };
+		0B7B3C832E3D8C2B0056A79C /* CloudKitProfileServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C502E3D8C2B0056A79C /* CloudKitProfileServiceNew.swift */; };
+		0B7B3C842E3D8C2B0056A79C /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C722E3D8C2B0056A79C /* WelcomeView.swift */; };
+		0B7B3C852E3D8C2B0056A79C /* BMICalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C6F2E3D8C2B0056A79C /* BMICalculatorView.swift */; };
+		0B7B3C862E3D8C2B0056A79C /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C682E3D8C2B0056A79C /* StyledTextField.swift */; };
+		0B7B3C872E3D8C2B0056A79C /* NutrientDatabaseDownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C672E3D8C2B0056A79C /* NutrientDatabaseDownloadView.swift */; };
+		0B7B3C882E3D8C2B0056A79C /* iCloudSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C602E3D8C2B0056A79C /* iCloudSignInView.swift */; };
+		0B7B3C892E3D8C2B0056A79C /* CloudKitUserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C512E3D8C2B0056A79C /* CloudKitUserProfileRepository.swift */; };
+		0B7B3C8A2E3D8C2B0056A79C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C612E3D8C2B0056A79C /* LoginView.swift */; };
+		0B7B3C8B2E3D8C2B0056A79C /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C592E3D8C2B0056A79C /* UserProfileRepository.swift */; };
+		0B7B3C8C2E3D8C2B0056A79C /* FoodAnalysisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C472E3D8C2B0056A79C /* FoodAnalysisService.swift */; };
+		0B7B3C8D2E3D8C2B0056A79C /* iCloudDocumentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C532E3D8C2B0056A79C /* iCloudDocumentService.swift */; };
+		0B7B3C8E2E3D8C2B0056A79C /* MacroServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C492E3D8C2B0056A79C /* MacroServices.swift */; };
+		0B7B3C8F2E3D8C2B0056A79C /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C622E3D8C2B0056A79C /* SessionStore.swift */; };
+		0B7B3C902E3D8C2B0056A79C /* NutritionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C5D2E3D8C2B0056A79C /* NutritionData.swift */; };
+		0B7B3C912E3D8C2B0056A79C /* AnimatedWelcomeLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C642E3D8C2B0056A79C /* AnimatedWelcomeLogo.swift */; };
+		0B7B3C922E3D8C2B0056A79C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C782E3D8C2B0056A79C /* ContentView.swift */; };
+		0B7B3C932E3D8C2B0056A79C /* ICloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C542E3D8C2B0056A79C /* ICloudService.swift */; };
+		0B7B3C942E3D8C2B0056A79C /* CloudNutrientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C462E3D8C2B0056A79C /* CloudNutrientService.swift */; };
+		0B7B3C952E3D8C2B0056A79C /* CloudKitAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C4E2E3D8C2B0056A79C /* CloudKitAuthService.swift */; };
+		0B7B3C962E3D8C2B0056A79C /* CloudKitProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C4F2E3D8C2B0056A79C /* CloudKitProfileService.swift */; };
+		0B7B3C972E3D8C2B0056A79C /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C752E3D8C2B0056A79C /* SettingsMenu.swift */; };
+		0B7B3C982E3D8C2B0056A79C /* UniversalBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C692E3D8C2B0056A79C /* UniversalBackground.swift */; };
+		0B7B3C992E3D8C2B0056A79C /* MainAppView_Simple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C6D2E3D8C2B0056A79C /* MainAppView_Simple.swift */; };
+		0B7B3C9A2E3D8C2B0056A79C /* OnboardingDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C702E3D8C2B0056A79C /* OnboardingDemoView.swift */; };
+		0B7B3C9B2E3D8C2B0056A79C /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C5C2E3D8C2B0056A79C /* Group.swift */; };
+		0B7B3C9C2E3D8C2B0056A79C /* LocalGroupStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C552E3D8C2B0056A79C /* LocalGroupStorage.swift */; };
+		0B7B3C9D2E3D8C2B0056A79C /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C572E3D8C2B0056A79C /* SupabaseService.swift */; };
+		0B7B3C9E2E3D8C2B0056A79C /* SharedDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C562E3D8C2B0056A79C /* SharedDataLoader.swift */; };
+		0B7B3C9F2E3D8C2B0056A79C /* ProfileSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C712E3D8C2B0056A79C /* ProfileSetupView.swift */; };
+		0B7B3CA02E3D8C2B0056A79C /* GitHubNutrientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C482E3D8C2B0056A79C /* GitHubNutrientService.swift */; };
+		0B7B3CA12E3D8C2B0056A79C /* MacroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C792E3D8C2B0056A79C /* MacroApp.swift */; };
+		0B7B3CA22E3D8C2B0056A79C /* GroupRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C522E3D8C2B0056A79C /* GroupRepository.swift */; };
+		0B7B3CA32E3D8C2B0056A79C /* AlternativeStorageOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C442E3D8C2B0056A79C /* AlternativeStorageOptions.swift */; };
+		0B7B3CA42E3D8C2B0056A79C /* MainAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C6C2E3D8C2B0056A79C /* MainAppView.swift */; };
+		0B7B3CA52E3D8C2B0056A79C /* CloudProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C5B2E3D8C2B0056A79C /* CloudProvider.swift */; };
+		0B7B3CA62E3D8C2B0056A79C /* LoadingAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C652E3D8C2B0056A79C /* LoadingAnimations.swift */; };
+		0B7B3CA72E3D8C2B0056A79C /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C582E3D8C2B0056A79C /* SyncManager.swift */; };
+		0B7B3CA82E3D8C2B0056A79C /* SimpleFoodAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C4B2E3D8C2B0056A79C /* SimpleFoodAI.swift */; };
+		0B7B3CA92E3D8C2B0056A79C /* CloudStorageSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C742E3D8C2B0056A79C /* CloudStorageSettingsView.swift */; };
+		0B7B3CAA2E3D8C2B0056A79C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C762E3D8C2B0056A79C /* SettingsView.swift */; };
+		0B7B3CAB2E3D8C2B0056A79C /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B3C662E3D8C2B0056A79C /* NavigationBar.swift */; };
+		0B7B3CAC2E3D8C2B0056A79C /* split_afcd.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0B7B3C7B2E3D8C2B0056A79C /* split_afcd.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0B02C6352E3AEE0D00A672B6 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
-		0B02C63A2E3AEE3E00A672B6 /* CloudProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudProvider.swift; sourceTree = "<group>"; };
-		0B1819EF2E39D97000562B43 /* MacroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroApp.swift; sourceTree = "<group>"; };
 		0B5257A52E3A2E2900B30CCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0B7B3BFD2E3D7E470056A79C /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
-		0B7B3BFF2E3D7E6D0056A79C /* AlternativeStorageOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeStorageOptions.swift; sourceTree = "<group>"; };
-		0B7B3C002E3D7E6D0056A79C /* CloudNutrientHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudNutrientHandler.swift; sourceTree = "<group>"; };
-		0B7B3C012E3D7E6D0056A79C /* CloudNutrientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudNutrientService.swift; sourceTree = "<group>"; };
-		0B7B3C022E3D7E6D0056A79C /* FoodAnalysisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAnalysisService.swift; sourceTree = "<group>"; };
-		0B7B3C032E3D7E6D0056A79C /* GitHubNutrientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNutrientService.swift; sourceTree = "<group>"; };
-		0B7B3C042E3D7E6D0056A79C /* GitHubNutrientServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNutrientServiceTest.swift; sourceTree = "<group>"; };
-		0B7B3C052E3D7E6D0056A79C /* MacroServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroServices.swift; sourceTree = "<group>"; };
-		0B7B3C062E3D7E6D0056A79C /* NutrientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientService.swift; sourceTree = "<group>"; };
-		0B7B3C072E3D7E6D0056A79C /* SimpleFoodAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleFoodAI.swift; sourceTree = "<group>"; };
-		0B7B3C122E3D7EA10056A79C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		0B7B3C132E3D7EA10056A79C /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
-		0B7B3C152E3D7EA10056A79C /* AnimatedWelcomeLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedWelcomeLogo.swift; sourceTree = "<group>"; };
-		0B7B3C162E3D7EA10056A79C /* LoadingAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimations.swift; sourceTree = "<group>"; };
-		0B7B3C172E3D7EA10056A79C /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
-		0B7B3C182E3D7EA10056A79C /* NutrientDatabaseDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientDatabaseDownloadView.swift; sourceTree = "<group>"; };
-		0B7B3C192E3D7EA10056A79C /* StyledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
-		0B7B3C1A2E3D7EA10056A79C /* UniversalBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalBackground.swift; sourceTree = "<group>"; };
-		0B7B3C1C2E3D7EA10056A79C /* FloatingInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingInputBar.swift; sourceTree = "<group>"; };
-		0B7B3C1D2E3D7EA10056A79C /* MainAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView.swift; sourceTree = "<group>"; };
-		0B7B3C1E2E3D7EA10056A79C /* MainAppView_Simple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView_Simple.swift; sourceTree = "<group>"; };
-		0B7B3C202E3D7EA10056A79C /* BMICalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMICalculatorView.swift; sourceTree = "<group>"; };
-		0B7B3C212E3D7EA10056A79C /* OnboardingDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDemoView.swift; sourceTree = "<group>"; };
-		0B7B3C222E3D7EA10056A79C /* ProfileSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupView.swift; sourceTree = "<group>"; };
-		0B7B3C232E3D7EA10056A79C /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
-		0B7B3C252E3D7EA10056A79C /* CloudStorageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorageSettingsView.swift; sourceTree = "<group>"; };
-		0B7B3C262E3D7EA10056A79C /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
-		0B7B3C272E3D7EA10056A79C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0B7B3C3B2E3D81D70056A79C /* Macro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Macro.entitlements; sourceTree = "<group>"; };
-		0B7C99B12E3AE81100C74B04 /* CloudKitProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitProfileService.swift; sourceTree = "<group>"; };
-		0B7C99B22E3AE81100C74B04 /* CloudKitUserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitUserProfileRepository.swift; sourceTree = "<group>"; };
-		0B9ED1CC2E39D21A006A7B7B /* GroupRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRepository.swift; sourceTree = "<group>"; };
-		0B9ED1CD2E39D21A006A7B7B /* ICloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudService.swift; sourceTree = "<group>"; };
-		0B9ED1CE2E39D21A006A7B7B /* LocalGroupStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalGroupStorage.swift; sourceTree = "<group>"; };
-		0B9ED1CF2E39D21A006A7B7B /* SharedDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataLoader.swift; sourceTree = "<group>"; };
-		0B9ED1D02E39D21A006A7B7B /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
-		0B9ED1D12E39D21A006A7B7B /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
-		0B9ED1D32E39D21A006A7B7B /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
-		0B9ED1D42E39D21A006A7B7B /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		0B7B3C442E3D8C2B0056A79C /* AlternativeStorageOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeStorageOptions.swift; sourceTree = "<group>"; };
+		0B7B3C452E3D8C2B0056A79C /* CloudNutrientHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudNutrientHandler.swift; sourceTree = "<group>"; };
+		0B7B3C462E3D8C2B0056A79C /* CloudNutrientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudNutrientService.swift; sourceTree = "<group>"; };
+		0B7B3C472E3D8C2B0056A79C /* FoodAnalysisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAnalysisService.swift; sourceTree = "<group>"; };
+		0B7B3C482E3D8C2B0056A79C /* GitHubNutrientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNutrientService.swift; sourceTree = "<group>"; };
+		0B7B3C492E3D8C2B0056A79C /* MacroServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroServices.swift; sourceTree = "<group>"; };
+		0B7B3C4A2E3D8C2B0056A79C /* NutrientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientService.swift; sourceTree = "<group>"; };
+		0B7B3C4B2E3D8C2B0056A79C /* SimpleFoodAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleFoodAI.swift; sourceTree = "<group>"; };
+		0B7B3C4D2E3D8C2B0056A79C /* CloudKitAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitAuthenticationService.swift; sourceTree = "<group>"; };
+		0B7B3C4E2E3D8C2B0056A79C /* CloudKitAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitAuthService.swift; sourceTree = "<group>"; };
+		0B7B3C4F2E3D8C2B0056A79C /* CloudKitProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitProfileService.swift; sourceTree = "<group>"; };
+		0B7B3C502E3D8C2B0056A79C /* CloudKitProfileServiceNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitProfileServiceNew.swift; sourceTree = "<group>"; };
+		0B7B3C512E3D8C2B0056A79C /* CloudKitUserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitUserProfileRepository.swift; sourceTree = "<group>"; };
+		0B7B3C522E3D8C2B0056A79C /* GroupRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRepository.swift; sourceTree = "<group>"; };
+		0B7B3C532E3D8C2B0056A79C /* iCloudDocumentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudDocumentService.swift; sourceTree = "<group>"; };
+		0B7B3C542E3D8C2B0056A79C /* ICloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudService.swift; sourceTree = "<group>"; };
+		0B7B3C552E3D8C2B0056A79C /* LocalGroupStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalGroupStorage.swift; sourceTree = "<group>"; };
+		0B7B3C562E3D8C2B0056A79C /* SharedDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataLoader.swift; sourceTree = "<group>"; };
+		0B7B3C572E3D8C2B0056A79C /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
+		0B7B3C582E3D8C2B0056A79C /* SyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
+		0B7B3C592E3D8C2B0056A79C /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
+		0B7B3C5B2E3D8C2B0056A79C /* CloudProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudProvider.swift; sourceTree = "<group>"; };
+		0B7B3C5C2E3D8C2B0056A79C /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		0B7B3C5D2E3D8C2B0056A79C /* NutritionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionData.swift; sourceTree = "<group>"; };
+		0B7B3C5E2E3D8C2B0056A79C /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		0B7B3C602E3D8C2B0056A79C /* iCloudSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudSignInView.swift; sourceTree = "<group>"; };
+		0B7B3C612E3D8C2B0056A79C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		0B7B3C622E3D8C2B0056A79C /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		0B7B3C642E3D8C2B0056A79C /* AnimatedWelcomeLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedWelcomeLogo.swift; sourceTree = "<group>"; };
+		0B7B3C652E3D8C2B0056A79C /* LoadingAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimations.swift; sourceTree = "<group>"; };
+		0B7B3C662E3D8C2B0056A79C /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		0B7B3C672E3D8C2B0056A79C /* NutrientDatabaseDownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientDatabaseDownloadView.swift; sourceTree = "<group>"; };
+		0B7B3C682E3D8C2B0056A79C /* StyledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
+		0B7B3C692E3D8C2B0056A79C /* UniversalBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalBackground.swift; sourceTree = "<group>"; };
+		0B7B3C6B2E3D8C2B0056A79C /* FloatingInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingInputBar.swift; sourceTree = "<group>"; };
+		0B7B3C6C2E3D8C2B0056A79C /* MainAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView.swift; sourceTree = "<group>"; };
+		0B7B3C6D2E3D8C2B0056A79C /* MainAppView_Simple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView_Simple.swift; sourceTree = "<group>"; };
+		0B7B3C6F2E3D8C2B0056A79C /* BMICalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMICalculatorView.swift; sourceTree = "<group>"; };
+		0B7B3C702E3D8C2B0056A79C /* OnboardingDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDemoView.swift; sourceTree = "<group>"; };
+		0B7B3C712E3D8C2B0056A79C /* ProfileSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupView.swift; sourceTree = "<group>"; };
+		0B7B3C722E3D8C2B0056A79C /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		0B7B3C742E3D8C2B0056A79C /* CloudStorageSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorageSettingsView.swift; sourceTree = "<group>"; };
+		0B7B3C752E3D8C2B0056A79C /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
+		0B7B3C762E3D8C2B0056A79C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		0B7B3C782E3D8C2B0056A79C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0B7B3C792E3D8C2B0056A79C /* MacroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroApp.swift; sourceTree = "<group>"; };
+		0B7B3C7B2E3D8C2B0056A79C /* split_afcd.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = split_afcd.sh; sourceTree = "<group>"; };
 		0BB9EF0E2E39BB1D00EDB4AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BB9EF0F2E39BB1D00EDB4AA /* Macro.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Macro.xcodeproj; sourceTree = "<group>"; };
 		0BEE023E2E39ACF20085B9EA /* Macro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macro.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0BFD31572E3AF63400BA677C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,114 +134,135 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		0B7B3C082E3D7E6D0056A79C /* Services */ = {
+		0B7B3C4C2E3D8C2B0056A79C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0B7B3BFF2E3D7E6D0056A79C /* AlternativeStorageOptions.swift */,
-				0B7B3C002E3D7E6D0056A79C /* CloudNutrientHandler.swift */,
-				0B7B3C012E3D7E6D0056A79C /* CloudNutrientService.swift */,
-				0B7B3C022E3D7E6D0056A79C /* FoodAnalysisService.swift */,
-				0B7B3C032E3D7E6D0056A79C /* GitHubNutrientService.swift */,
-				0B7B3C042E3D7E6D0056A79C /* GitHubNutrientServiceTest.swift */,
-				0B7B3C052E3D7E6D0056A79C /* MacroServices.swift */,
-				0B7B3C062E3D7E6D0056A79C /* NutrientService.swift */,
-				0B7B3C072E3D7E6D0056A79C /* SimpleFoodAI.swift */,
+				0B7B3C442E3D8C2B0056A79C /* AlternativeStorageOptions.swift */,
+				0B7B3C452E3D8C2B0056A79C /* CloudNutrientHandler.swift */,
+				0B7B3C462E3D8C2B0056A79C /* CloudNutrientService.swift */,
+				0B7B3C472E3D8C2B0056A79C /* FoodAnalysisService.swift */,
+				0B7B3C482E3D8C2B0056A79C /* GitHubNutrientService.swift */,
+				0B7B3C492E3D8C2B0056A79C /* MacroServices.swift */,
+				0B7B3C4A2E3D8C2B0056A79C /* NutrientService.swift */,
+				0B7B3C4B2E3D8C2B0056A79C /* SimpleFoodAI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		0B7B3C142E3D7EA10056A79C /* Authentication */ = {
+		0B7B3C5A2E3D8C2B0056A79C /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				0B7B3C122E3D7EA10056A79C /* LoginView.swift */,
-				0B7B3C132E3D7EA10056A79C /* SessionStore.swift */,
-			);
-			path = Authentication;
-			sourceTree = "<group>";
-		};
-		0B7B3C1B2E3D7EA10056A79C /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				0B7B3C152E3D7EA10056A79C /* AnimatedWelcomeLogo.swift */,
-				0B7B3C162E3D7EA10056A79C /* LoadingAnimations.swift */,
-				0B7B3C172E3D7EA10056A79C /* NavigationBar.swift */,
-				0B7B3C182E3D7EA10056A79C /* NutrientDatabaseDownloadView.swift */,
-				0B7B3C192E3D7EA10056A79C /* StyledTextField.swift */,
-				0B7B3C1A2E3D7EA10056A79C /* UniversalBackground.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		0B7B3C1F2E3D7EA10056A79C /* MainApp */ = {
-			isa = PBXGroup;
-			children = (
-				0B7B3C1C2E3D7EA10056A79C /* FloatingInputBar.swift */,
-				0B7B3C1D2E3D7EA10056A79C /* MainAppView.swift */,
-				0B7B3C1E2E3D7EA10056A79C /* MainAppView_Simple.swift */,
-			);
-			path = MainApp;
-			sourceTree = "<group>";
-		};
-		0B7B3C242E3D7EA10056A79C /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				0B7B3C202E3D7EA10056A79C /* BMICalculatorView.swift */,
-				0B7B3C212E3D7EA10056A79C /* OnboardingDemoView.swift */,
-				0B7B3C222E3D7EA10056A79C /* ProfileSetupView.swift */,
-				0B7B3C232E3D7EA10056A79C /* WelcomeView.swift */,
-			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		0B7B3C282E3D7EA10056A79C /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				0B7B3C252E3D7EA10056A79C /* CloudStorageSettingsView.swift */,
-				0B7B3C262E3D7EA10056A79C /* SettingsMenu.swift */,
-				0B7B3C272E3D7EA10056A79C /* SettingsView.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		0B9ED1D22E39D21A006A7B7B /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				0B7B3C082E3D7E6D0056A79C /* Services */,
-				0B7B3BFD2E3D7E470056A79C /* SupabaseService.swift */,
-				0B7C99B12E3AE81100C74B04 /* CloudKitProfileService.swift */,
-				0B7C99B22E3AE81100C74B04 /* CloudKitUserProfileRepository.swift */,
-				0B9ED1CC2E39D21A006A7B7B /* GroupRepository.swift */,
-				0B9ED1CD2E39D21A006A7B7B /* ICloudService.swift */,
-				0B9ED1CE2E39D21A006A7B7B /* LocalGroupStorage.swift */,
-				0B9ED1CF2E39D21A006A7B7B /* SharedDataLoader.swift */,
-				0B9ED1D02E39D21A006A7B7B /* SyncManager.swift */,
-				0B9ED1D12E39D21A006A7B7B /* UserProfileRepository.swift */,
+				0B7B3C4C2E3D8C2B0056A79C /* Services */,
+				0B7B3C4D2E3D8C2B0056A79C /* CloudKitAuthenticationService.swift */,
+				0B7B3C4E2E3D8C2B0056A79C /* CloudKitAuthService.swift */,
+				0B7B3C4F2E3D8C2B0056A79C /* CloudKitProfileService.swift */,
+				0B7B3C502E3D8C2B0056A79C /* CloudKitProfileServiceNew.swift */,
+				0B7B3C512E3D8C2B0056A79C /* CloudKitUserProfileRepository.swift */,
+				0B7B3C522E3D8C2B0056A79C /* GroupRepository.swift */,
+				0B7B3C532E3D8C2B0056A79C /* iCloudDocumentService.swift */,
+				0B7B3C542E3D8C2B0056A79C /* ICloudService.swift */,
+				0B7B3C552E3D8C2B0056A79C /* LocalGroupStorage.swift */,
+				0B7B3C562E3D8C2B0056A79C /* SharedDataLoader.swift */,
+				0B7B3C572E3D8C2B0056A79C /* SupabaseService.swift */,
+				0B7B3C582E3D8C2B0056A79C /* SyncManager.swift */,
+				0B7B3C592E3D8C2B0056A79C /* UserProfileRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
 		};
-		0B9ED1D52E39D21A006A7B7B /* Domain */ = {
+		0B7B3C5F2E3D8C2B0056A79C /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				0B02C63A2E3AEE3E00A672B6 /* CloudProvider.swift */,
-				0B9ED1D32E39D21A006A7B7B /* Group.swift */,
-				0B9ED1D42E39D21A006A7B7B /* UserProfile.swift */,
+				0B7B3C5B2E3D8C2B0056A79C /* CloudProvider.swift */,
+				0B7B3C5C2E3D8C2B0056A79C /* Group.swift */,
+				0B7B3C5D2E3D8C2B0056A79C /* NutritionData.swift */,
+				0B7B3C5E2E3D8C2B0056A79C /* UserProfile.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		0B9ED1DF2E39D21A006A7B7B /* Presentation */ = {
+		0B7B3C632E3D8C2B0056A79C /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				0B7B3C142E3D7EA10056A79C /* Authentication */,
-				0B7B3C1B2E3D7EA10056A79C /* Components */,
-				0B7B3C1F2E3D7EA10056A79C /* MainApp */,
-				0B7B3C242E3D7EA10056A79C /* Onboarding */,
-				0B7B3C282E3D7EA10056A79C /* Settings */,
-				0B1819EF2E39D97000562B43 /* MacroApp.swift */,
-				0BFD31572E3AF63400BA677C /* ContentView.swift */,
+				0B7B3C602E3D8C2B0056A79C /* iCloudSignInView.swift */,
+				0B7B3C612E3D8C2B0056A79C /* LoginView.swift */,
+				0B7B3C622E3D8C2B0056A79C /* SessionStore.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		0B7B3C6A2E3D8C2B0056A79C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0B7B3C642E3D8C2B0056A79C /* AnimatedWelcomeLogo.swift */,
+				0B7B3C652E3D8C2B0056A79C /* LoadingAnimations.swift */,
+				0B7B3C662E3D8C2B0056A79C /* NavigationBar.swift */,
+				0B7B3C672E3D8C2B0056A79C /* NutrientDatabaseDownloadView.swift */,
+				0B7B3C682E3D8C2B0056A79C /* StyledTextField.swift */,
+				0B7B3C692E3D8C2B0056A79C /* UniversalBackground.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0B7B3C6E2E3D8C2B0056A79C /* MainApp */ = {
+			isa = PBXGroup;
+			children = (
+				0B7B3C6B2E3D8C2B0056A79C /* FloatingInputBar.swift */,
+				0B7B3C6C2E3D8C2B0056A79C /* MainAppView.swift */,
+				0B7B3C6D2E3D8C2B0056A79C /* MainAppView_Simple.swift */,
+			);
+			path = MainApp;
+			sourceTree = "<group>";
+		};
+		0B7B3C732E3D8C2B0056A79C /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0B7B3C6F2E3D8C2B0056A79C /* BMICalculatorView.swift */,
+				0B7B3C702E3D8C2B0056A79C /* OnboardingDemoView.swift */,
+				0B7B3C712E3D8C2B0056A79C /* ProfileSetupView.swift */,
+				0B7B3C722E3D8C2B0056A79C /* WelcomeView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		0B7B3C772E3D8C2B0056A79C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0B7B3C742E3D8C2B0056A79C /* CloudStorageSettingsView.swift */,
+				0B7B3C752E3D8C2B0056A79C /* SettingsMenu.swift */,
+				0B7B3C762E3D8C2B0056A79C /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		0B7B3C7A2E3D8C2B0056A79C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				0B7B3C632E3D8C2B0056A79C /* Authentication */,
+				0B7B3C6A2E3D8C2B0056A79C /* Components */,
+				0B7B3C6E2E3D8C2B0056A79C /* MainApp */,
+				0B7B3C732E3D8C2B0056A79C /* Onboarding */,
+				0B7B3C772E3D8C2B0056A79C /* Settings */,
+				0B7B3C782E3D8C2B0056A79C /* ContentView.swift */,
+				0B7B3C792E3D8C2B0056A79C /* MacroApp.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		0B7B3C7C2E3D8C2B0056A79C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0B7B3C7B2E3D8C2B0056A79C /* split_afcd.sh */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0B7B3C7D2E3D8C2B0056A79C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0B7B3C7C2E3D8C2B0056A79C /* Data */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		0BB9EF162E39BB1D00EDB4AA /* Products */ = {
@@ -240,11 +273,12 @@
 		0BEE02352E39ACF20085B9EA = {
 			isa = PBXGroup;
 			children = (
+				0B7B3C5A2E3D8C2B0056A79C /* Data */,
+				0B7B3C5F2E3D8C2B0056A79C /* Domain */,
+				0B7B3C7A2E3D8C2B0056A79C /* Presentation */,
+				0B7B3C7D2E3D8C2B0056A79C /* Resources */,
 				0B7B3C3B2E3D81D70056A79C /* Macro.entitlements */,
 				0B5257A52E3A2E2900B30CCA /* Assets.xcassets */,
-				0B9ED1D22E39D21A006A7B7B /* Data */,
-				0B9ED1D52E39D21A006A7B7B /* Domain */,
-				0B9ED1DF2E39D21A006A7B7B /* Presentation */,
 				0BB9EF0E2E39BB1D00EDB4AA /* Info.plist */,
 				0BB9EF0F2E39BB1D00EDB4AA /* Macro.xcodeproj */,
 				0B1819E62E39D88000562B43 /* Frameworks */,
@@ -330,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B5257A62E3A2E2900B30CCA /* Assets.xcassets in Resources */,
+				0B7B3CAC2E3D8C2B0056A79C /* split_afcd.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,47 +375,52 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B9ED1E32E39D21A006A7B7B /* Group.swift in Sources */,
-				0B9ED1E52E39D21A006A7B7B /* UserProfileRepository.swift in Sources */,
-				0BFD31582E3AF63400BA677C /* ContentView.swift in Sources */,
-				0B9ED1E62E39D21A006A7B7B /* ICloudService.swift in Sources */,
-				0B1819F02E39D97000562B43 /* MacroApp.swift in Sources */,
-				0B7C99B32E3AE81100C74B04 /* CloudKitProfileService.swift in Sources */,
-				0B7C99B42E3AE81100C74B04 /* CloudKitUserProfileRepository.swift in Sources */,
-				0B7B3C292E3D7EA10056A79C /* SessionStore.swift in Sources */,
-				0B7B3C2A2E3D7EA10056A79C /* NavigationBar.swift in Sources */,
-				0B7B3C2B2E3D7EA10056A79C /* NutrientDatabaseDownloadView.swift in Sources */,
-				0B7B3C2C2E3D7EA10056A79C /* SettingsView.swift in Sources */,
-				0B7B3C2D2E3D7EA10056A79C /* ProfileSetupView.swift in Sources */,
-				0B7B3C2E2E3D7EA10056A79C /* WelcomeView.swift in Sources */,
-				0B7B3C2F2E3D7EA10056A79C /* LoadingAnimations.swift in Sources */,
-				0B7B3C302E3D7EA10056A79C /* LoginView.swift in Sources */,
-				0B7B3C312E3D7EA10056A79C /* MainAppView.swift in Sources */,
-				0B7B3C322E3D7EA10056A79C /* StyledTextField.swift in Sources */,
-				0B7B3C332E3D7EA10056A79C /* FloatingInputBar.swift in Sources */,
-				0B7B3C342E3D7EA10056A79C /* OnboardingDemoView.swift in Sources */,
-				0B7B3C352E3D7EA10056A79C /* AnimatedWelcomeLogo.swift in Sources */,
-				0B7B3C362E3D7EA10056A79C /* UniversalBackground.swift in Sources */,
-				0B7B3C372E3D7EA10056A79C /* CloudStorageSettingsView.swift in Sources */,
-				0B7B3C382E3D7EA10056A79C /* SettingsMenu.swift in Sources */,
-				0B7B3C392E3D7EA10056A79C /* MainAppView_Simple.swift in Sources */,
-				0B7B3C3A2E3D7EA10056A79C /* BMICalculatorView.swift in Sources */,
-				0B02C63B2E3AEE3E00A672B6 /* CloudProvider.swift in Sources */,
-				0B9ED1EC2E39D21A006A7B7B /* GroupRepository.swift in Sources */,
-				0B9ED1ED2E39D21A006A7B7B /* SharedDataLoader.swift in Sources */,
-				0B9ED1EE2E39D21A006A7B7B /* LocalGroupStorage.swift in Sources */,
-				0B9ED1EF2E39D21A006A7B7B /* SyncManager.swift in Sources */,
-				0B9ED1F12E39D21A006A7B7B /* UserProfile.swift in Sources */,
-				0B7B3C092E3D7E6D0056A79C /* CloudNutrientHandler.swift in Sources */,
-				0B7B3C0A2E3D7E6D0056A79C /* NutrientService.swift in Sources */,
-				0B7B3C0B2E3D7E6D0056A79C /* GitHubNutrientService.swift in Sources */,
-				0B7B3C0C2E3D7E6D0056A79C /* FoodAnalysisService.swift in Sources */,
-				0B7B3C0D2E3D7E6D0056A79C /* MacroServices.swift in Sources */,
-				0B7B3C0E2E3D7E6D0056A79C /* AlternativeStorageOptions.swift in Sources */,
-				0B7B3C0F2E3D7E6D0056A79C /* SimpleFoodAI.swift in Sources */,
-				0B7B3C102E3D7E6D0056A79C /* CloudNutrientService.swift in Sources */,
-				0B7B3C112E3D7E6D0056A79C /* GitHubNutrientServiceTest.swift in Sources */,
-				0B7B3BFE2E3D7E470056A79C /* SupabaseService.swift in Sources */,
+				0B7B3C7E2E3D8C2B0056A79C /* CloudKitAuthenticationService.swift in Sources */,
+				0B7B3C7F2E3D8C2B0056A79C /* NutrientService.swift in Sources */,
+				0B7B3C802E3D8C2B0056A79C /* CloudNutrientHandler.swift in Sources */,
+				0B7B3C812E3D8C2B0056A79C /* FloatingInputBar.swift in Sources */,
+				0B7B3C822E3D8C2B0056A79C /* UserProfile.swift in Sources */,
+				0B7B3C832E3D8C2B0056A79C /* CloudKitProfileServiceNew.swift in Sources */,
+				0B7B3C842E3D8C2B0056A79C /* WelcomeView.swift in Sources */,
+				0B7B3C852E3D8C2B0056A79C /* BMICalculatorView.swift in Sources */,
+				0B7B3C862E3D8C2B0056A79C /* StyledTextField.swift in Sources */,
+				0B7B3C872E3D8C2B0056A79C /* NutrientDatabaseDownloadView.swift in Sources */,
+				0B7B3C882E3D8C2B0056A79C /* iCloudSignInView.swift in Sources */,
+				0B7B3C892E3D8C2B0056A79C /* CloudKitUserProfileRepository.swift in Sources */,
+				0B7B3C8A2E3D8C2B0056A79C /* LoginView.swift in Sources */,
+				0B7B3C8B2E3D8C2B0056A79C /* UserProfileRepository.swift in Sources */,
+				0B7B3C8C2E3D8C2B0056A79C /* FoodAnalysisService.swift in Sources */,
+				0B7B3C8D2E3D8C2B0056A79C /* iCloudDocumentService.swift in Sources */,
+				0B7B3C8E2E3D8C2B0056A79C /* MacroServices.swift in Sources */,
+				0B7B3C8F2E3D8C2B0056A79C /* SessionStore.swift in Sources */,
+				0B7B3C902E3D8C2B0056A79C /* NutritionData.swift in Sources */,
+				0B7B3C912E3D8C2B0056A79C /* AnimatedWelcomeLogo.swift in Sources */,
+				0B7B3C922E3D8C2B0056A79C /* ContentView.swift in Sources */,
+				0B7B3C932E3D8C2B0056A79C /* ICloudService.swift in Sources */,
+				0B7B3C942E3D8C2B0056A79C /* CloudNutrientService.swift in Sources */,
+				0B7B3C952E3D8C2B0056A79C /* CloudKitAuthService.swift in Sources */,
+				0B7B3C962E3D8C2B0056A79C /* CloudKitProfileService.swift in Sources */,
+				0B7B3C972E3D8C2B0056A79C /* SettingsMenu.swift in Sources */,
+				0B7B3C982E3D8C2B0056A79C /* UniversalBackground.swift in Sources */,
+				0B7B3C992E3D8C2B0056A79C /* MainAppView_Simple.swift in Sources */,
+				0B7B3C9A2E3D8C2B0056A79C /* OnboardingDemoView.swift in Sources */,
+				0B7B3C9B2E3D8C2B0056A79C /* Group.swift in Sources */,
+				0B7B3C9C2E3D8C2B0056A79C /* LocalGroupStorage.swift in Sources */,
+				0B7B3C9D2E3D8C2B0056A79C /* SupabaseService.swift in Sources */,
+				0B7B3C9E2E3D8C2B0056A79C /* SharedDataLoader.swift in Sources */,
+				0B7B3C9F2E3D8C2B0056A79C /* ProfileSetupView.swift in Sources */,
+				0B7B3CA02E3D8C2B0056A79C /* GitHubNutrientService.swift in Sources */,
+				0B7B3CA12E3D8C2B0056A79C /* MacroApp.swift in Sources */,
+				0B7B3CA22E3D8C2B0056A79C /* GroupRepository.swift in Sources */,
+				0B7B3CA32E3D8C2B0056A79C /* AlternativeStorageOptions.swift in Sources */,
+				0B7B3CA42E3D8C2B0056A79C /* MainAppView.swift in Sources */,
+				0B7B3CA52E3D8C2B0056A79C /* CloudProvider.swift in Sources */,
+				0B7B3CA62E3D8C2B0056A79C /* LoadingAnimations.swift in Sources */,
+				0B7B3CA72E3D8C2B0056A79C /* SyncManager.swift in Sources */,
+				0B7B3CA82E3D8C2B0056A79C /* SimpleFoodAI.swift in Sources */,
+				0B7B3CA92E3D8C2B0056A79C /* CloudStorageSettingsView.swift in Sources */,
+				0B7B3CAA2E3D8C2B0056A79C /* SettingsView.swift in Sources */,
+				0B7B3CAB2E3D8C2B0056A79C /* NavigationBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +557,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Macro.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QPJ3G326WV;
@@ -543,8 +584,9 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = "";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.LumoraLabs.Macro;
+				PRODUCT_BUNDLE_IDENTIFIER = io.LumoraLabs.Macro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -567,6 +609,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Macro.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QPJ3G326WV;
@@ -593,8 +636,9 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = "";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.LumoraLabs.Macro;
+				PRODUCT_BUNDLE_IDENTIFIER = io.LumoraLabs.Macro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

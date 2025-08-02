@@ -1,5 +1,13 @@
-plugins {
-    alias(libs.plugins.android.application)
+plugins {android {
+    namespace = "io.LumoraLabs.Macro"
+    compileSdk = 36
+
+    defaultConfig {
+        applicationId = "io.LumoraLabs.Macro"
+        minSdk = 33
+        targetSdk = 36
+        versionCode = 1
+        versionName = "1.0"(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
@@ -8,11 +16,11 @@ plugins {
 }
 
 android {
-    namespace = "com.lumoralabs.macro"
+    namespace = "io.lumoralabs.macro"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.lumoralabs.macro"
+        applicationId = "io.lumoralabs.macro"
         minSdk = 33
         targetSdk = 36
         versionCode = 1
