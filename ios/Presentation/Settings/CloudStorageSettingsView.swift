@@ -82,15 +82,15 @@ struct CloudStorageSettingsView: View {
     }
     
     private func loadCurrentSettings() {
-        selectedProvider = profileRepo.getCurrentCloudProvider()
+        if let providerString = profileRepo.getCurrentCloudProvider(),
+           let provider = CloudProvider(rawValue: providerString) {
+            selectedProvider = provider
+        }
     }
     
     private func checkAvailableProviders() {
-        profileRepo.getAvailableCloudProviders { (providers: [CloudProvider]) in
-            DispatchQueue.main.async {
-                availableProviders = providers
-            }
-        }
+        let providers = profileRepo.getAvailableCloudProviders()
+        availableProviders = providers as! [CloudProvider]
     }
     
     private func checkCloudKitStatus() {
@@ -102,7 +102,7 @@ struct CloudStorageSettingsView: View {
     
     private func selectProvider(_ provider: CloudProvider) {
         selectedProvider = provider
-        profileRepo.setCloudProvider(provider)
+        profileRepo.setCloudProvider(provider.rawValue)
     }
 }
 

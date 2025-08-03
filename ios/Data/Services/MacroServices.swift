@@ -6,58 +6,6 @@ import OSLog
 // MARK: - Sendable Data Models  
 // Following Apple's final pattern: defined in non-actor context
 
-struct NutritionData: Codable, Identifiable, Hashable, Sendable {
-    let id: UUID
-    let name: String
-    let brand: String?
-    let calories: Double
-    let protein: Double
-    let carbs: Double
-    let fat: Double
-    let fiber: Double?
-    let sugar: Double?
-    let sodium: Double?
-    let confidence: Double
-    let source: String
-    let barcode: String?
-    let servingSize: String?
-    let servingUnit: String?
-    
-    init(
-        id: UUID = UUID(),
-        name: String,
-        brand: String? = nil,
-        calories: Double,
-        protein: Double,
-        carbs: Double,
-        fat: Double,
-        fiber: Double? = nil,
-        sugar: Double? = nil,
-        sodium: Double? = nil,
-        confidence: Double = 1.0,
-        source: String = "manual",
-        barcode: String? = nil,
-        servingSize: String? = nil,
-        servingUnit: String? = nil
-    ) {
-        self.id = id
-        self.name = name
-        self.brand = brand
-        self.calories = calories
-        self.protein = protein
-        self.carbs = carbs
-        self.fat = fat
-        self.fiber = fiber
-        self.sugar = sugar
-        self.sodium = sodium
-        self.confidence = confidence
-        self.source = source
-        self.barcode = barcode
-        self.servingSize = servingSize
-        self.servingUnit = servingUnit
-    }
-}
-
 struct NutritionEntry: Codable, Identifiable, Hashable, Sendable {
     let id: UUID
     let nutritionData: NutritionData

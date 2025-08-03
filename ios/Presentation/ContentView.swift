@@ -1,30 +1,28 @@
-
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var session = SessionStore()
+    @EnvironmentObject var authManager: AuthManager
+    @StateObject private var userProfileRepository = UserProfileRepository()
+    @State private var isOnboardingComplete = false
 
     var body: some View {
-        ZStack {
-            UniversalBackground()
-            
-            if session.isLoggedIn {
-                if !session.isProfileComplete {
-                    ProfileSetupView(session: session)
-                } else if !session.isWelcomeScreenSeen {
-                    WelcomeView(session: session)
-                } else if !session.isBMIComplete {
-                    BMICalculatorView(session: session)
-                } else {
+        if authManager.session != nil {
+            if userProfileRepository.hasProfile || isOnboardingComplete {
+                // User has completed onboarding - show main app
+                NavigationStack {
                     MainAppView()
                 }
             } else {
-                LoginView(session: session)
+                // User needs to complete onboarding
+                OnboardingView(isOnboardingComplete: $isOnboardingComplete)
+                    .environmentObject(userProfileRepository)
             }
-        }
-        .ignoresSafeArea(.all) // Ensure full screen coverage
-        .onAppear {
-            session.listen()
+        } else {
+            LoginView()
+                .onAppear {
+                    // Reset onboarding state when returning to login
+                    isOnboardingComplete = false
+                }
         }
     }
 }

@@ -48,6 +48,9 @@ db.config
 # Info.plist files that contain API keys (if they do)
 ios/Info.plist
 reference/Info.plist
+android/app/src/main/AndroidManifest.xml
+ios/Secrets.plist
+android/secrets.properties
 
 # Reference/Development folder - should not be in production repo
 reference/

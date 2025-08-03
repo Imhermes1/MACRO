@@ -10,6 +10,8 @@ public struct NavigationBar: View {
     public var title: String = "Macro"
     
     @State private var showingTabDropdown = false
+    @State private var showingProfileDropdown = false
+    @EnvironmentObject var authManager: AuthManager
     
     public init(
         showTabDropdown: Bool = true,
@@ -26,13 +28,14 @@ public struct NavigationBar: View {
     public var body: some View {
         ZStack(alignment: .topLeading) {
             // Full screen tap-to-dismiss overlay when dropdown is open
-            if showingTabDropdown {
+            if showingTabDropdown || showingProfileDropdown {
                 Color.clear
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.3)) {
                             showingTabDropdown = false
+                            showingProfileDropdown = false
                         }
                     }
                     .zIndex(50) // Below dropdown but above nav bar
@@ -63,16 +66,20 @@ public struct NavigationBar: View {
 
                 // Center title
                 Text(title)
-                    .font(.headline)
-                    .fontWeight(.bold)
+                    .font(.system(size: 24, weight: .thin, design: .default))
                     .foregroundColor(.white)
+                    .tracking(4)
+                    .opacity(0.95)
 
                 Spacer()
 
                 // Right profile button
                 if showProfileButton {
                     Button(action: {
-                        profileAction?()
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            showingProfileDropdown.toggle()
+                            showingTabDropdown = false // Close tab dropdown if open
+                        }
                     }) {
                         Image(systemName: "person.circle")
                             .foregroundColor(.white)
@@ -101,6 +108,21 @@ public struct NavigationBar: View {
                     insertion: AnyTransition.scale(scale: 0.8, anchor: .topLeading)
                         .combined(with: AnyTransition.opacity),
                     removal: AnyTransition.scale(scale: 0.8, anchor: .topLeading)
+                        .combined(with: AnyTransition.opacity)
+                ))
+                .zIndex(100)
+            }
+            
+            // Profile dropdown positioned from the right side
+            if showingProfileDropdown {
+                ProfileDropdownMenu {
+                    showingProfileDropdown = false
+                }
+                .offset(x: UIScreen.main.bounds.width - 196, y: 8) // Position from right edge
+                .transition(.asymmetric(
+                    insertion: AnyTransition.scale(scale: 0.8, anchor: .topTrailing)
+                        .combined(with: AnyTransition.opacity),
+                    removal: AnyTransition.scale(scale: 0.8, anchor: .topTrailing)
                         .combined(with: AnyTransition.opacity)
                 ))
                 .zIndex(100)
@@ -171,6 +193,87 @@ struct TabOption {
     let icon: String
     let title: String
     let isActive: Bool
+}
+
+// MARK: - Profile Dropdown Menu
+struct ProfileDropdownMenu: View {
+    let onDismiss: () -> Void
+    @EnvironmentObject var authManager: AuthManager
+    @StateObject private var userProfileRepository = UserProfileRepository()
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            // Profile dropdown content
+            VStack(spacing: 4) {
+                // Settings option
+                Button(action: {
+                    // Handle settings navigation
+                    onDismiss()
+                }) {
+                    HStack(spacing: 12) {
+                        Image(systemName: "gear")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundColor(.primary)
+                            .frame(width: 20)
+                        
+                        Text("Settings")
+                            .font(.system(.body, design: .rounded, weight: .medium))
+                            .foregroundColor(.primary)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color.clear)
+                    )
+                }
+                .buttonStyle(.plain)
+                
+                // Divider
+                Divider()
+                    .padding(.horizontal, 16)
+                
+                // Logout/Reset option
+                Button(action: {
+                    Task {
+                        // NUCLEAR RESET: Clear everything
+                        userProfileRepository.clearProfile()
+                        await authManager.signOut()
+                        onDismiss()
+                        
+                        print("🧹 COMPLETE ACCOUNT NUKE: Profile repository cleared + Auth signed out")
+                    }
+                }) {
+                    HStack(spacing: 12) {
+                        Image(systemName: "arrow.right.square")
+                            .font(.system(size: 16, weight: .medium))
+                            .foregroundColor(.red)
+                            .frame(width: 20)
+                        
+                        Text("Logout & Reset")
+                            .font(.system(.body, design: .rounded, weight: .medium))
+                            .foregroundColor(.red)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color.clear)
+                    )
+                }
+                .buttonStyle(.plain)
+            }
+            .padding(.vertical, 8)
+        }
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
+        .frame(width: 180)
+    }
 }
 
 #Preview {

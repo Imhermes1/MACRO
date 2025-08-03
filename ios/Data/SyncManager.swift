@@ -1,26 +1,62 @@
 import Foundation
+import Combine
 import Network
 
-class SyncManager {
+@MainActor
+class SyncManager: ObservableObject {
     private let monitor = NWPathMonitor()
     private let queue = DispatchQueue(label: "NetworkMonitor")
+    
+    @Published var isOnline = false
+    @Published var lastSyncDate: Date?
 
-    func isOnline(completion: @escaping (Bool) -> Void) {
-        monitor.pathUpdateHandler = { path in
-            completion(path.status == .satisfied)
+    init() {
+        startNetworkMonitoring()
+    }
+    
+    private func startNetworkMonitoring() {
+        monitor.pathUpdateHandler = { [weak self] path in
+            DispatchQueue.main.async {
+                self?.isOnline = path.status == .satisfied
+            }
         }
         monitor.start(queue: queue)
     }
 
-    func syncGroups(localStorage: LocalGroupStorage, supabaseService: SupabaseService) {
-        isOnline { online in
-            if online {
-                let localGroups = localStorage.loadGroups()
-                localGroups.forEach { supabaseService.saveGroup($0) }
-                supabaseService.getGroups { cloudGroups in
-                    localStorage.saveGroups(cloudGroups)
-                }
+    func checkNetworkStatus() async -> Bool {
+        await withCheckedContinuation { continuation in
+            monitor.pathUpdateHandler = { path in
+                continuation.resume(returning: path.status == .satisfied)
             }
         }
     }
+
+    // TODO: Re-enable when types are properly imported
+    /*
+    func syncGroups(localStorage: LocalGroupStorage, supabaseService: SupabaseService) async {
+        guard isOnline else {
+            print("🌐 Cannot sync groups - device is offline")
+            return
+        }
+        
+        do {
+            // Upload local groups to cloud
+            let localGroups = localStorage.loadGroups()
+            for group in localGroups {
+                try await supabaseService.saveGroup(group)
+            }
+            
+            // Download cloud groups and update local storage
+            let cloudGroups = try await supabaseService.getGroups()
+            localStorage.saveGroups(cloudGroups)
+            
+            lastSyncDate = Date()
+            print("✅ Groups synced successfully")
+            
+        } catch {
+            print("❌ Sync failed: \(error.localizedDescription)")
+        }
+    }
+    */
 }
+

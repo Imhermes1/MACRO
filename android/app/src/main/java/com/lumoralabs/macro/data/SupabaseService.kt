@@ -15,21 +15,23 @@ import kotlinx.coroutines.withContext
  * 
  * Documentation: https://supabase.com/docs/reference/kotlin
  */
+import android.content.Context
+import android.content.pm.PackageManager
+
 object SupabaseService {
-    
-    // TODO: Replace with your actual Supabase project URL and anon key
-    // Configure these in your app's configuration or environment variables
-    private const val SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL" // e.g., "https://your-project.supabase.co"
-    private const val SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY"
-    
-    private val supabase = createSupabaseClient(
-        supabaseUrl = SUPABASE_URL,
-        supabaseKey = SUPABASE_ANON_KEY
+    // Read Supabase URL and key from AndroidManifest.xml meta-data
+    private fun getMetaData(context: Context, key: String): String {
+        val appInfo = context.packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
+        return appInfo.metaData.getString(key) ?: ""
+    }
+
+    fun createClient(context: Context) = createSupabaseClient(
+        supabaseUrl = "https://macro.supabase.co",
+        supabaseKey = getMetaData(context, "SUPABASE_PUBLISHABLE_KEY")
     ) {
         install(Postgrest)
         install(Auth) {
-            // Configure authentication providers
-            // TODO: Configure Google OAuth, Email auth based on requirements
+            // Configure authentication providers as needed
         }
         install(Realtime)
     }
@@ -38,7 +40,8 @@ object SupabaseService {
      * Save a group to Supabase PostgreSQL database
      * Replaces Firestore collection with PostgreSQL table
      */
-    suspend fun saveGroup(group: Group) = withContext(Dispatchers.IO) {
+    suspend fun saveGroup(context: Context, group: Group) = withContext(Dispatchers.IO) {
+        val supabase = createClient(context)
         try {
             supabase.from("groups").insert(group)
         } catch (e: Exception) {
@@ -51,7 +54,8 @@ object SupabaseService {
      * Get all groups from Supabase PostgreSQL database
      * Replaces Firestore collection query with PostgreSQL SELECT
      */
-    suspend fun getGroups(): List<Group> = withContext(Dispatchers.IO) {
+    suspend fun getGroups(context: Context): List<Group> = withContext(Dispatchers.IO) {
+        val supabase = createClient(context)
         try {
             supabase.from("groups").select().decodeList<Group>()
         } catch (e: Exception) {
