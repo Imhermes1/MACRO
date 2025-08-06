@@ -17,17 +17,11 @@ sealed class MacroDestination {
     data object ProfileSetup : MacroDestination()
     
     @Serializable
-    data object Welcome : MacroDestination()
-    
-    @Serializable
-    data object BMICalculator : MacroDestination()
+    data object GoalsSetup : MacroDestination()
     
     @Serializable
     data object MainApp : MacroDestination()
     
     @Serializable
     data object Settings : MacroDestination()
-    
-    @Serializable
-    data object OnboardingDemo : MacroDestination()
 }

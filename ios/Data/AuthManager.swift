@@ -46,10 +46,17 @@ class AuthManager: ObservableObject {
         }
     }
 
-    func signUp(with email: String, password: String) async {
+    func signUp(with email: String, password: String, firstName: String = "", lastName: String = "") async {
         do {
             let response = try await SupabaseManager.shared.client.auth.signUp(email: email, password: password)
             self.session = response.session
+            
+            // Store the names provided during email signup
+            if !firstName.isEmpty {
+                self.userFirstName = firstName
+                self.userLastName = lastName
+                print("Stored email signup user data - First: '\(firstName)', Last: '\(lastName)'")
+            }
         } catch {
             self.errorMessage = error.localizedDescription
         }
@@ -66,44 +73,59 @@ class AuthManager: ObservableObject {
 
     func signOut() async {
         do {
+            // Step 1: Sign out from Supabase
             try await SupabaseManager.shared.client.auth.signOut()
-            self.session = nil
-            // Clear stored user data
-            self.userFirstName = ""
-            self.userLastName = ""
-            self.userEmail = ""
             
-            // Clear activity tracking
+            // Step 2: Clear all auth manager state immediately
+            await MainActor.run {
+                self.session = nil
+                self.userFirstName = ""
+                self.userLastName = ""
+                self.userEmail = ""
+                self.errorMessage = nil
+            }
+            
+            // Step 3: Clear activity tracking
             UserActivityService.shared.clearActivityData()
             
-            // NUCLEAR OPTION: Clear ALL UserDefaults to ensure fresh start
+            // Step 4: NUCLEAR OPTION - Clear ALL UserDefaults
             if let bundleID = Bundle.main.bundleIdentifier {
                 UserDefaults.standard.removePersistentDomain(forName: bundleID)
             }
             
-            // Also manually clear any specific keys we know about
+            // Step 5: Also manually clear specific keys as backup
             let keysToRemove = [
                 "user_profile",
-                "has_seen_app_demo",
+                "weight_history",
+                "has_seen_app_demo", 
                 "has_completed_onboarding",
                 "user_goals",
                 "calorie_goal",
                 "macro_goals",
                 "fitness_level",
-                "activity_level"
+                "activity_level",
+                "last_login_date",
+                "login_count",
+                "user_activity_last_active"
             ]
             
             for key in keysToRemove {
                 UserDefaults.standard.removeObject(forKey: key)
             }
             
-            // Force synchronization
+            // Step 6: Force UserDefaults synchronization
             UserDefaults.standard.synchronize()
             
-            print("🧹 COMPLETE RESET: All user data cleared")
+            // Step 7: Add small delay to ensure state propagation
+            try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
+            
+            print("🧹 COMPLETE NUCLEAR RESET: All user data cleared and auth session ended")
             
         } catch {
-            self.errorMessage = error.localizedDescription
+            await MainActor.run {
+                self.errorMessage = error.localizedDescription
+            }
+            print("⚠️ Logout error: \(error.localizedDescription)")
         }
     }
     

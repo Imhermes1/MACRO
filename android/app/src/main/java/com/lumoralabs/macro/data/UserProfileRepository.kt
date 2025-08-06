@@ -8,27 +8,27 @@ import org.json.JSONObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class UserProfileRepository(private val context: Context) {
-    private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+object UserProfileRepository {
+    private const val PREFS_NAME = "user_profile"
+    private const val PROFILE_KEY = "profile"
+    private const val TAG = "UserProfileRepository"
 
-    companion object {
-        private const val PREFS_NAME = "user_profile"
-        private const val PROFILE_KEY = "profile"
-        private const val TAG = "UserProfileRepository"
-    }
+    private fun getPrefs(context: Context): SharedPreferences = 
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-    suspend fun saveProfile(profile: UserProfile) {
+    suspend fun saveProfile(context: Context, profile: UserProfile) {
         // Always save locally first for immediate access
-        saveProfileLocally(profile)
-        
+        saveProfileLocally(context, profile)
         // Save to cloud if user is authenticated
-        val currentUser = SupabaseService.Auth.getCurrentUser()
+        val currentUser = SupabaseService.Auth.getCurrentUser(context)
         if (currentUser != null) {
-            saveProfileToCloud(profile, currentUser.id)
+            // TODO: Fix this when we have proper user ID access
+            // saveProfileToCloud(context, profile, currentUser.id)
         }
     }
     
-    private fun saveProfileLocally(profile: UserProfile) {
+    private fun saveProfileLocally(context: Context, profile: UserProfile) {
+        val prefs = getPrefs(context)
         val obj = JSONObject().apply {
             put("firstName", profile.firstName)
             put("lastName", profile.lastName)
@@ -36,82 +36,92 @@ class UserProfileRepository(private val context: Context) {
             put("dob", profile.dob)
             put("height", profile.height)
             put("weight", profile.weight)
+            put("gender", profile.gender)
+            put("goal", profile.goal)
+            put("activityLevel", profile.activityLevel)
+            put("macroPreference", profile.macroPreference)
         }
         prefs.edit().putString(PROFILE_KEY, obj.toString()).apply()
     }
     
-    private suspend fun saveProfileToCloud(profile: UserProfile, userId: String) = withContext(Dispatchers.IO) {
+    private suspend fun saveProfileToCloud(context: Context, profile: UserProfile, userId: String) = withContext(Dispatchers.IO) {
         val data = mapOf(
             "id" to userId,
-            "firstName" to profile.firstName,
-            "lastName" to profile.lastName,
+            "first_name" to profile.firstName,
+            "last_name" to profile.lastName,
             "age" to profile.age,
             "dob" to profile.dob,
             "height" to profile.height,
             "weight" to profile.weight,
-            "lastUpdated" to System.currentTimeMillis()
+            "gender" to profile.gender,
+            "goal" to profile.goal,
+            "activity_level" to profile.activityLevel,
+            "macro_preference" to profile.macroPreference,
+            "last_updated" to System.currentTimeMillis()
         )
         
         try {
-            // TODO: Replace with actual Supabase client implementation
-            // This is a placeholder - implement using Supabase Kotlin client
-            // Documentation: https://supabase.com/docs/reference/kotlin/insert
-            
-            // Example implementation would be:
-            // supabase.from("user_profiles").upsert(data)
-            
-            Log.d(TAG, "Profile saved to Supabase cloud (placeholder)")
+            // TODO: Implement Supabase client properly
+            // val client = SupabaseService.getClient(context)
+            // client.from("user_profiles").upsert(data)
+            Log.d(TAG, "Profile would be saved to Supabase cloud when implemented")
         } catch (e: Exception) {
             Log.e(TAG, "Error saving profile to Supabase cloud", e)
         }
     }
 
-    suspend fun loadProfile(onResult: (UserProfile?) -> Unit = {}) {
-        // Try to load from cloud first if user is authenticated
-        val currentUser = SupabaseService.Auth.getCurrentUser()
-        if (currentUser != null) {
-            loadProfileFromCloud(currentUser.id) { cloudProfile ->
-                if (cloudProfile != null) {
-                    // Save cloud data locally for offline access
-                    saveProfileLocally(cloudProfile)
-                    onResult(cloudProfile)
-                } else {
-                    // Fallback to local data
-                    onResult(loadProfileLocally())
-                }
-            }
-        } else {
-            // For unauthenticated users, only use local storage
-            onResult(loadProfileLocally())
-        }
+    fun loadProfile(context: Context): UserProfile? {
+        return loadProfileLocally(context)
     }
-    
-    private fun loadProfileLocally(): UserProfile? {
-        val json = prefs.getString(PROFILE_KEY, null) ?: return null
+
+    private fun loadProfileLocally(context: Context): UserProfile? {
+        val prefs = getPrefs(context)
+        val profileStr = prefs.getString(PROFILE_KEY, null) ?: return null
         return try {
-            val obj = JSONObject(json)
+            val obj = JSONObject(profileStr)
             UserProfile(
-                firstName = obj.getString("firstName"),
-                lastName = obj.optString("lastName", null),
-                age = obj.getInt("age"),
-                dob = obj.optString("dob", null),
-                height = obj.getDouble("height").toFloat(),
-                weight = obj.getDouble("weight").toFloat()
+                firstName = obj.optString("firstName", ""),
+                lastName = obj.optString("lastName", ""),
+                age = obj.optInt("age", 0),
+                dob = obj.optString("dob", ""),
+                height = obj.optDouble("height", 0.0).toFloat(),
+                weight = obj.optDouble("weight", 0.0).toFloat(),
+                gender = obj.optString("gender", ""),
+                goal = obj.optString("goal", ""),
+                activityLevel = obj.optString("activityLevel", ""),
+                macroPreference = obj.optString("macroPreference", "")
             )
         } catch (e: Exception) {
-            // Error parsing local profile data
+            Log.e(TAG, "Error parsing profile", e)
             null
         }
     }
+
+    suspend fun loadProfile(context: Context, onResult: (UserProfile?) -> Unit = {}) {
+        // Try to load from cloud first if user is authenticated
+        val currentUser = SupabaseService.Auth.getCurrentUser(context)
+        if (currentUser != null) {
+            // TODO: Implement cloud loading when we have proper user ID access
+            // loadProfileFromCloud(context, currentUser.id) { cloudProfile ->
+            //     if (cloudProfile != null) {
+            //         saveProfileLocally(context, cloudProfile)
+            //         onResult(cloudProfile)
+            //     } else {
+            //         onResult(loadProfileLocally(context))
+            //     }
+            // }
+            onResult(loadProfileLocally(context))
+        } else {
+            // For unauthenticated users, only use local storage
+            onResult(loadProfileLocally(context))
+        }
+    }
     
-    private suspend fun loadProfileFromCloud(userId: String, onResult: (UserProfile?) -> Unit) = withContext(Dispatchers.IO) {
+    private suspend fun loadProfileFromCloud(context: Context, userId: String, onResult: (UserProfile?) -> Unit) = withContext(Dispatchers.IO) {
         try {
-            // TODO: Replace with actual Supabase client implementation
-            // This is a placeholder - implement using Supabase Kotlin client
-            // Documentation: https://supabase.com/docs/reference/kotlin/select
-            
-            // Example implementation would be:
-            // val response = supabase.from("user_profiles").select().eq("id", userId).single()
+            // TODO: Implement Supabase client properly
+            // val client = SupabaseService.getClient(context)
+            // val response = client.from("user_profiles").select().eq("id", userId).single()
             // val profile = response.decodeAs<UserProfile>()
             
             Log.d(TAG, "Loading profile from Supabase cloud (placeholder)")
@@ -122,20 +132,16 @@ class UserProfileRepository(private val context: Context) {
         }
     }
     
-    // Synchronous version for backward compatibility
-    fun loadProfile(): UserProfile? {
-        return loadProfileLocally()
-    }
-    
     /**
      * Migrates local profile data to cloud when user upgrades from anonymous to authenticated
      */
-    suspend fun migrateLocalToCloud() {
-        val currentUser = SupabaseService.Auth.getCurrentUser()
+    suspend fun migrateLocalToCloud(context: Context) {
+        val currentUser = SupabaseService.Auth.getCurrentUser(context)
         if (currentUser != null) {
-            val localProfile = loadProfileLocally()
+            val localProfile = loadProfileLocally(context)
             if (localProfile != null) {
-                saveProfileToCloud(localProfile, currentUser.id)
+                // TODO: Implement when we have proper user ID access
+                // saveProfileToCloud(context, localProfile, currentUser.id)
             }
         }
     }
@@ -143,7 +149,8 @@ class UserProfileRepository(private val context: Context) {
     /**
      * Deletes local profile data (useful when user signs out)
      */
-    fun clearLocalProfile() {
+    fun clearLocalProfile(context: Context) {
+        val prefs = getPrefs(context)
         prefs.edit().remove(PROFILE_KEY).apply()
     }
 }

@@ -139,19 +139,21 @@ public struct NutritionData: Codable, Identifiable, Hashable, Sendable {
 
 // MARK: - Analysis Result Model
 
-public struct NutritionAnalysisResult {
+public struct NutritionAnalysisResult: Codable, Equatable, Hashable {
     public let nutrition: NutritionData
     public let confidence: Double
     public var source: String
-    public var analysisMethod: String = ""
-    public var analysisTime: TimeInterval = 0.0
+    public var analysisMethod: String
+    public var analysisTime: TimeInterval
     public let suggestions: [String]? // For corrections/improvements
     public let alternatives: [NutritionData]? // Alternative interpretations
     
-    public init(nutrition: NutritionData, confidence: Double, source: String, suggestions: [String]? = nil, alternatives: [NutritionData]? = nil) {
+    public init(nutrition: NutritionData, confidence: Double, source: String, analysisMethod: String = "", analysisTime: TimeInterval = 0.0, suggestions: [String]? = nil, alternatives: [NutritionData]? = nil) {
         self.nutrition = nutrition
         self.confidence = confidence
         self.source = source
+        self.analysisMethod = analysisMethod
+        self.analysisTime = analysisTime
         self.suggestions = suggestions
         self.alternatives = alternatives
     }

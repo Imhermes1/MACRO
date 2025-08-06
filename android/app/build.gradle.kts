@@ -1,18 +1,12 @@
-plugins {android {
-    namespace = "io.LumoraLabs.Macro"
-    compileSdk = 36
-
-    defaultConfig {
-        applicationId = "io.LumoraLabs.Macro"
-        minSdk = 33
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"(libs.plugins.android.application)
+plugins {
+    alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    // TODO: Enable when google-services.json is properly configured
+    // alias(libs.plugins.google.services)
 }
 
 android {
@@ -65,6 +59,10 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
     
+    // Compose animations and icons
+    implementation("androidx.compose.animation:animation:1.6.8")
+    implementation("androidx.compose.material:material-icons-extended:1.6.8")
+    
     // Lifecycle and ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
@@ -96,9 +94,15 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     
     // Supabase
-    implementation(libs.supabase.android)
+    implementation(libs.supabase.client)
+    implementation(libs.supabase.postgrest)
     implementation(libs.supabase.auth)
     implementation(libs.supabase.realtime)
+    implementation("io.ktor:ktor-client-android:2.3.12")
+    implementation("io.ktor:ktor-client-core:2.3.12")
+    
+    // Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
     
     // Testing dependencies
     testImplementation(libs.junit)

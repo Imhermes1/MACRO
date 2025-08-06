@@ -6,5 +6,10 @@ data class UserProfile(
     val age: Int,
     val dob: String?,
     val height: Float,
-    val weight: Float
+    val weight: Float,
+    val gender: String = "Male",
+    val goal: String? = null,
+    val activityLevel: String? = null,
+    val macroPreference: String? = null,
+    val customDiet: String? = null
 )

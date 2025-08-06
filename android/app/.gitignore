@@ -1,0 +1,6 @@
+/build
+
+# Sensitive configuration files with API keys
+src/main/AndroidManifest.xml
+*.properties
+google-services.json

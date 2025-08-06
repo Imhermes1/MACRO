@@ -1,78 +1,64 @@
 import SwiftUI
+import Foundation
+import WeatherKit
+import Combine 
 
 struct MainAppView: View {
     @EnvironmentObject var authManager: AuthManager
     @State private var showOnboardingDemo = false
-    @State private var currentInput = ""
     @State private var todaysCalories = 0
     @State private var calorieGoal = 2000
     @State private var isProgressExpanded = false
-    @State private var isAnalyzing = false
-    @State private var analysisResult: NutritionData?
-    @State private var analysisError: String?
+    @State private var showAnalytics = false
     
-    // Fix CloudNutrientService binding issue by removing @StateObject
-    // until CloudNutrientService properly conforms to ObservableObject
-    // @StateObject private var cloudNutrientService = CloudNutrientService()
+    // Smart welcome system properties
+    @State private var showWelcomeMessage = false
+    @State private var welcomeMessage = ""
+    private let weatherManager = WeatherManager.shared
     
     var body: some View {
         ZStack {
             UniversalBackground()
             
             VStack(spacing: 0) {
-                // Add safe area padding for the NavigationBar
-                Spacer()
-                    .frame(height: 100) // Account for status bar + NavigationBar height
-                
-                // Spacer where dropdown used to be
-                Spacer()
-                    .frame(height: 80) // Space for the dropdown
-                
                 // Main content area
                 ScrollView {
                     VStack(spacing: 20) {
-                        // Add minimal top padding since progress bar now handles spacing
+                        // Add top padding for navigation bar
                         Spacer()
-                            .frame(height: 20) // Reduced padding since progress bar is properly positioned
+                            .frame(height: 130) // Space for navigation bar + a bit more
                         
-                        // AI Analysis Result Card
-                        if let result = analysisResult {
-                            AIAnalysisCard(nutrition: result)
-                        }
-                        
-                        // Analysis Error Display
-                        if let error = analysisError {
-                            ErrorCard(message: error)
-                        }
-                        
-                        // Recent entries or placeholder
-                        RecentEntriesSection()
-                        
-                        // Quick tips or motivational content
-                        QuickTipsCard()
+                        // Chat view with proper positioning
+                        NutritionChatView()
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, 12)
                     .padding(.bottom, 100) // Space for floating input bar
                 }
                 .background(Color.clear)
+                .zIndex(0) // Base layer for main content
                 
                 Spacer()
             }
             
-            // NavigationBar sits on top of all content (from Components/NavigationBar.swift)
+            // NavigationBar sits on top of all content
             VStack {
                 NavigationBar(
                     showTabDropdown: true,
                     showProfileButton: true,
                     profileAction: {
                         // Navigate to settings/profile
+                    },
+                    tabNavigationAction: { tabTitle in
+                        if tabTitle == "Analytics" {
+                            showAnalytics = true
+                        }
                     }
                 )
                 .padding(EdgeInsets(top: 44, leading: 16, bottom: 0, trailing: 16))
                 
                 Spacer()
             }
-            .zIndex(10) // Highest z-index to ensure it's always on top
+            .zIndex(3) // Navigation layer
             
             // Floating input bar at bottom using FloatingInputBar component
             VStack {
@@ -80,7 +66,7 @@ struct MainAppView: View {
                 FloatingInputBar()
                     .padding(.bottom, 34) // Safe area bottom
             }
-            .zIndex(8) // Below navigation but above other content
+            .zIndex(1) // Floating input layer
             
             // MOVED TO END: Dropdown Progress Bar - LAST in ZStack = on top of everything
             Button(action: {
@@ -103,7 +89,7 @@ struct MainAppView: View {
                 }
             }
             .buttonStyle(.plain)
-            .zIndex(5) // Lower z-index so navigation dropdown appears above it
+            .zIndex(2) // Daily progress dropdown base
             
             // MOVED TO END: Expanded dropdown content - separate layer on top
             if isProgressExpanded {
@@ -134,12 +120,14 @@ struct MainAppView: View {
                     Spacer()
                         .allowsHitTesting(false)
                 }
-                .zIndex(16) // Higher than progress bar
+                .zIndex(2) // Daily progress expanded content
             }
         }
         .ignoresSafeArea(.all)
         .onAppear {
-            // (Add onboarding logic here if needed)
+            setupSmartWelcome()
+            // Record user activity when main app appears
+            UserActivityService.shared.recordActivity()
         }
         .sheet(isPresented: $showOnboardingDemo) {
             // OnboardingDemoView - temporarily commented out
@@ -149,61 +137,182 @@ struct MainAppView: View {
                     showOnboardingDemo = false
                 }
         }
+        .sheet(isPresented: $showAnalytics) {
+            ProgressAnalyticsView()
+        }
     }
     
-    // MARK: - Helper Functions
+    // MARK: - Smart Welcome System with WeatherManager
     
     /**
-     * World-class AI analysis with multiple fallbacks for maximum accuracy
-     * Target: <5 seconds response time with near 100% accuracy
+     * Enhanced welcome system that combines usage patterns with weather/location context
      */
-    @MainActor
-    private func tryAIAnalysis(for input: String) async {
-        isAnalyzing = true
-        analysisError = nil
-        analysisResult = nil
+    private func setupSmartWelcome() {
+        // Check user preferences first
+        if UserDefaults.standard.bool(forKey: "disable_smart_welcome") {
+            return
+        }
         
-        print("🚀 Starting world-class nutrition analysis for: \(input)")
+        let lastLoginDate = UserDefaults.standard.object(forKey: "last_login_date") as? Date
+        let loginCount = UserDefaults.standard.integer(forKey: "total_login_count")
         
-        // TODO: Re-enable when CloudNutrientService is properly implemented
-        // Placeholder nutrition analysis
-        let placeholderNutrition = NutritionData(
-            name: input,
-            calories: 250,
-            protein: 15,
-            carbs: 30,
-            fat: 10,
-            confidence: 0.8,
-            source: "Placeholder Analysis"
-        )
-        analysisResult = placeholderNutrition
-        todaysCalories += Int(placeholderNutrition.calories)
+        // Update login stats
+        UserDefaults.standard.set(Date(), forKey: "last_login_date")
+        UserDefaults.standard.set(loginCount + 1, forKey: "total_login_count")
         
-        // Show success message with method used
-        let message = "✅ Food logged via placeholder analysis"
-        print(message)
-        
-        // You could show this as a toast notification
-        showFoodLoggedMessage(
-            food: placeholderNutrition.name,
-            calories: Int(placeholderNutrition.calories),
-            method: "Placeholder",
-            confidence: Int(placeholderNutrition.confidence * 100)
-        )
-        
-        isAnalyzing = false
+        // Check if we should show welcome based on usage patterns
+        if shouldShowWelcome(lastLogin: lastLoginDate, loginCount: loginCount + 1) {
+            // Request location for weather context
+            weatherManager.requestLocation()
+            
+            // Generate contextual greeting
+            generateContextualWelcome(loginCount: loginCount + 1, lastLogin: lastLoginDate)
+            
+            // Show welcome with delay for smooth entrance
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                    showWelcomeMessage = true
+                }
+                
+                // Auto-dismiss after 6 seconds (longer for rich content)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+                    withAnimation(.easeInOut(duration: 0.4)) {
+                        showWelcomeMessage = false
+                    }
+                }
+            }
+        }
     }
     
     /**
-     * Show success message when food is logged
+     * Determines if we should show welcome based on usage patterns
      */
-    private func showFoodLoggedMessage(food: String, calories: Int, method: String, confidence: Int) {
-        // This could trigger a toast notification or success animation
-        print("🎉 FOOD LOGGED: \(food) - \(calories) cal (\(confidence)% confidence via \(method))")
+    private func shouldShowWelcome(lastLogin: Date?, loginCount: Int) -> Bool {
+        // Skip for very new users (they get full welcome screen)
+        if loginCount <= 3 {
+            return false
+        }
         
-        // You could add haptic feedback here
-        // let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-        // impactFeedback.impactOccurred()
+        // Skip if already shown greeting this session
+        if weatherManager.hasLoadedGreetingThisSession {
+            return false
+        }
+        
+        let calendar = Calendar.current
+        let now = Date()
+        
+        // Always show after long absence (7+ days)
+        if let lastLogin = lastLogin {
+            let daysSinceLastLogin = calendar.dateComponents([.day], from: lastLogin, to: now).day ?? 0
+            if daysSinceLastLogin >= 7 {
+                return true
+            }
+            
+            // Show after weekend break (2+ days)
+            if daysSinceLastLogin >= 2 {
+                return true
+            }
+        }
+        
+        // Show based on time patterns (morning sessions, meal times)
+        let hour = calendar.component(.hour, from: now)
+        
+        // Morning greeting (6-11 AM)
+        if hour >= 6 && hour < 11 {
+            return true
+        }
+        
+        // Meal time greetings
+        if hour >= 11 && hour < 15 || hour >= 17 && hour < 21 {
+            return true
+        }
+        
+        // Show 30% of the time for other sessions (to avoid being too chatty)
+        return Double.random(in: 0...1) < 0.3
+    }
+    
+    /**
+     * Generates contextual welcome message using WeatherManager
+     */
+    private func generateContextualWelcome(loginCount: Int, lastLogin: Date?) {
+        // Get name from profile first (if exists), then auth manager, then fallback to "there"
+        let profileRepo = UserProfileRepository()
+        let userProfile = profileRepo.loadProfile()
+        let userName = userProfile?.firstName ?? (authManager.userFirstName.isEmpty ? "there" : authManager.userFirstName)
+        
+        // Check for special usage patterns first
+        if let lastLogin = lastLogin {
+            let daysSinceLastLogin = Calendar.current.dateComponents([.day], from: lastLogin, to: Date()).day ?? 0
+            
+            if daysSinceLastLogin >= 7 {
+                welcomeMessage = "Welcome back, \(userName)! 🎉 It's been a while. " + weatherManager.weatherBasedRemark()
+                weatherManager.hasLoadedGreetingThisSession = true
+                return
+            }
+            
+            if daysSinceLastLogin >= 2 {
+                welcomeMessage = "Hey \(userName)! Ready to get back on track? " + weatherManager.weatherBasedRemark()
+                weatherManager.hasLoadedGreetingThisSession = true
+                return
+            }
+        }
+        
+        // Use WeatherManager's sophisticated greeting system
+        welcomeMessage = weatherManager.generateGreeting(userName: userName)
+        weatherManager.hasLoadedGreetingThisSession = true
+    }
+    
+    /**
+     * Returns appropriate icon based on weather and time context
+     */
+    private func getWelcomeIcon() -> String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        
+        // Check weather conditions first
+        if let weather = weatherManager.currentWeather {
+            switch weather.currentWeather.condition {
+            case .clear:
+                return hour >= 6 && hour < 18 ? "sun.max.fill" : "moon.stars.fill"
+            case .cloudy, .mostlyCloudy, .partlyCloudy:
+                return "cloud.fill"
+            case .rain, .drizzle:
+                return "cloud.rain.fill"
+            case .thunderstorms:
+                return "cloud.bolt.rain.fill"
+            case .snow, .flurries, .blizzard:
+                return "cloud.snow.fill"
+            case .haze:
+                return "cloud.fog.fill"
+            default:
+                break
+            }
+        }
+        
+        // Fallback to time-based icons
+        switch hour {
+        case 5..<12:
+            return "sunrise.fill"
+        case 12..<17:
+            return "sun.max.fill"
+        case 17..<20:
+            return "sunset.fill"
+        default:
+            return "moon.stars.fill"
+        }
+    }
+    
+    /**
+     * Allow users to disable smart welcome (call this from settings)
+     */
+    static func disableSmartWelcome() {
+        UserDefaults.standard.set(true, forKey: "disable_smart_welcome")
+    }
+    
+    /**
+     * Allow users to re-enable smart welcome (call this from settings)
+     */
+    static func enableSmartWelcome() {
+        UserDefaults.standard.set(false, forKey: "disable_smart_welcome")
     }
 }
 
@@ -348,151 +457,6 @@ struct DropdownProgressBar: View {
                 y: 3
             )
         }
-    }
-}
-
-// MARK: - Recent Entries Section
-struct RecentEntriesSection: View {
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text("Recent Entries")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                Spacer()
-                Button("View All") {
-                    // Navigate to full history
-                }
-                .font(.subheadline)
-                .foregroundColor(.yellow)
-            }
-            
-            // Placeholder for when there are no entries yet
-            VStack(spacing: 16) {
-                Image(systemName: "plus.circle.dashed")
-                    .font(.system(size: 40))
-                    .foregroundColor(.white.opacity(0.5))
-                
-                Text("Start tracking your nutrition!")
-                    .font(.headline)
-                    .foregroundColor(.white.opacity(0.8))
-                
-                Text("Use the input bar below to add your first meal or snack")
-                    .font(.subheadline)
-                    .foregroundColor(.white.opacity(0.6))
-                    .multilineTextAlignment(.center)
-            }
-            .padding(30)
-            .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color.cyan.opacity(0.08))
-                    .strokeBorder(Color.cyan.opacity(0.2), lineWidth: 1)
-            )
-        }
-        .padding(.horizontal, 4)
-    }
-}
-
-// MARK: - Quick Tips Card
-struct QuickTipsCard: View {
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Image(systemName: "lightbulb.fill")
-                    .foregroundColor(.yellow)
-                Text("Quick Tip")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                Spacer()
-            }
-            
-            Text("💡 Try saying: \"I had a banana and coffee for breakfast\" or \"Large pizza slice, 350 calories\"")
-                .font(.body)
-                .foregroundColor(.white.opacity(0.8))
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color.yellow.opacity(0.1))
-                .strokeBorder(Color.yellow.opacity(0.3), lineWidth: 1)
-        )
-    }
-}
-
-// MARK: - Floating Input Bar
-struct FloatingCalorieInputBar: View {
-    @Binding var currentInput: String
-    let onCaloriesAdded: (Int) -> Void
-    
-    @State private var isRecording = false
-    @State private var showVoiceAnimation = false
-    
-    var body: some View {
-        HStack(spacing: 12) {
-            // Voice input button
-            Button(action: {
-                isRecording.toggle()
-                if isRecording {
-                    withAnimation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true)) {
-                        showVoiceAnimation = true
-                    }
-                } else {
-                    showVoiceAnimation = false
-                }
-            }) {
-                ZStack {
-                    Circle()
-                        .fill(isRecording ? Color.red.opacity(0.2) : Color.white.opacity(0.1))
-                        .frame(width: 44, height: 44)
-                        .scaleEffect(showVoiceAnimation ? 1.2 : 1.0)
-                    
-                    Image(systemName: isRecording ? "mic.fill" : "mic")
-                        .font(.title3)
-                        .foregroundColor(isRecording ? .red : .white)
-                }
-            }
-            
-            // Text input field
-            TextField("What did you eat?", text: $currentInput)
-                .textFieldStyle(PlainTextFieldStyle())
-                .font(.body)
-                .foregroundColor(.white)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-                .background(
-                    RoundedRectangle(cornerRadius: 22)
-                        .fill(Color.white.opacity(0.1))
-                )
-            
-            // Send button
-            Button(action: {
-                // Process input and extract calories
-                // For now, just add a placeholder amount
-                onCaloriesAdded(250)
-                currentInput = ""
-            }) {
-                Circle()
-                    .fill(Color.yellow)
-                    .frame(width: 44, height: 44)
-                    .overlay(
-                        Image(systemName: "arrow.up")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                    )
-            }
-            .disabled(currentInput.isEmpty)
-            .opacity(currentInput.isEmpty ? 0.5 : 1.0)
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 12)
-        .background(
-            RoundedRectangle(cornerRadius: 28)
-                .fill(.ultraThinMaterial)
-                .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
-        )
     }
 }
 
@@ -745,196 +709,20 @@ struct ExpandedProgressContent: View {
     // MARK: - AI Analysis Methods (DUPLICATE - COMMENTED OUT)
     
     /*
-     * World-class AI analysis with multiple fallbacks for maximum accuracy
-     * Target: <5 seconds response time with near 100% accuracy
-     * 
-     * DUPLICATE FUNCTION - COMMENTED OUT TO FIX COMPILATION ERRORS
+     * These methods have been moved to dedicated food processing services
+     * MainAppView should only handle UI hosting, not food analysis logic
      */
-    /*
-    @MainActor
-    private func tryAIAnalysis(for input: String) async {
-        isAnalyzing = true
-        analysisError = nil
-        analysisResult = nil
-        
-        print("🚀 Starting world-class nutrition analysis for: \(input)")
-        
-        do {
-            // Use the new CloudNutrientService with intelligent fallbacks
-            if let result = await cloudNutrientService.analyzeFood(input) {
-                let nutrition = result.nutrition
-                analysisResult = nutrition
-                todaysCalories += Int(nutrition.calories)
-                
-                // Show success message with method used
-                let message = "✅ Food logged via \(result.analysisMethod) in \(String(format: "%.1f", result.analysisTime))s"
-                print(message)
-                
-                // You could show this as a toast notification
-                showFoodLoggedMessage(
-                    food: nutrition.name,
-                    calories: Int(nutrition.calories),
-                    method: result.analysisMethod,
-                    confidence: Int(result.confidence * 100)
-                )
-                
-            } else {
-                // All fallbacks failed
-                analysisError = "Unable to analyze '\(input)'. Please try a more specific description or check your connection."
-                print("❌ All analysis methods failed for: \(input)")
-            }
-        } catch {
-            analysisError = "Analysis failed: \(error.localizedDescription)"
-            print("❌ Analysis error: \(error)")
-        }
-        
-        isAnalyzing = false
-    }
-    */
-    
-    /**
-     * Show success message when food is logged
-     */
-    private func showFoodLoggedMessage(food: String, calories: Int, method: String, confidence: Int) {
-        // This could trigger a toast notification or success animation
-        print("🎉 FOOD LOGGED: \(food) - \(calories) cal (\(confidence)% confidence via \(method))")
-        
-        // You could add haptic feedback here
-        // let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-        // impactFeedback.impactOccurred()
-    }
-    
-    /**
-     * Enhanced analysis with detailed nutrition breakdown (legacy - now handled by CloudNutrientService)
-     */
-    @MainActor
-    private func performAIAnalysis(for input: String) async -> NutritionData? {
-        // TODO: Re-enable when CloudNutrientService is properly implemented
-        // This now uses the CloudNutrientService internally
-        // if let result = await cloudNutrientService.analyzeFood(input) {
-        //     return result.nutrition
-        // }
-        
-        // Placeholder implementation
-        return NutritionData(
-            name: input,
-            calories: 250,
-            protein: 15,
-            carbs: 30,
-            fat: 10,
-            confidence: 0.8,
-            source: "Placeholder Analysis"
-        )
-    }
-    
-    /**
-     * Create enhanced nutrition data with confidence scoring
-     */
-    private func createEnhancedNutrition(from basic: NutritionData, confidence: Double) -> NutritionData {
-        return NutritionData(
-            name: basic.name,
-            brand: basic.brand,
-            calories: basic.calories,
-            protein: basic.protein,
-            carbs: basic.carbs,
-            fat: basic.fat,
-            fiber: basic.fiber,
-            sugar: basic.sugar,
-            sodium: basic.sodium,
-            confidence: confidence,
-            source: "Enhanced Analysis",
-            barcode: basic.barcode,
-            servingSize: basic.servingSize,
-            servingUnit: basic.servingUnit,
-            date: basic.date
-        )
-    }
 }
 
-// MARK: - AI Analysis Card Component
+// MARK: - AI Analysis Card Component (Moved to separate file)
+// These UI components should be in their own files
 
-struct AIAnalysisCard: View {
-    let nutrition: NutritionData
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text("AI Analysis")
-                    .font(.headline)
-                    .foregroundColor(.primary)
-                
-                Spacer()
-                
-                Text("\(Int(nutrition.confidence * 100))% confident")
-                    .font(.caption)
-                    .foregroundColor(.green)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(Color.green.opacity(0.1))
-                    .cornerRadius(8)
-            }
-            
-            Text(nutrition.name)
-                .font(.title2)
-                .fontWeight(.semibold)
-            
-            HStack(spacing: 20) {
-                MacroItem(label: "Calories", value: "\(Int(nutrition.calories))")
-                MacroItem(label: "Protein", value: "\(Int(nutrition.protein))g")
-                MacroItem(label: "Carbs", value: "\(Int(nutrition.carbs))g")
-                MacroItem(label: "Fat", value: "\(Int(nutrition.fat))g")
-            }
-            
-            Text("Source: \(nutrition.source)")
-                .font(.caption)
-                .foregroundColor(.secondary)
-        }
-        .padding()
-        .background(Color.blue.opacity(0.1))
-        .cornerRadius(12)
-    }
-}
-
-struct MacroItem: View {
-    let label: String
-    let value: String
-    
-    var body: some View {
-        VStack {
-            Text(value)
-                .font(.title3)
-                .fontWeight(.semibold)
-            Text(label)
-                .font(.caption)
-                .foregroundColor(.secondary)
-        }
-    }
-}
-
-// MARK: - Error Card Component
-
-struct ErrorCard: View {
-    let message: String
-    
-    var body: some View {
-        HStack {
-            Image(systemName: "exclamationmark.triangle")
-                .foregroundColor(.orange)
-            
-            Text(message)
-                .font(.body)
-                .foregroundColor(.primary)
-            
-            Spacer()
-        }
-        .padding()
-        .background(Color.orange.opacity(0.1))
-        .cornerRadius(12)
-    }
-}
+// MARK: - Error Card Component (Moved to separate file)
+// These UI components should be in their own files
 
 // End of MainAppView struct
 
 #Preview {
     MainAppView()
 }
+

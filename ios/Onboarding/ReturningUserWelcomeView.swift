@@ -1,10 +1,11 @@
 import SwiftUI
 
-struct WelcomeView: View {
+struct ReturningUserWelcomeView: View {
     @EnvironmentObject var authManager: AuthManager
-    @Binding var isOnboardingComplete: Bool
+    @Binding var shouldShowReturningUserWelcome: Bool
     @State private var showAnimation = false
     @State private var showSecondaryElements = false
+    @State private var daysSinceLastVisit: Int = 0
     
     private let profileRepo = UserProfileRepository()
     
@@ -16,31 +17,18 @@ struct WelcomeView: View {
                 VStack(spacing: 0) {
                     Spacer()
                     
-                    // Welcome content
+                    // Welcome back content
                     VStack(spacing: 24) {
-                        // Animated logo with enhanced glow
-                        // AnimatedWelcomeLogo()
-                        //     .scaleEffect(showAnimation ? 1.0 : 0.8)
-                        //     .opacity(showAnimation ? 1.0 : 0.0)
-                        //     .animation(.easeOut(duration: 1.2), value: showAnimation)
-                        
-                        // Welcome message
+                        // Welcome back message
                         VStack(spacing: 16) {
-                            Text("Welcome to")
-                                .font(.system(size: 24, weight: .medium))
-                                .foregroundColor(.white)
-                                .scaleEffect(showSecondaryElements ? 1.0 : 0.9)
-                                .opacity(showSecondaryElements ? 1.0 : 0.0)
-                                .animation(.easeOut(duration: 0.8).delay(0.8), value: showSecondaryElements)
-                            
-                            Text("MACRO")
-                                .font(.system(size: 48, weight: .thin))
+                            Text("Welcome Back!")
+                                .font(.system(size: 36, weight: .thin))
                                 .foregroundColor(.white)
                                 .tracking(4)
                                 .shadow(color: .cyan.opacity(0.5), radius: 10, x: 0, y: 0)
-                                .scaleEffect(showSecondaryElements ? 1.0 : 0.9)
-                                .opacity(showSecondaryElements ? 1.0 : 0.0)
-                                .animation(.easeOut(duration: 0.8).delay(1.0), value: showSecondaryElements)
+                                .scaleEffect(showAnimation ? 1.0 : 0.8)
+                                .opacity(showAnimation ? 1.0 : 0.0)
+                                .animation(.easeOut(duration: 1.2), value: showAnimation)
                             
                             if let firstName = getFirstName() {
                                 Text("Hi \(firstName)! 👋")
@@ -48,38 +36,48 @@ struct WelcomeView: View {
                                     .foregroundColor(.white)
                                     .scaleEffect(showSecondaryElements ? 1.0 : 0.9)
                                     .opacity(showSecondaryElements ? 1.0 : 0.0)
-                                    .animation(.easeOut(duration: 0.8).delay(1.2), value: showSecondaryElements)
+                                    .animation(.easeOut(duration: 0.8).delay(0.8), value: showSecondaryElements)
                             }
                             
-                            Text("Your nutrition journey starts here")
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundColor(.white.opacity(0.8))
+                            if daysSinceLastVisit > 0 {
+                                Text("It's been \(daysSinceLastVisit) day\(daysSinceLastVisit == 1 ? "" : "s") since your last visit")
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(.white.opacity(0.8))
+                                    .multilineTextAlignment(.center)
+                                    .scaleEffect(showSecondaryElements ? 1.0 : 0.9)
+                                    .opacity(showSecondaryElements ? 1.0 : 0.0)
+                                    .animation(.easeOut(duration: 0.8).delay(1.0), value: showSecondaryElements)
+                            }
+                            
+                            Text("Ready to continue your nutrition journey?")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(.white.opacity(0.7))
                                 .multilineTextAlignment(.center)
                                 .scaleEffect(showSecondaryElements ? 1.0 : 0.9)
                                 .opacity(showSecondaryElements ? 1.0 : 0.0)
-                                .animation(.easeOut(duration: 0.8).delay(1.4), value: showSecondaryElements)
+                                .animation(.easeOut(duration: 0.8).delay(1.2), value: showSecondaryElements)
                         }
                         .padding(.horizontal, 40)
                         
-                        // Feature highlights
+                        // Motivational features reminder
                         VStack(spacing: 12) {
-                            WelcomeFeatureRow(icon: "chart.line.uptrend.xyaxis", title: "Track your macros", delay: 1.6)
-                            WelcomeFeatureRow(icon: "target", title: "Reach your goals", delay: 1.8)
-                            WelcomeFeatureRow(icon: "heart.fill", title: "Stay healthy", delay: 2.0)
+                            ReturningUserFeatureRow(icon: "chart.line.uptrend.xyaxis", title: "Track your progress", subtitle: "See how far you've come", delay: 1.4)
+                            ReturningUserFeatureRow(icon: "target", title: "Continue your goals", subtitle: "Pick up where you left off", delay: 1.6)
+                            ReturningUserFeatureRow(icon: "sparkles", title: "New AI features", subtitle: "Enhanced nutrition coaching", delay: 1.8)
                         }
                         .scaleEffect(showSecondaryElements ? 1.0 : 0.9)
                         .opacity(showSecondaryElements ? 1.0 : 0.0)
-                        .animation(.easeOut(duration: 0.8).delay(1.6), value: showSecondaryElements)
+                        .animation(.easeOut(duration: 0.8).delay(1.4), value: showSecondaryElements)
                     }
                     
                     Spacer()
                     
                     // Continue button
                     Button(action: {
-                        isOnboardingComplete = true
+                        shouldShowReturningUserWelcome = false
                     }) {
                         HStack {
-                            Text("Get Started!")
+                            Text("Let's Continue!")
                                 .fontWeight(.semibold)
                             Image(systemName: "arrow.right")
                         }
@@ -91,17 +89,20 @@ struct WelcomeView: View {
                             RoundedRectangle(cornerRadius: 30)
                                 .fill(Color.blue)
                         )
-                        .shadow(color: .blue.opacity(0.2), radius: 10, x: 0, y: 5)
+                        .shadow(color: .blue.opacity(0.3), radius: 15, x: 0, y: 8)
                     }
                     .scaleEffect(showSecondaryElements ? 1.0 : 0.9)
                     .opacity(showSecondaryElements ? 1.0 : 0.0)
-                    .animation(.easeOut(duration: 0.8).delay(2.2), value: showSecondaryElements)
+                    .animation(.easeOut(duration: 0.8).delay(2.0), value: showSecondaryElements)
                     .padding(.bottom, geometry.safeAreaInsets.bottom + 40)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .onAppear {
+            // Get days since last visit for display
+            daysSinceLastVisit = UserActivityService.shared.daysSinceLastActivity() ?? 0
+            
             // Start animations
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 showAnimation = true
@@ -116,14 +117,15 @@ struct WelcomeView: View {
         if let profile = profileRepo.loadProfile() {
             return profile.firstName
         }
-        // You might want to get user details from your AuthManager's session
-        return nil
+        // Fallback to auth manager data
+        return authManager.userFirstName.isEmpty ? nil : authManager.userFirstName
     }
 }
 
-struct WelcomeFeatureRow: View {
+struct ReturningUserFeatureRow: View {
     let icon: String
     let title: String
+    let subtitle: String
     let delay: Double
     @State private var show = false
     
@@ -134,9 +136,15 @@ struct WelcomeFeatureRow: View {
                 .foregroundColor(.cyan)
                 .frame(width: 24)
             
-            Text(title)
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(.white.opacity(0.8))
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(.white)
+                
+                Text(subtitle)
+                    .font(.system(size: 12, weight: .light))
+                    .foregroundColor(.white.opacity(0.6))
+            }
             
             Spacer()
         }

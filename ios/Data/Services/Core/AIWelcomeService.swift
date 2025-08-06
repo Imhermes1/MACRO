@@ -1,8 +1,11 @@
 import Foundation
+import Combine
 
 /// AI-powered welcome message service using GPT-4.1-mini-2025-04-14
 /// Generates personalized greetings using weather, time, and user context
 class AIWelcomeService: ObservableObject {
+    var objectWillChange = ObservableObjectPublisher()
+
     static let shared = AIWelcomeService()
     
     private let weatherManager = WeatherManager.shared
@@ -41,20 +44,23 @@ class AIWelcomeService: ObservableObject {
     
     /// Build prompt for GPT-4.1-mini
     private func buildPrompt(context: UserContext) -> String {
+        let userNameForPrompt = context.userName.isEmpty ? "user" : context.userName
         return """
-        Generate a friendly, personalized welcome message for a nutrition tracking app user.
+        Generate a friendly, personalised welcome message for a nutrition tracking app user.
         
-        User: \(context.userName)
+        User: \(userNameForPrompt)
         Weather: \(context.weather)
         Time: \(context.timeOfDay) (\(context.hour):00)
         
         Requirements:
-        - Keep it conversational and encouraging
-        - 1-2 sentences max
-        - Mention food/nutrition naturally
-        - Use Australian English
-        - Be specific to the time and weather context
-        - Sound like a supportive mate, not robotic
+        •    Keep it conversational and encouraging (sound like a supportive mate, not robotic)
+        •    1-2 sentences maximum
+        •    Naturally mention food or nutrition
+        •    Use Australian English
+        •    Be specific to the provided time and weather context
+        •    If the user name is “user”, default to friendly greetings like “G’day” or “Hey there”
+        •    Include a motivational quote or affirmation if it is early morning or early afternoon
+        •	Do not use em dashes
         """
     }
     
@@ -63,7 +69,9 @@ class AIWelcomeService: ObservableObject {
         let greetings = ["Hi", "Hey", "Hello", "Good to see you", "Welcome back"]
         let greeting = greetings.randomElement() ?? "Hi"
         
-        var message = "\(greeting) \(context.userName)!"
+        // Handle empty userName gracefully
+        let userName = context.userName.isEmpty ? "there" : context.userName
+        var message = "\(greeting) \(userName)!"
         
         // Weather + time combinations
         if context.weather == "hot" && context.timeOfDay == "morning" {

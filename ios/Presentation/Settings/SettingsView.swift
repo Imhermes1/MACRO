@@ -43,6 +43,29 @@ struct SettingsView: View {
                 Text("About")
                     .font(.headline)
                     .foregroundColor(.white)
+                
+                #if DEBUG
+                Divider()
+                Text("Debug Options")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                
+                Button("Simulate 3 Days Inactivity") {
+                    UserActivityService.shared.simulateInactivity(days: 3)
+                }
+                .foregroundColor(.yellow)
+                
+                Button("Simulate 7 Days Inactivity") {
+                    UserActivityService.shared.simulateInactivity(days: 7)
+                }
+                .foregroundColor(.orange)
+                
+                if let daysSince = UserActivityService.shared.daysSinceLastActivity() {
+                    Text("Days since last activity: \(daysSince)")
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.7))
+                }
+                #endif
             }
             .padding()
             .background(UniversalBackground())

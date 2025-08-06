@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="io.lumoralabs.macro" />
+                  <option name="mobileSdkAppId" value="1:251660050778:android:YOUR_APP_ID" />
+                  <option name="projectId" value="macro-7c60a" />
+                  <option name="projectNumber" value="251660050778" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

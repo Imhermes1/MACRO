@@ -31,6 +31,12 @@ struct MacroApp: App {
                         }
                     }
                 }
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                    // Record activity when app becomes active (returns from background)
+                    if authManager.session != nil {
+                        UserActivityService.shared.recordActivity()
+                    }
+                }
         }
     }
 }

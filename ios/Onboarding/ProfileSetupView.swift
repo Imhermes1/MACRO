@@ -9,7 +9,9 @@ struct ProfileSetupView: View {
     @State private var dob = ""
     @State private var height = ""
     @State private var weight = ""
-    @State private var gender = "Male"
+    @State private var goalWeight = ""
+    @State private var goalType: GoalType = .maintainWeight
+    @State private var activityLevel: ActivityLevel = .moderate
     @State private var showDobIncentive = false
     @State private var showAlert = false
     @State private var alertMessage = ""
@@ -20,7 +22,7 @@ struct ProfileSetupView: View {
     private let profileRepo = UserProfileRepository()
     
     enum Field: Hashable {
-        case firstName, lastName, age, dob, height, weight, gender
+        case firstName, lastName, age, dob, height, weight, goalWeight
     }
     
     var body: some View {
@@ -129,62 +131,92 @@ struct ProfileSetupView: View {
                                 keyboardType: .decimalPad,
                                 focusedField: $focusedField,
                                 currentField: .weight,
+                                nextField: .goalWeight
+                            )
+                            
+                            // Goal Weight
+                            CustomTextField(
+                                text: $goalWeight,
+                                placeholder: "Goal Weight (kg)",
+                                keyboardType: .decimalPad,
+                                focusedField: $focusedField,
+                                currentField: .goalWeight,
                                 nextField: nil
                             )
                             
-                            // Gender
+                            // Goal Type
                             VStack(spacing: 8) {
                                 HStack {
-                                    Text("Gender*")
+                                    Text("Goal*")
                                         .foregroundColor(.white.opacity(0.6))
                                         .font(.system(size: 16))
                                     Spacer()
                                 }
                                 .padding(.horizontal, 16)
                                 
-                                HStack(spacing: 12) {
-                                    Button(action: { gender = "Male" }) {
-                                        HStack {
-                                            Image(systemName: gender == "Male" ? "checkmark.circle.fill" : "circle")
-                                                .foregroundColor(gender == "Male" ? .blue : .white.opacity(0.6))
-                                            Text("Male")
-                                                .foregroundColor(.white)
+                                VStack(spacing: 8) {
+                                    ForEach(GoalType.allCases, id: \.self) { goal in
+                                        Button(action: { goalType = goal }) {
+                                            HStack {
+                                                Image(systemName: goalType == goal ? "checkmark.circle.fill" : "circle")
+                                                    .foregroundColor(goalType == goal ? .blue : .white.opacity(0.6))
+                                                Text(goal.displayName)
+                                                    .foregroundColor(.white)
+                                                Spacer()
+                                            }
+                                            .padding(.horizontal, 16)
+                                            .padding(.vertical, 8)
                                         }
-                                        .padding(.horizontal, 16)
-                                        .padding(.vertical, 12)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 20)
-                                                .fill(Color.black.opacity(0.2))
-                                        )
+                                    }
+                                }
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Color.black.opacity(0.2))
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 20)
-                                                .stroke(gender == "Male" ? Color.blue : Color.black, lineWidth: 1)
+                                                .stroke(Color.black, lineWidth: 1)
                                         )
-                                    }
-                                    
-                                    Button(action: { gender = "Female" }) {
-                                        HStack {
-                                            Image(systemName: gender == "Female" ? "checkmark.circle.fill" : "circle")
-                                                .foregroundColor(gender == "Female" ? .blue : .white.opacity(0.6))
-                                            Text("Female")
-                                                .foregroundColor(.white)
-                                        }
-                                        .padding(.horizontal, 16)
-                                        .padding(.vertical, 12)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 20)
-                                                .fill(Color.black.opacity(0.2))
-                                        )
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 20)
-                                                .stroke(gender == "Female" ? Color.blue : Color.black, lineWidth: 1)
-                                        )
-                                    }
-                                    
+                                )
+                            }
+                            
+                            // Activity Level
+                            VStack(spacing: 8) {
+                                HStack {
+                                    Text("Activity Level*")
+                                        .foregroundColor(.white.opacity(0.6))
+                                        .font(.system(size: 16))
                                     Spacer()
                                 }
                                 .padding(.horizontal, 16)
+                                
+                                VStack(spacing: 8) {
+                                    ForEach(ActivityLevel.allCases, id: \.self) { level in
+                                        Button(action: { activityLevel = level }) {
+                                            HStack {
+                                                Image(systemName: activityLevel == level ? "checkmark.circle.fill" : "circle")
+                                                    .foregroundColor(activityLevel == level ? .blue : .white.opacity(0.6))
+                                                VStack(alignment: .leading, spacing: 2) {
+                                                    Text(level.displayName)
+                                                        .foregroundColor(.white)
+                                                        .font(.system(size: 14, weight: .medium))
+                                                }
+                                                Spacer()
+                                            }
+                                            .padding(.horizontal, 16)
+                                            .padding(.vertical, 8)
+                                        }
+                                    }
+                                }
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Color.black.opacity(0.2))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .stroke(Color.black, lineWidth: 1)
+                                        )
+                                )
                             }
+                            
                             
                             // Save button
                             NavigationLink(destination: GoalsSetupView(isOnboardingComplete: $isOnboardingComplete)) {
@@ -194,7 +226,7 @@ struct ProfileSetupView: View {
                                             .progressViewStyle(CircularProgressViewStyle(tint: .white))
                                             .scaleEffect(0.8)
                                     }
-                                    Text(isLoading ? "Saving..." : "Continue to Goals Setup")
+                                    Text(isLoading ? "Saving..." : "Complete Profile Setup")
                                         .fontWeight(.semibold)
                                 }
                                 .font(.headline)
@@ -227,7 +259,11 @@ struct ProfileSetupView: View {
                         Spacer()
                         Button(action: {
                             Task {
+                                // Clear local profile first
+                                profileRepo.clearProfile()
+                                // Then sign out
                                 await authManager.signOut()
+                                print("🚪 ProfileSetup: Logged out and cleared profile")
                             }
                         }) {
                             Image(systemName: "power")
@@ -330,6 +366,19 @@ struct ProfileSetupView: View {
         
         isLoading = true
         
+        // Parse goal weight if provided
+        let trimmedGoalWeight = goalWeight.trimmingCharacters(in: .whitespacesAndNewlines)
+        var goalWeightFloat: Float? = nil
+        if !trimmedGoalWeight.isEmpty {
+            goalWeightFloat = Float(trimmedGoalWeight.replacingOccurrences(of: ",", with: "."))
+            if goalWeightFloat == nil || goalWeightFloat! <= 0 || goalWeightFloat! > 999 {
+                isLoading = false
+                alertMessage = "Please enter a valid goal weight in kilograms (1-999)."
+                showAlert = true
+                return
+            }
+        }
+        
         // Create and save profile
         let profile = UserProfile(
             firstName: trimmedFirstName,
@@ -337,11 +386,17 @@ struct ProfileSetupView: View {
             age: ageInt,
             dob: trimmedDob.isEmpty ? nil : trimmedDob,
             height: heightFloat,
-            weight: weightFloat
+            weight: weightFloat,
+            initialWeight: weightFloat, // Set initial weight to current weight
+            goalWeight: goalWeightFloat,
+            goalType: goalType,
+            activityLevel: activityLevel,
+            profileCompleted: true // Mark profile as completed
         )
         
-        // Save profile - this is synchronous so we handle it properly
+        // Save profile and mark as completed
         profileRepo.saveProfile(profile)
+        profileRepo.markProfileCompleted()
         
         // Success feedback
         isLoading = false

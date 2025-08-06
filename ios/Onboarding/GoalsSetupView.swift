@@ -18,7 +18,7 @@ struct GoalsSetupView: View {
             ZStack {
                 UniversalBackground()
                 
-                VStack(spacing: 30) {
+                VStack(spacing: 20) {
                     // Header
                     VStack(spacing: 16) {
                         Text("Goals & Health")
@@ -226,9 +226,7 @@ struct GoalsSetupView: View {
                             }
                             
                             // Complete Setup Button
-                            Button(action: {
-                                completeSetup()
-                            }) {
+                            NavigationLink(destination: WelcomeView(isOnboardingComplete: $isOnboardingComplete)) {
                                 HStack {
                                     if isLoading {
                                         ProgressView()
@@ -250,6 +248,9 @@ struct GoalsSetupView: View {
                                 .animation(.easeInOut(duration: 0.2), value: isLoading)
                             }
                             .disabled(isLoading)
+                            .simultaneousGesture(TapGesture().onEnded {
+                                completeSetup()
+                            })
                             .padding(.top, 10)
                         }
                         .padding(.horizontal, 20)
@@ -265,7 +266,11 @@ struct GoalsSetupView: View {
                         Spacer()
                         Button(action: {
                             Task {
+                                // Clear any profile data first
+                                profileRepo.clearProfile()
+                                // Then sign out
                                 await authManager.signOut()
+                                print("🚪 GoalsSetup: Logged out and cleared profile")
                             }
                         }) {
                             Image(systemName: "power")
@@ -342,7 +347,7 @@ struct GoalsSetupView: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             isLoading = false
-            isOnboardingComplete = true
+            // Don't set isOnboardingComplete here - let WelcomeView handle it
         }
     }
     

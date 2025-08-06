@@ -7,6 +7,7 @@ public struct NavigationBar: View {
     public var showTabDropdown: Bool = true
     public var showProfileButton: Bool = true
     public var profileAction: (() -> Void)? = nil
+    public var tabNavigationAction: ((String) -> Void)? = nil
     public var title: String = "Macro"
     
     @State private var showingTabDropdown = false
@@ -17,11 +18,13 @@ public struct NavigationBar: View {
         showTabDropdown: Bool = true,
         showProfileButton: Bool = true,
         profileAction: (() -> Void)? = nil,
+        tabNavigationAction: ((String) -> Void)? = nil,
         title: String = "Macro"
     ) {
         self.showTabDropdown = showTabDropdown
         self.showProfileButton = showProfileButton
         self.profileAction = profileAction
+        self.tabNavigationAction = tabNavigationAction
         self.title = title
     }
 
@@ -38,7 +41,7 @@ public struct NavigationBar: View {
                             showingProfileDropdown = false
                         }
                     }
-                    .zIndex(50) // Below dropdown but above nav bar
+                    .zIndex(1) // Below dropdown but above nav bar
             }
             
             HStack {
@@ -96,13 +99,19 @@ public struct NavigationBar: View {
             }
             .padding(.horizontal, 0)
             .padding(.vertical, 12)
-            .zIndex(60) // Above tap-to-dismiss overlay
+            .zIndex(3) // Above tap-to-dismiss overlay
             
             // Dropdown positioned so top-left corner sits on the hamburger button
             if showingTabDropdown {
-                TabDropdownMenu {
-                    showingTabDropdown = false
-                }
+                TabDropdownMenu(
+                    onDismiss: {
+                        showingTabDropdown = false
+                    },
+                    onNavigate: { tabTitle in
+                        showingTabDropdown = false
+                        tabNavigationAction?(tabTitle)
+                    }
+                )
                 .offset(x: 0, y: 8) // Position top-left corner over the button
                 .transition(.asymmetric(
                     insertion: AnyTransition.scale(scale: 0.8, anchor: .topLeading)
@@ -110,7 +119,7 @@ public struct NavigationBar: View {
                     removal: AnyTransition.scale(scale: 0.8, anchor: .topLeading)
                         .combined(with: AnyTransition.opacity)
                 ))
-                .zIndex(100)
+                .zIndex(4)
             }
             
             // Profile dropdown positioned from the right side
@@ -125,7 +134,7 @@ public struct NavigationBar: View {
                     removal: AnyTransition.scale(scale: 0.8, anchor: .topTrailing)
                         .combined(with: AnyTransition.opacity)
                 ))
-                .zIndex(100)
+                .zIndex(4)
             }
         }
     }
@@ -134,10 +143,11 @@ public struct NavigationBar: View {
 // MARK: - Tab Dropdown Menu
 struct TabDropdownMenu: View {
     let onDismiss: () -> Void
+    let onNavigate: (String) -> Void
     
     private let tabOptions = [
         TabOption(icon: "house.fill", title: "Home", isActive: true),
-        TabOption(icon: "chart.line.uptrend.xyaxis", title: "Progress", isActive: false),
+        TabOption(icon: "chart.line.uptrend.xyaxis", title: "Analytics", isActive: false),
         TabOption(icon: "fork.knife", title: "Meals", isActive: false),
         TabOption(icon: "target", title: "Goals", isActive: false)
     ]
@@ -149,7 +159,11 @@ struct TabDropdownMenu: View {
                 ForEach(tabOptions, id: \.title) { option in
                     Button(action: {
                         // Handle tab navigation
-                        onDismiss()
+                        if option.title == "Analytics" {
+                            onNavigate(option.title)
+                        } else {
+                            onDismiss()
+                        }
                     }) {
                         HStack(spacing: 12) {
                             Image(systemName: option.icon)
@@ -238,12 +252,25 @@ struct ProfileDropdownMenu: View {
                 // Logout/Reset option
                 Button(action: {
                     Task {
-                        // NUCLEAR RESET: Clear everything
+                        // NUCLEAR RESET: Clear everything in proper order
+                        print("🚀 Starting complete account nuke...")
+                        
+                        // Step 1: Clear profile repository
                         userProfileRepository.clearProfile()
+                        
+                        // Step 2: Force UI to refresh by clearing published properties
+                        await MainActor.run {
+                            userProfileRepository.currentProfile = nil
+                            userProfileRepository.weightHistory = []
+                        }
+                        
+                        // Step 3: Sign out (which handles all other cleanup)
                         await authManager.signOut()
+                        
+                        // Step 4: Dismiss any open sheets/modals
                         onDismiss()
                         
-                        print("🧹 COMPLETE ACCOUNT NUKE: Profile repository cleared + Auth signed out")
+                        print("🧹 COMPLETE ACCOUNT NUKE: Everything cleared, returning to login")
                     }
                 }) {
                     HStack(spacing: 12) {
